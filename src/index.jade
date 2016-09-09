@@ -1,0 +1,18 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='x-ua-compatible', content='ie=edge')
+    title=htmlWebpackPlugin.options.title
+    link(rel="icon" href="assets/favicon.png")
+    meta(name='description', content='Kastoria Museum react website')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    if htmlWebpackPlugin.options.NODE_ENV==="production"
+      each cssFile in htmlWebpackPlugin.files.css
+        link(href=cssFile rel="stylesheet")
+  body
+    #root
+      if htmlWebpackPlugin.options.NODE_ENV==="production"
+        each jsFile in htmlWebpackPlugin.files.js
+          if (!new RegExp(/(sw|bootstrap)/).test(jsFile))
+            script(type="text/javascript" src=jsFile)

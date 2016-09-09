@@ -1,0 +1,19 @@
+.offline-update {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  background: white;
+  width: 100%;
+  z-index: 100000;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,.2),0 5px 5px 0 rgba(0,0,0,.24);
+  transition: top 1s;
+  .container {
+    height: 100%;
+  }
+  &.hidden {
+    display: block;
+    opacity: 1;
+    top: -100%;
+  }
+}
