@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom';
 
 import dateFormat from 'date-format'
@@ -63,6 +63,13 @@ class FlightsForm extends Component {
       </Form>
     )
   }
+}
+
+FlightsForm.propTypes = {
+  resetForm: PropTypes.func.isRequired,
+  loadData: PropTypes.func.isRequired,
+  inputCities: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired
 }
 
 export default FlightsForm
