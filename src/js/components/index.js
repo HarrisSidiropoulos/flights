@@ -77,11 +77,7 @@ export class Main extends Component {
           </ButtonToolbar>
         </Form>
         <br/>
-        {
-          error && <Panel header="Error" bsStyle="danger">
-            <Panel>{error}</Panel>
-          </Panel>
-        }
+        { error && <Panel header="Error" bsStyle="danger">{error}</Panel> }
         {
           cities.map(({flight, weather}, index)=> {
             return (
