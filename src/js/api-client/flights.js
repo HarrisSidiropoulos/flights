@@ -38,7 +38,6 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
 
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, data)
     .then((response) => {
-      console.log(response)
       if (!response.ok) {
         switch(response.status) {
         case 400:
