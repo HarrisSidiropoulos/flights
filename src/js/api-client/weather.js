@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 
 const WEATHER_API_KEY='d19be8b22d9cee2291ebb8577f647fcc'
-const WEATHER_API_URL='//api.openweathermap.org/data/2.5'
+const WEATHER_API_URL='http://api.openweathermap.org/data/2.5'
 
 export function getWeatherDate(date) {
   return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 100000000);
