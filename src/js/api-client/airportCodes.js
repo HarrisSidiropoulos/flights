@@ -20,7 +20,8 @@ const getAirportCodes = (city='Thessaloniki', limit=1) => {
       return response.json()
     })
     .then((response)=> {
-      if (response.statusCode===400) {
+      console.log(response.statusCode)
+      if (response.statusCode!==200) {
         throw new Error(response.message)
       }
       return response.airports[0].iata
