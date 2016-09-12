@@ -40,7 +40,7 @@ export class Main extends Component {
   render() {
     const {loading, cities, error} = this.props
     const maxDate = new Date();
-    maxDate.setDate(maxDate.getDate() + 14);
+    maxDate.setDate(maxDate.getDate() + 13);
     return (
       <div className="container">
         <OfflineUpdate {...offlineProps()}/>
