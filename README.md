@@ -5,7 +5,7 @@ Build a tool (website/mobile app/etc) where a user can input up to 5 destination
 http://flights.polyptychon.gr/
 
 #Installation
-Install the latest nodejs with new ES6 features (v6.5.0) https://nodejs.org/en/
+Install the latest nodejs with new ES6 features (v6.5.0) (https://nodejs.org/en/).
 Clone this repository to a local folder.
 Run npm install to add dependencies.
 
