@@ -2,13 +2,15 @@
 /*eslint indent: */
 import getWeatherAndFlights from '../api-client/getWeatherAndFlights'
 
+export const RESET_DATA = 'RESET';
 export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 
-const requestData = () => ({ type: FETCH_DATA_REQUEST })
-const requestError = (e) => ({ type: FETCH_DATA_FAILURE, error: e })
-const receiveData = (data) => {
+export const resetData = () => ({ type: RESET_DATA })
+export const requestData = () => ({ type: FETCH_DATA_REQUEST })
+export const requestError = (e) => ({ type: FETCH_DATA_FAILURE, error: e })
+export const receiveData = (data) => {
   return {
     type: FETCH_DATA_SUCCESS,
     payload: data

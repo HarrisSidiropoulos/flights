@@ -1,5 +1,5 @@
 /*eslint indent: */
-import {ADD_CITY, REMOVE_CITY, UPDATE_CITY} from '../actions/cities'
+import {RESET_CITIES, ADD_CITY, REMOVE_CITY, UPDATE_CITY} from '../actions/cities'
 export const INITIAL_STATE = {
   cities:[{value:"Athens", error:""}],
   min:1,
@@ -8,6 +8,10 @@ export const INITIAL_STATE = {
 
 export default function cities(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case RESET_CITIES:
+      return {
+        ...INITIAL_STATE
+      }
     case ADD_CITY: {
       let {max, cities} = state
       cities = cities.slice()

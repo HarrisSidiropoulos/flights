@@ -1,9 +1,13 @@
 /*eslint indent: */
-import {FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS} from '../actions'
+import {RESET_DATA, FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS} from '../actions'
 export const INITIAL_STATE = { loading: false, cities: [], error: false }
 
 export default function weatherAndFlights(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case RESET_DATA:
+      return {
+        ...INITIAL_STATE
+      }
     case FETCH_DATA_REQUEST:
       return {
         ...state,

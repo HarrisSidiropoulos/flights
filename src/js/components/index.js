@@ -15,7 +15,8 @@ import DynamicInputs from './dynamicInputs'
 import OfflineUpdate from './offline-update'
 import offlineProps from './offline-update/offline-props'
 
-import {loadData} from '../actions'
+import {loadData, resetData} from '../actions'
+import {resetCities} from '../actions/cities'
 
 require('./styles/bootstrap.scss')
 require('./styles/styles.scss')
@@ -31,8 +32,13 @@ export class Main extends Component {
     const fromCity = ReactDOM.findDOMNode(this.fromCityInput).value;
     loadData(fromCity, inputCities.map(({value})=>value), date)
   }
+  resetForm(e) {
+    e.preventDefault()
+    const {resetForm} = this.props
+    resetForm()
+  }
   render() {
-    const {loading, cities, error} = this.props
+    const {loading, cities, error, resetForm} = this.props
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + 14);
     return (
@@ -61,7 +67,7 @@ export class Main extends Component {
             ref={node => {this.toCityInputs = node}}
             />
           <ButtonToolbar>
-            <Button type="reset">Reset</Button>
+            <Button type="reset" onClick={(e)=>this.resetForm(e)}>Reset</Button>
             <Button type="submit" bsStyle="primary" className={loading && 'disabled'}>Submit</Button>
           </ButtonToolbar>
         </Form>
@@ -103,7 +109,11 @@ export const mapStateToProps = ({ weatherAndFlights, cities } ) => {
   }
 };
 export const mapDispatchToProps = (dispatch) => ({
-  loadData: (fromCity, toCities, date) => dispatch(loadData(fromCity, toCities, date))
+  loadData: (fromCity, toCities, date) => dispatch(loadData(fromCity, toCities, date)),
+  resetForm: () => {
+    dispatch(resetData())
+    dispatch(resetCities())
+  }
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main)
