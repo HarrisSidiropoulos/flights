@@ -21,6 +21,9 @@ import {resetCities} from '../actions/cities'
 require('./styles/bootstrap.scss')
 require('./styles/styles.scss')
 
+const defaultDate = dateFormat('yyyy-MM-dd', new Date())
+const defaultCity = "Thessaloniki"
+
 export class Main extends Component {
   constructor(props) {
     super(props);
@@ -35,6 +38,8 @@ export class Main extends Component {
   resetForm(e) {
     e.preventDefault()
     const {resetForm} = this.props
+    ReactDOM.findDOMNode(this.dateInput).value = defaultDate
+    ReactDOM.findDOMNode(this.fromCityInput).value = defaultCity
     resetForm()
   }
   render() {
@@ -49,7 +54,7 @@ export class Main extends Component {
             <ControlLabel>Date:</ControlLabel>
             <FormControl type="date" ref={node => {this.dateInput = node}}
               required
-              defaultValue={dateFormat('yyyy-MM-dd', new Date())}
+              defaultValue={defaultDate}
               min={dateFormat('yyyy-MM-dd', new Date())}
               max={dateFormat('yyyy-MM-dd', maxDate)} />
           </FormGroup>
@@ -59,7 +64,7 @@ export class Main extends Component {
               type="text"
               required
               ref={node => {this.fromCityInput = node}}
-              defaultValue="Thessaloniki" />
+              defaultValue={defaultCity} />
           </FormGroup>
           <DynamicInputs
             max={4}
