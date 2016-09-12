@@ -14,7 +14,6 @@ export const getWeatherAndFlights = (fromCity, toCities, date) => {
       )
     })
     .then(values => {
-      console.log(values)
       return values
     })
 }
@@ -28,7 +27,10 @@ export const getWeatherAndFlight = (fromAirport, toCity, date) => {
       ])
     })
     .then(values => {
-      return values
+      return {
+        flight: values[0],
+        weather: values[1]
+      }
     })
 }
 export default getWeatherAndFlights
