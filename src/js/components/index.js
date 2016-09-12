@@ -32,7 +32,7 @@ export class Main extends Component {
     loadData(fromCity, inputCities.map(({value})=>value), date)
   }
   render() {
-    const {loading, cities} = this.props
+    const {loading, cities, error} = this.props
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + 14);
     return (
@@ -66,6 +66,11 @@ export class Main extends Component {
           </ButtonToolbar>
         </Form>
         <br/>
+        {
+          error && <Panel header="Error" bsStyle="danger">
+            <Panel>{error}</Panel>
+          </Panel>
+        }
         {
           cities.map(({flight, weather}, index)=> {
             return (

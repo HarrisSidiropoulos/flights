@@ -20,6 +20,8 @@ export const loadData = (fromCity, toCities, date) => {
     dispatch(requestData());
     return getWeatherAndFlights(fromCity, toCities, date)
       .then(response => dispatch(receiveData(response)))
-      .catch(e => requestError(e))
+      .catch(e => {
+        return dispatch(requestError(e.toString()))
+      })
   }
 }
