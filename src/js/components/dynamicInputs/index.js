@@ -14,7 +14,7 @@ export class DynamicInputs extends Component {
     super(props);
   }
   render() {
-    const {label, cities, addCity, removeCity,updateCity, max} = this.props
+    const {label, cities, addCity, removeCity,updateCity, max, min} = this.props
     return (
       <div>
       {
@@ -23,14 +23,14 @@ export class DynamicInputs extends Component {
             <ControlLabel>{label}:</ControlLabel>
             <InputGroup>
               <InputGroup.Button>
-                <Button onClick={()=> removeCity(index)} className={index===0 && 'disabled'}>-</Button>
+                <Button onClick={()=> removeCity(index)} className={index<min && 'disabled'}>-</Button>
               </InputGroup.Button>
               <FormControl type="text"
                 required
                 onChange={(e)=> updateCity(index,e.target.value)}
                 value={value} />
               <InputGroup.Button>
-                <Button onClick={()=> addCity(index)} className={index===max-1 && 'disabled'}>+</Button>
+                <Button onClick={()=> addCity(index)} className={index>=max-1 && 'disabled'}>+</Button>
               </InputGroup.Button>
             </InputGroup>
           </FormGroup>
