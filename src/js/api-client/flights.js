@@ -2,8 +2,8 @@
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
 
-const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
-// const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
+// const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
+const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
 const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 
 export function getFlightDate(date) {
@@ -37,8 +37,20 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
 
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, data)
     .then((response) => {
+      console.log(response)
       if (!response.ok) {
-        throw new Error(response.statusText)
+        switch(response.status) {
+        case 400:
+          throw new Error("Invalid inputs, including invalid API key. Do not retry without correcting inputs.")
+        case 403:
+          throw new Error("Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly.")
+        case 500:
+          throw new Error("Internal error. Try reproducing manually, and report a problem if it recurs.")
+        case 503:
+          throw new Error("Temporary overload. Wait before retrying.")
+        default:
+          throw new Error(response.statusText)
+        }
       }
       return response.json()
     })
