@@ -38,7 +38,7 @@ export class Main extends Component {
     resetForm()
   }
   render() {
-    const {loading, cities, error, resetForm} = this.props
+    const {loading, cities, error} = this.props
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + 14);
     return (
