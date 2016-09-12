@@ -23,7 +23,7 @@ export class DynamicInputs extends Component {
             <ControlLabel>{label}:</ControlLabel>
             <InputGroup>
               <InputGroup.Button>
-                <Button onClick={()=> removeCity(index)} className={index<min && 'disabled'}>-</Button>
+                <Button onClick={()=> removeCity(index)} className={index<min && cities.length===1 && 'disabled'}>-</Button>
               </InputGroup.Button>
               <FormControl type="text"
                 required
