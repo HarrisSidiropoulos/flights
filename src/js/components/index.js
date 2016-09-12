@@ -82,10 +82,12 @@ export class Main extends Component {
           cities.map(({flight, weather}, index)=> {
             return (
               <Panel key={index} header={`Weather & flights from ${flight.fromCity} to ${flight.toCity} `} className="">
-                <Panel>
-                  <strong>{flight.toCity} weather:</strong> {weather.weather[0].description} <br/>
-                  <strong>Temperature:</strong>  {Math.floor(weather.temp.day)}C <br/>
-                </Panel>
+                {
+                  weather && <Panel>
+                    <strong>{flight.toCity} weather:</strong> {weather.weather[0].description} <br/>
+                    <strong>Temperature:</strong>  {Math.floor(weather.temp.day)}C <br/>
+                  </Panel>
+                }
                 <Panel>
                   <strong>Sale Total:</strong>     {flight.saleTotal} <br/>
                   <strong>From Airport:</strong>   {flight.fromAirport} <br/>
