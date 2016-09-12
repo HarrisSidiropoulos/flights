@@ -3,10 +3,6 @@ import fetch from 'isomorphic-fetch';
 const WEATHER_API_KEY='d19be8b22d9cee2291ebb8577f647fcc'
 const WEATHER_API_URL='http://api.openweathermap.org/data/2.5'
 
-export function getWeatherDate(date) {
-  return Math.floor(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) / 100000000);
-}
-
 export const getCityWeather = (city='London', date=new Date(), cnt=14, units='metric') => {
   return fetch(`${WEATHER_API_URL}/forecast/daily?q=${city}&units=${units}&cnt=${cnt}&APPID=${WEATHER_API_KEY}`)
     .then((response) => {
@@ -16,7 +12,12 @@ export const getCityWeather = (city='London', date=new Date(), cnt=14, units='me
       return response.json()
     })
     .then((response)=> {
-      const results = response.list.filter(({dt})=>Math.floor(dt/100000)===getWeatherDate(date))
+      const results = response.list.filter(({dt})=> {
+        dt = new Date(dt*1000)
+        return dt.getDate()===date.getDate() &&
+          dt.getMonth()===date.getMonth() &&
+          dt.getFullYear()===date.getFullYear()
+      })
       if (results.length===0) {
         throw new Error("Could not find date")
       }
