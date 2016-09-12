@@ -92,7 +92,7 @@ export class Main extends Component {
                   <strong>Sale Total:</strong>     {flight.saleTotal} <br/>
                   <strong>From Airport:</strong>   {flight.fromAirport} <br/>
                   <strong>To Airport:</strong>     {flight.toAirport} <br/>
-                  <strong>Carier:</strong>         {flight.carier} <br/>
+                  <strong>Carrier:</strong>         {flight.carrier} <br/>
                   <strong>Departure Time:</strong> {dateFormat('MM-dd-yyyy hh:mm', new Date(flight.departureTime))} <br/>
                   <strong>Arrival Time:</strong>   {dateFormat('MM-dd-yyyy hh:mm', new Date(flight.arrivalTime))} <br/>
                 </Panel>

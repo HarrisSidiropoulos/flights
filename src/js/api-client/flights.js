@@ -60,7 +60,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
         fromAirport: response.trips.data.airport.filter(({city}) => city===fromAirport)[0].name,
         toCity: response.trips.data.city.filter(({code}) => code===toAirport)[0].name,
         fromCity: response.trips.data.city.filter(({code}) => code===fromAirport)[0].name,
-        carier: response.trips.data.carrier[0].name,
+        carrier: response.trips.data.carrier[0].name,
         saleTotal: response.trips.tripOption[0].saleTotal,
         duration: response.trips.tripOption[0].slice[0].duration,
         arrivalTime: response.trips.tripOption[0].slice[0].segment[0].leg[0].arrivalTime,
