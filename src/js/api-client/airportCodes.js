@@ -20,7 +20,6 @@ const getAirportCodes = (city='Thessaloniki', limit=1) => {
       return response.json()
     })
     .then((response)=> {
-      console.log(response.statusCode)
       if (response.statusCode!==200) {
         throw new Error(response.message)
       }
