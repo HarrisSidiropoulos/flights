@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 
-import {addCity,removeCity,updateCity} from '../../actions/cities'
+import {addCity,removeCity,updateCity} from '../../../actions/cities'
 
 import FormControl from 'react-bootstrap/lib/FormControl'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
