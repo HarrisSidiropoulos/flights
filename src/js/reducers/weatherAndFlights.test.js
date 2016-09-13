@@ -28,7 +28,46 @@ describe('weatherAndFlights reducer', () => {
       expect(weatherAndFlights(INITIAL_STATE, action).loading).toBe(false)
     })
     it('should change state cities', () => {
-      const payload = ['Thessaloniki']
+      const payload = [
+        {
+          "flight":{
+            "toAirport":"Athens Eleftherios Venizelos",
+            "fromAirport":"Thessaloniki Makedonia",
+            "toCity":"Athens",
+            "fromCity":"Thessaloniki",
+            "carrier":"Aegean Airlines S.A.",
+            "saleTotal":"EUR49.30",
+            "duration":50,
+            "arrivalTime":"2016-09-14T00:45+03:00",
+            "departureTime":"2016-09-13T23:55+03:00"
+          },
+          "weather":{
+            "dt":1473760800,
+            "temp":{
+              "day":27.39,
+              "min":23.47,
+              "max":27.73,
+              "night":23.47,
+              "eve":27.03,
+              "morn":27.39
+            },
+            "pressure":1021.8,
+            "humidity":73,
+            "weather":[
+              {
+                "id":800,
+                "main":"Clear",
+                "description":"clear sky",
+                "icon":"01d"
+              }
+            ],
+            "speed":7.71,
+            "deg":11,
+            "clouds":0,
+            "city":"Athens"
+          }
+        }
+      ]
       const action = {type: FETCH_DATA_SUCCESS, payload}
       expect(weatherAndFlights(INITIAL_STATE, action).cities).toEqual(payload)
     })
