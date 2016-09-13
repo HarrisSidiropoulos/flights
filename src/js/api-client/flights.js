@@ -28,7 +28,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
     }
   }
 
-  const data = {
+  const request = {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -36,7 +36,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
     body: JSON.stringify(requestBody)
   }
 
-  return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, data)
+  return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, request)
     .then((response) => {
       if (!response.ok) {
         switch(response.status) {
