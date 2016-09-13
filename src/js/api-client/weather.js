@@ -21,7 +21,9 @@ export const getCityWeather = (city='London', date=new Date(), cnt=14, units='me
       if (results.length===0) {
         throw new Error("Could not find date")
       }
-      return results[0]
+      const result = results[0]
+      result.city = response.city.name
+      return result
     })
 }
 

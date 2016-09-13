@@ -12,6 +12,8 @@ import FormControl from 'react-bootstrap/lib/FormControl'
 
 import DynamicInputs from './dynamicInputs'
 
+require('./styles.scss')
+
 const defaultDate = dateFormat('yyyy-MM-dd', new Date())
 const defaultCity = "Thessaloniki"
 const maxDate = new Date();
@@ -58,7 +60,9 @@ class FlightsForm extends Component {
           />
         <ButtonToolbar>
           <Button type="reset" onClick={(e)=>this.resetForm(e)}>Reset</Button>
-          <Button type="submit" bsStyle="primary" className={loading && 'disabled'}>Submit</Button>
+          <Button type="submit" bsStyle="primary" className={loading && 'progress-bar-striped'}>
+            <span>Submit</span>
+          </Button>
         </ButtonToolbar>
       </Form>
     )
