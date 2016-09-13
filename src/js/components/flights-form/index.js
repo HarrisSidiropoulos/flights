@@ -10,7 +10,7 @@ import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
 import Button from 'react-bootstrap/lib/Button'
 import FormControl from 'react-bootstrap/lib/FormControl'
 
-import DynamicInputs from './dynamicInputs'
+import DynamicInputs from './dynamic-inputs'
 
 require('./styles.scss')
 
@@ -37,7 +37,9 @@ class FlightsForm extends Component {
   render() {
     const {loading} = this.props
     return (
-      <Form onSubmit={(e)=>this.submitForm(e)} className={loading && 'loading'}>
+      <Form onSubmit={(e)=>this.submitForm(e)}
+            onReset={(e)=>this.resetForm(e)}
+            className={loading && 'loading'}>
         <FormGroup>
           <ControlLabel>Date:</ControlLabel>
           <FormControl type="date" ref={node => {this.dateInput = node}}
@@ -59,8 +61,9 @@ class FlightsForm extends Component {
           ref={node => {this.toCityInputs = node}}
           />
         <ButtonToolbar>
-          <Button type="reset" onClick={(e)=>this.resetForm(e)}>Reset</Button>
-          <Button type="submit" bsStyle="primary" className={loading && 'progress-bar-striped'}>
+          <Button type="reset">Reset</Button>
+          <Button type="submit" bsStyle="primary"
+              className={loading && 'progress-bar-striped disabled'}>
             <span>Submit</span>
           </Button>
         </ButtonToolbar>
