@@ -9,7 +9,7 @@ import FlightsResponse from './flights-response'
 import FlightsForm from './flights-form'
 
 import {loadData, resetData} from '../actions'
-import {resetCities} from '../actions/cities'
+import {resetCities} from '../actions/cityInputs'
 
 require('./styles/bootstrap.scss')
 require('./styles/styles.scss')
@@ -32,10 +32,10 @@ export class Main extends Component {
   }
 }
 
-export const mapStateToProps = ({ weatherAndFlights, cities } ) => {
+export const mapStateToProps = ({ weatherAndFlights, cityInputs } ) => {
   return {
     ...weatherAndFlights,
-    inputCities: cities.cities
+    cityInputs: cityInputs.cities
   }
 };
 export const mapDispatchToProps = (dispatch) => ({

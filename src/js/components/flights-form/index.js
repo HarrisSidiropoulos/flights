@@ -22,10 +22,10 @@ maxDate.setDate(maxDate.getDate() + 13);
 class FlightsForm extends Component {
   submitForm(e) {
     e.preventDefault()
-    const {loadData, inputCities} = this.props
+    const {loadData, cityInputs} = this.props
     const date = new Date(ReactDOM.findDOMNode(this.dateInput).value)
     const fromCity = ReactDOM.findDOMNode(this.fromCityInput).value;
-    loadData(fromCity, inputCities.map(({value})=>value), date)
+    loadData(fromCity, cityInputs.map(({value})=>value), date)
   }
   resetForm(e) {
     e.preventDefault()
@@ -75,7 +75,7 @@ class FlightsForm extends Component {
 FlightsForm.propTypes = {
   resetForm: PropTypes.func.isRequired,
   loadData: PropTypes.func.isRequired,
-  inputCities: PropTypes.array.isRequired,
+  cityInputs: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired
 }
 

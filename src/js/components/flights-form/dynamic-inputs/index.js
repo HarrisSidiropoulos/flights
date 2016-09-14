@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 
-import {addCity,removeCity,updateCity} from '../../../actions/cities'
+import {addCity,removeCity,updateCity} from '../../../actions/cityInputs'
 
 import FormControl from 'react-bootstrap/lib/FormControl'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
@@ -41,6 +41,7 @@ export class DynamicInputs extends Component {
   }
 }
 DynamicInputs.propTypes = {
+  cities: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
   min: PropTypes.number,
   max: PropTypes.number
@@ -50,8 +51,8 @@ DynamicInputs.defaultProps = {
   max: 4
 }
 
-export const mapStateToProps = ({cities}) => {
-  return cities
+export const mapStateToProps = ({cityInputs}) => {
+  return cityInputs
 }
 export const mapDispatchToProps = (dispatch) => ({
   addCity: (index) => dispatch(addCity(index)),

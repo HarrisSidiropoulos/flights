@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
 import weatherAndFlights from './weatherAndFlights'
-import cities from './cities'
+import cityInputs from './cityInputs'
 
 const rootReducer = combineReducers({
   weatherAndFlights,
-  cities
+  cityInputs
 });
 
 export default rootReducer
