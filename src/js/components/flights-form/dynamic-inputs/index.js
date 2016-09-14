@@ -16,10 +16,10 @@ export class DynamicInputs extends Component {
   render() {
     const {label, cities, addCity, removeCity,updateCity, max, min} = this.props
     return (
-      <div>
+      <div className="row">
       {
         cities.map(({value, error},index)=> (
-          <FormGroup key={index}>
+          <FormGroup key={index} className={`col-md-${Math.floor(12/cities.length)}`}>
             <ControlLabel>{label}:</ControlLabel>
             <InputGroup>
               <InputGroup.Button>
