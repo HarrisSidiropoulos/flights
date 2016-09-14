@@ -23,7 +23,10 @@ const getAirportCodes = (city='Thessaloniki', limit=1) => {
       if (response.statusCode!==200) {
         throw new Error(response.message)
       }
-      return response.airports[0].iata
+      return {
+        airport: response.airports[0].iata,
+        city: response.airports[0].city
+      }
     })
 }
 
