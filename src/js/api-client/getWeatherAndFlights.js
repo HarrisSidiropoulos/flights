@@ -21,16 +21,16 @@ export const getWeatherAndFlights = (fromCity, toCities, date) => {
 export const getWeatherAndFlight = (fromAirport, toCity, date) => {
   return getAirportCodes(toCity)
     .then((toAirport) => {
-      return Promise.all([
-        getFlights(fromAirport,toAirport, date),
-        getCityWeather(toCity, date)
-      ])
+      return getFlights(fromAirport,toAirport, date)
     })
-    .then(values => {
-      return {
-        flight: values[0],
-        weather: values[1]
-      }
+    .then((flight)=> {
+      return getCityWeather(flight.toCity, date)
+        .then((weather)=> {
+          return {
+            flight,
+            weather
+          }
+        })
     })
 }
 export default getWeatherAndFlights
