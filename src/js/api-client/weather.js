@@ -15,8 +15,8 @@ export const getCityWeather = (city='London', date=new Date(), cnt=14, units='me
       const results = response.list.filter(({dt})=> {
         dt = new Date(dt*1000)
         return dt.getDate()===date.getDate() &&
-          dt.getMonth()===date.getMonth() &&
-          dt.getFullYear()===date.getFullYear()
+              dt.getMonth()===date.getMonth() &&
+           dt.getFullYear()===date.getFullYear()
       })
       if (results.length===0) {
         throw new Error("Could not find date")

@@ -7,15 +7,10 @@ export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST';
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE';
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS';
 
-export const resetData = () => ({ type: RESET_DATA })
-export const requestData = () => ({ type: FETCH_DATA_REQUEST })
-export const requestError = (e) => ({ type: FETCH_DATA_FAILURE, error: e })
-export const receiveData = (data) => {
-  return {
-    type: FETCH_DATA_SUCCESS,
-    payload: data
-  }
-}
+export const resetData    = ()      => ({ type: RESET_DATA })
+export const requestData  = ()      => ({ type: FETCH_DATA_REQUEST })
+export const requestError = (e)     => ({ type: FETCH_DATA_FAILURE, error: e })
+export const receiveData  = (data)  => ({ type: FETCH_DATA_SUCCESS, payload: data })
 
 export const loadData = (fromCity, toCities, date) => {
   return dispatch => {

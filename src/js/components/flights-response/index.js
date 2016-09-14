@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
-import dateFormat from 'date-format'
 
+import dateFormat from 'date-format'
 import Panel from 'react-bootstrap/lib/Panel'
 
 const FlightsResponse = ({cities}) => {

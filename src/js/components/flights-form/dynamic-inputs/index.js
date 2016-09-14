@@ -1,13 +1,13 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 
-import {addCity,removeCity,updateCity} from '../../../actions/cityInputs'
-
 import FormControl from 'react-bootstrap/lib/FormControl'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import FormGroup from 'react-bootstrap/lib/FormGroup'
 import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Button from 'react-bootstrap/lib/Button'
+
+import {addCity,removeCity,updateCity} from '../../../actions/cityInputs'
 
 export class DynamicInputs extends Component {
   constructor(props) {

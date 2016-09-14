@@ -2,7 +2,6 @@ import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom';
 
 import dateFormat from 'date-format'
-
 import Form from 'react-bootstrap/lib/Form'
 import ControlLabel from 'react-bootstrap/lib/ControlLabel'
 import FormGroup from 'react-bootstrap/lib/FormGroup'

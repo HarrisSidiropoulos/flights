@@ -1,5 +1,6 @@
 /*eslint indent: */
 import {RESET_DATA, FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS} from '../actions'
+
 export const INITIAL_STATE = { loading: false, cities: [], error: false }
 
 export default function weatherAndFlights(state = INITIAL_STATE, action) {

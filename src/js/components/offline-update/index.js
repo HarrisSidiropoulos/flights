@@ -1,5 +1,6 @@
 /* eslint no-console: 0 */
 import React, {Component, PropTypes} from 'react'
+
 require('./styles.scss')
 
 class OfflineUpdate extends Component {
