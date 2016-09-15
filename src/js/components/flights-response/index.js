@@ -38,7 +38,7 @@ const FlightsResponse = ({cities}) => {
                   {
                     flight && <div className="col-md-12">
                       <hr />
-                      <h4>Flight to {flight.toCity} from {flight.fromCity}</h4>
+                      <h4>Flight from {flight.fromCity} to {flight.toCity}</h4>
                       <strong>Sale Total:</strong>     {flight.saleTotal.replace(/\D+/,'')}€ <br/>
                       <strong>From Airport:</strong>   {flight.fromAirport} <br/>
                       <strong>To Airport:</strong>     {flight.toAirport} <br/>
@@ -50,7 +50,7 @@ const FlightsResponse = ({cities}) => {
                   {
                     returnFlight && <div className="col-md-12">
                       <hr />
-                      <h4>Flight to {flight.fromCity} from {flight.toCity}</h4>
+                      <h4>Flight from {flight.toCity} to {flight.fromCity}</h4>
                       <strong>Sale Total:</strong>     {returnFlight.saleTotal.replace(/\D+/,'')}€ <br/>
                       <strong>From Airport:</strong>   {returnFlight.fromAirport} <br/>
                       <strong>To Airport:</strong>     {returnFlight.toAirport} <br/>
