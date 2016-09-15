@@ -12,10 +12,10 @@ export const requestData  = ()      => ({ type: FETCH_DATA_REQUEST })
 export const requestError = (e)     => ({ type: FETCH_DATA_FAILURE, error: e })
 export const receiveData  = (data)  => ({ type: FETCH_DATA_SUCCESS, payload: data })
 
-export const loadData = (fromCity, toCities, date) => {
+export const loadData = (fromCity, toCities, startDate, endDate) => {
   return dispatch => {
     dispatch(requestData());
-    return getWeatherAndFlights(fromCity, toCities, date)
+    return getWeatherAndFlights(fromCity, toCities, startDate, endDate)
       .then(response => dispatch(receiveData(response)))
       .catch(e => {
         return dispatch(requestError(e.toString()))

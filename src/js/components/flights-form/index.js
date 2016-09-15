@@ -22,9 +22,10 @@ class FlightsForm extends Component {
   submitForm(e) {
     e.preventDefault()
     const {loadData, cityInputs} = this.props
-    const date = new Date(ReactDOM.findDOMNode(this.dateInput).value)
+    const startDate = new Date(ReactDOM.findDOMNode(this.startDateInput).value)
+    const endDate = new Date(ReactDOM.findDOMNode(this.endDateInput).value)
     const fromCity = ReactDOM.findDOMNode(this.fromCityInput).value;
-    loadData(fromCity, cityInputs.map(({value})=>value), date)
+    loadData(fromCity, cityInputs.map(({value})=>value), startDate, endDate)
   }
   resetForm(e) {
     e.preventDefault()
@@ -40,8 +41,16 @@ class FlightsForm extends Component {
             onReset={(e)=>this.resetForm(e)}
             className={loading && 'loading'}>
         <FormGroup>
-          <ControlLabel>Date:</ControlLabel>
-          <FormControl type="date" ref={node => {this.dateInput = node}}
+          <ControlLabel>Start Date:</ControlLabel>
+          <FormControl type="date" ref={node => {this.startDateInput = node}}
+            required
+            defaultValue={defaultDate}
+            min={dateFormat('yyyy-MM-dd', new Date())}
+            max={dateFormat('yyyy-MM-dd', maxDate)} />
+        </FormGroup>
+        <FormGroup>
+          <ControlLabel>End Date:</ControlLabel>
+          <FormControl type="date" ref={node => {this.endDateInput = node}}
             required
             defaultValue={defaultDate}
             min={dateFormat('yyyy-MM-dd', new Date())}
