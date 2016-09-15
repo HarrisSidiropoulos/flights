@@ -40,22 +40,24 @@ class FlightsForm extends Component {
       <Form onSubmit={(e)=>this.submitForm(e)}
             onReset={(e)=>this.resetForm(e)}
             className={loading && 'loading'}>
-        <FormGroup>
-          <ControlLabel>Start Date:</ControlLabel>
-          <FormControl type="date" ref={node => {this.startDateInput = node}}
-            required
-            defaultValue={defaultDate}
-            min={dateFormat('yyyy-MM-dd', new Date())}
-            max={dateFormat('yyyy-MM-dd', maxDate)} />
-        </FormGroup>
-        <FormGroup>
-          <ControlLabel>End Date:</ControlLabel>
-          <FormControl type="date" ref={node => {this.endDateInput = node}}
-            required
-            defaultValue={defaultDate}
-            min={dateFormat('yyyy-MM-dd', new Date())}
-            max={dateFormat('yyyy-MM-dd', maxDate)} />
-        </FormGroup>
+        <div className="row">
+          <FormGroup className="col-md-6">
+            <ControlLabel>Start Date:</ControlLabel>
+            <FormControl type="date" ref={node => {this.startDateInput = node}}
+              required
+              defaultValue={defaultDate}
+              min={dateFormat('yyyy-MM-dd', new Date())}
+              max={dateFormat('yyyy-MM-dd', maxDate)} />
+          </FormGroup>
+          <FormGroup className="col-md-6">
+            <ControlLabel>End Date:</ControlLabel>
+            <FormControl type="date" ref={node => {this.endDateInput = node}}
+              required
+              defaultValue={defaultDate}
+              min={dateFormat('yyyy-MM-dd', new Date())}
+              max={dateFormat('yyyy-MM-dd', maxDate)} />
+          </FormGroup>
+        </div>
         <FormGroup>
           <ControlLabel>From city:</ControlLabel>
           <FormControl
