@@ -19,6 +19,12 @@ const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 13);
 
 class FlightsForm extends Component {
+  constructor() {
+    super()
+    this.state = {
+      minEndDate: defaultDate
+    }
+  }
   submitForm(e) {
     e.preventDefault()
     const {loadData, cityInputs} = this.props
@@ -30,9 +36,20 @@ class FlightsForm extends Component {
   resetForm(e) {
     e.preventDefault()
     const {resetForm} = this.props
-    ReactDOM.findDOMNode(this.dateInput).value = defaultDate
+    ReactDOM.findDOMNode(this.startDateInput).value = defaultDate
     ReactDOM.findDOMNode(this.fromCityInput).value = defaultCity
     resetForm()
+  }
+  onDateChange(value) {
+    this.setState({
+      ...this.state,
+      minEndDate: value
+    })
+    const startDate = new Date(value).getTime()
+    const endDate = new Date(ReactDOM.findDOMNode(this.endDateInput).value).getTime()
+    if (startDate>endDate) {
+      ReactDOM.findDOMNode(this.endDateInput).value = value
+    }
   }
   render() {
     const {loading} = this.props
@@ -46,6 +63,7 @@ class FlightsForm extends Component {
             <FormControl type="date" ref={node => {this.startDateInput = node}}
               required
               defaultValue={defaultDate}
+              onChange={(e)=>this.onDateChange(e.target.value)}
               min={dateFormat('yyyy-MM-dd', new Date())}
               max={dateFormat('yyyy-MM-dd', maxDate)} />
           </FormGroup>
@@ -54,7 +72,7 @@ class FlightsForm extends Component {
             <FormControl type="date" ref={node => {this.endDateInput = node}}
               required
               defaultValue={defaultDate}
-              min={dateFormat('yyyy-MM-dd', new Date())}
+              min={this.state.minEndDate}
               max={dateFormat('yyyy-MM-dd', maxDate)} />
           </FormGroup>
         </div>
