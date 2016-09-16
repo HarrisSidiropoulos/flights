@@ -12,14 +12,16 @@ export const getCityWeather = (city='London', startDate=new Date(), endDate=new 
       return response.json()
     })
     .then((response)=> {
-      const results = response.list.filter(({dt})=> {
+      const filteredWeatherList = response.list.filter(({dt})=> {
         dt = new Date(dt*1000)
         return (dt.getDate()>=startDate.getDate()     && dt.getDate() <= endDate.getDate()) ||
               (dt.getMonth()>=startDate.getMonth()    && dt.getMonth() <= endDate.getMonth) ||
            (dt.getFullYear()>=startDate.getFullYear() && dt.getFullYear() <= endDate.getFullYear)
       })
-      response.list = results
-      return response
+      return {
+        ...response,
+        list: filteredWeatherList
+      }
     })
 }
 

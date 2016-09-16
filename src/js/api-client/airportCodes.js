@@ -12,7 +12,7 @@ const getAirportCodes = (city='Thessaloniki', limit=1) => {
       "APC-Auth": APC_AUTH
     }
   }
-  return fetch(`${API_URL}?term=${city}&limit=${limit}`, request)
+  return fetch(`${API_URL}?term=${city.trim()}&limit=${limit}`, request)
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText)

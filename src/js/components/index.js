@@ -39,7 +39,8 @@ export const mapStateToProps = ({ weatherAndFlights, cityInputs } ) => {
   }
 };
 export const mapDispatchToProps = (dispatch) => ({
-  loadData: (fromCity, toCities, startDate, endDate) => dispatch(loadData(fromCity, toCities, startDate, endDate)),
+  loadData: (fromCity, toCities, startDate, endDate) =>
+    dispatch(loadData(fromCity, toCities, startDate, endDate)),
   resetForm: () => {
     dispatch(resetData())
     dispatch(resetCities())

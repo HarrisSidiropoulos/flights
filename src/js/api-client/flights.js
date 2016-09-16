@@ -2,16 +2,16 @@
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
 
-// const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
+const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
 // const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
-const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
+// const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
 const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
 
-export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) => {
+export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const requestBody = {
     "request": {
       "slice": [
@@ -24,7 +24,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
       "passengers": {
         "adultCount": 1
       },
-      "solutions": 1
+      "solutions": solutions
     }
   }
 
@@ -55,7 +55,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
       return response.json()
     })
     .then((response)=> {
-      const data = {
+      const filteredResponse = {
         toAirport     : response.trips.data.airport.filter(({city}) => city===toAirport)[0].name,
         fromAirport   : response.trips.data.airport.filter(({city}) => city===fromAirport)[0].name,
         toCity        : response.trips.data.city.filter(({code}) => code===toAirport)[0].name,
@@ -66,7 +66,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date()) 
         arrivalTime   : response.trips.tripOption[0].slice[0].segment[0].leg[0].arrivalTime,
         departureTime : response.trips.tripOption[0].slice[0].segment[0].leg[0].departureTime
       }
-      return data
+      return filteredResponse
     })
 }
 
