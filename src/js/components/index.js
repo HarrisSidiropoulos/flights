@@ -8,7 +8,7 @@ import offlineProps from './offline-update/offline-props'
 import FlightsResponse from './flights-response'
 import FlightsForm from './flights-form'
 
-import {loadData, resetData} from '../actions'
+import {loadData, resetData, requestData} from '../actions'
 import {resetCities} from '../actions/cityInputs'
 
 require('./styles/bootstrap.scss')
@@ -40,7 +40,7 @@ export const mapStateToProps = ({ weatherAndFlights, cityInputs } ) => {
 };
 export const mapDispatchToProps = (dispatch) => ({
   loadData: (fromCity, toCities, startDate, endDate) =>
-    dispatch(loadData(fromCity, toCities, startDate, endDate)),
+    dispatch(requestData(fromCity, toCities, startDate, endDate)),
   resetForm: () => {
     dispatch(resetData())
     dispatch(resetCities())
