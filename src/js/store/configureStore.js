@@ -1,20 +1,19 @@
-import { createStore, applyMiddleware } from 'redux'
-import rootReducer from '../reducers'
-import {loadDataEpic} from '../actions'
 import 'rxjs';
-import { combineEpics, createEpicMiddleware } from 'redux-observable'
+import {createStore, applyMiddleware} from 'redux'
+import {createEpicMiddleware} from 'redux-observable'
+import rootReducer from './rootReducer'
+import rootEpic from './rootEpic'
 
-// import createLogger from 'redux-logger'
-// const logger = createLogger();
+import createLogger from 'redux-logger'
+const logger = createLogger();
 
-const rootEpic = combineEpics(loadDataEpic)
 const epicMiddleware = createEpicMiddleware(rootEpic)
 
 const configureStore = (initialState = {})=> {
   const store =  createStore(
     rootReducer,
     initialState,
-    applyMiddleware(epicMiddleware)
+    applyMiddleware(epicMiddleware, logger)
   );
   return store;
 };

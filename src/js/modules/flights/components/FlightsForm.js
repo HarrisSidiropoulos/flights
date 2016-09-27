@@ -8,10 +8,9 @@ import FormGroup from 'react-bootstrap/lib/FormGroup'
 import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
 import Button from 'react-bootstrap/lib/Button'
 import FormControl from 'react-bootstrap/lib/FormControl'
+import {components as DynamicInputsComponents} from '../../dynamic-inputs'
 
-import DynamicInputs from './dynamic-inputs'
-
-require('./styles.scss')
+const {DynamicInputs} = DynamicInputsComponents
 
 const defaultDate = dateFormat('yyyy-MM-dd', new Date())
 const defaultCity = "Thessaloniki"

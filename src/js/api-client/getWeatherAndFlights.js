@@ -1,8 +1,5 @@
-/*eslint no-console: */
-/*eslint indent: */
-import getAirportCodes from './airportCodes'
-import getFlights from './flights'
-import getCityWeather from './weather'
+import getAirportCodes from './getAirportCodes'
+import getWeatherAndFlight from './getWeatherAndFlight'
 
 export const getWeatherAndFlights = (fromCity, toCities, startDate, endDate) => {
   return getAirportCodes(fromCity)
@@ -15,24 +12,6 @@ export const getWeatherAndFlights = (fromCity, toCities, startDate, endDate) => 
     })
     .then(values => {
       return values
-    })
-}
-
-export const getWeatherAndFlight = (fromAirport, toCity, startDate, endDate) => {
-  return getAirportCodes(toCity)
-    .then(({airport, city}) => {
-      return Promise.all([
-        getFlights(fromAirport, airport, startDate),
-        getFlights(airport, fromAirport, endDate),
-        getCityWeather(city, startDate, endDate)
-      ])
-    })
-    .then(([flight, returnFlight, weather])=> {
-      return {
-        flight,
-        returnFlight,
-        weather
-      }
     })
 }
 export default getWeatherAndFlights

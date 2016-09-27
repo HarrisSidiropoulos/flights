@@ -7,23 +7,24 @@ import FormGroup from 'react-bootstrap/lib/FormGroup'
 import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Button from 'react-bootstrap/lib/Button'
 
-import {addCity,removeCity,updateCity} from '../../../actions/cityInputs'
+import {addCity,removeCity,updateCity} from '../actions'
+import {NAME} from '../constants'
 
 export class DynamicInputs extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const {label, cities, addCity, removeCity,updateCity, max, min} = this.props
+    const {label, inputs, addCity, removeCity,updateCity, max, min} = this.props
     return (
       <div className="row">
       {
-        cities.map(({value, error},index)=> (
-          <FormGroup key={index} className={`col-md-${Math.floor(12/cities.length)}`}>
+        inputs.map(({value, error},index)=> (
+          <FormGroup key={index} className={`col-md-${Math.floor(12/inputs.length)}`}>
             <ControlLabel>{label}:</ControlLabel>
             <InputGroup>
               <InputGroup.Button>
-                <Button onClick={()=> removeCity(index)} className={index<min && cities.length===1 && 'disabled'}>-</Button>
+                <Button onClick={()=> removeCity(index)} className={index<min && inputs.length===1 && 'disabled'}>-</Button>
               </InputGroup.Button>
               <FormControl type="text"
                 required
@@ -41,7 +42,7 @@ export class DynamicInputs extends Component {
   }
 }
 DynamicInputs.propTypes = {
-  cities: PropTypes.array.isRequired,
+  inputs: PropTypes.array.isRequired,
   label: PropTypes.string.isRequired,
   min: PropTypes.number,
   max: PropTypes.number
@@ -51,8 +52,10 @@ DynamicInputs.defaultProps = {
   max: 4
 }
 
-export const mapStateToProps = ({cityInputs}) => {
-  return cityInputs
+export const mapStateToProps = ({[NAME]:inputs}) => {
+  return {
+    inputs
+  }
 }
 export const mapDispatchToProps = (dispatch) => ({
   addCity: (index) => dispatch(addCity(index)),
