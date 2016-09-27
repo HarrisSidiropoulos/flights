@@ -4,7 +4,9 @@ export const INITIAL_STATE = [{value:"Athens", error:""}]
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
   case RESET_CITIES:
-    return INITIAL_STATE
+    return [
+      ...INITIAL_STATE
+    ]
   case ADD_CITY:
     return [
       ...state.slice(0, action.index+1),
