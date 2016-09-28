@@ -14,7 +14,7 @@ describe('getAirportCodes', ()=> {
     const city='Thessaloniki'
     const limit=1
 
-    nock(API_URL, REQUEST_HEADERS.headers)
+    nock(API_URL, REQUEST_HEADERS)
       .post('')
       .query({term:city, limit})
       .reply(200, qpxResponse)
