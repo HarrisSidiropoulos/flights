@@ -9,7 +9,7 @@ export const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
-export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+export const getFlightHeaders = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const requestBody = {
     "request": {
       "slice": [
@@ -34,9 +34,9 @@ export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new D
     body: JSON.stringify(requestBody)
   }
 }
-export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
 
-  return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, getFlightsHeaders(fromAirport, toAirport, date, solutions))
+  return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, getFlightHeaders(fromAirport, toAirport, date, solutions))
     .then((response) => {
       if (!response.ok) {
         switch(response.status) {
@@ -70,4 +70,4 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
     })
 }
 
-export default getFlights
+export default getFlight

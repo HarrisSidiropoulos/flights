@@ -1,16 +1,15 @@
-/*eslint no-console: */
 import fetch from 'isomorphic-fetch';
 
 export const APC_AUTH='1c6ac43d70'
 export const API_URL='https://www.air-port-codes.com/api/v1/multi'
-export const request = {
+export const REQUEST_HEADERS = {
   method: "POST",
   headers: {
     "APC-Auth": APC_AUTH
   }
 }
 const getAirportCodes = (city='Thessaloniki', limit=1) => {
-  return fetch(`${API_URL}?term=${city.trim()}&limit=${limit}`, request)
+  return fetch(`${API_URL}?term=${city.trim()}&limit=${limit}`, REQUEST_HEADERS)
     .then((response) => {
       if (!response.ok) {
         throw new Error(response.statusText)
