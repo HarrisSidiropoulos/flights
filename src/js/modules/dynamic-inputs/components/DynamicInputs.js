@@ -24,14 +24,16 @@ export class DynamicInputs extends Component {
             <ControlLabel>{label}:</ControlLabel>
             <InputGroup>
               <InputGroup.Button>
-                <Button onClick={()=> removeInput(index)} className={index<min && inputs.length===1 && 'disabled'}>-</Button>
+                <Button onClick={()=> removeInput(index, min, inputs.length)}
+                  className={index<min && inputs.length===1 && 'disabled'}>-</Button>
               </InputGroup.Button>
               <FormControl type="text"
                 required
                 onChange={(e)=> updateInput(index,e.target.value)}
                 value={value} />
               <InputGroup.Button>
-                <Button onClick={()=> addInput(index)} className={index>=max-1 && 'disabled'}>+</Button>
+                <Button onClick={()=> addInput(index, max, inputs.length)}
+                  className={index>=max-1 && 'disabled'}>+</Button>
               </InputGroup.Button>
             </InputGroup>
           </FormGroup>
@@ -58,8 +60,18 @@ export const mapStateToProps = ({[NAME]:inputs}) => {
   }
 }
 export const mapDispatchToProps = (dispatch) => ({
-  addInput: (index) => dispatch(addInput(index)),
-  removeInput: (index) => dispatch(removeInput(index)),
-  updateInput: (index,value) => dispatch(updateInput(index,value))
+  addInput: (index, max, length) => {
+    if (length<max) {
+      dispatch(addInput(index))
+    }
+  },
+  removeInput: (index, min, length) => {
+    if (length>min) {
+      dispatch(removeInput(index))
+    }
+  },
+  updateInput: (index,value) => {
+    dispatch(updateInput(index,value))
+  }
 })
 export default connect(mapStateToProps, mapDispatchToProps)(DynamicInputs)
