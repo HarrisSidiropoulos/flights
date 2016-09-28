@@ -17,7 +17,8 @@ describe('getFlight', ()=> {
       "arrivalTime":"2016-09-29T00:45+03:00",
       "departureTime":"2016-09-28T23:55+03:00"
     }
-    const qpxResponse = require('./getFlight.response.json')
+    const nock_response = require('./getFlight.response.json')
+    
     const fromAirport='SKG'
     const toAirport="ATH"
     const date=new Date(1475056800000)
@@ -26,7 +27,7 @@ describe('getFlight', ()=> {
     nock(QPX_API_URL, getFlightHeaders(fromAirport, toAirport, date, solutions))
       .post('')
       .query({key: QPX_API_KEY})
-      .reply(200, qpxResponse)
+      .reply(200, nock_response)
 
     return getFlight(fromAirport, toAirport, date, solutions)
       .then((response)=> {

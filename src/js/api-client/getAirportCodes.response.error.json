@@ -1,0 +1,6 @@
+{
+  "status":false,
+  "statusCode":404,
+  "message":"No results found for search term.",
+  "term":"blabla"
+}

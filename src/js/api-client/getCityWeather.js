@@ -3,6 +3,7 @@ import fetch from 'isomorphic-fetch';
 
 export const WEATHER_API_KEY='d19be8b22d9cee2291ebb8577f647fcc'
 export const WEATHER_API_URL='http://api.openweathermap.org/data/2.5/forecast/daily'
+export const WEATHER_DATE_ERROR="Could not find weather date!"
 
 export function getDateAsNumber(date) {
   return parseInt(dateFormat('yyyyMMdd', date), 10);
@@ -23,7 +24,7 @@ export const getCityWeather = (city='London', startDate=new Date(), endDate=new 
                 dt <= getDateAsNumber(endDate))
       })
       if (filteredWeatherList.length===0) {
-        throw new Error("Could not find weather date!")
+        throw new Error(WEATHER_DATE_ERROR)
       }
       return {
         ...response,
