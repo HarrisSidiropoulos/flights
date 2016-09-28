@@ -1,0 +1,25 @@
+{
+  "airports": [
+    {
+      "name": "Thessaloniki Airport",
+      "city": "Thessaloniki",
+      "iata": "SKG",
+      "latitude": "40.520423",
+      "longitude": "22.971676",
+      "country": {
+        "name": "Greece",
+        "iso": "GR"
+      },
+      "state": {
+        "name": "Thessaloniki",
+        "type": "Periphery"
+      }
+    }
+  ],
+  "term": "thessaloniki",
+  "limit": "1",
+  "size": 0,
+  "cached": false,
+  "status": true,
+  "statusCode": 200
+}

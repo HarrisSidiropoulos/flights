@@ -16,7 +16,7 @@ describe('getCityWeather', ()=> {
 
     nock(WEATHER_API_URL)
       .get('')
-      .query({q: city, units: units, cnt: cnt, APPID: WEATHER_API_KEY})
+      .query({q: city, units, cnt, APPID: WEATHER_API_KEY})
       .reply(200, expectedValue)
 
     return getCityWeather(city, startDate, endDate, cnt, units)
