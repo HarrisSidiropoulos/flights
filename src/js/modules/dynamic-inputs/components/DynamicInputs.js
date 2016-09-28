@@ -7,7 +7,7 @@ import FormGroup from 'react-bootstrap/lib/FormGroup'
 import InputGroup from 'react-bootstrap/lib/InputGroup'
 import Button from 'react-bootstrap/lib/Button'
 
-import {addCity,removeCity,updateCity} from '../actions'
+import {addInput,removeInput,updateInput} from '../actions'
 import {NAME} from '../constants'
 
 export class DynamicInputs extends Component {
@@ -15,7 +15,7 @@ export class DynamicInputs extends Component {
     super(props);
   }
   render() {
-    const {label, inputs, addCity, removeCity,updateCity, max, min} = this.props
+    const {label, inputs, addInput, removeInput, updateInput, max, min} = this.props
     return (
       <div className="row">
       {
@@ -24,14 +24,14 @@ export class DynamicInputs extends Component {
             <ControlLabel>{label}:</ControlLabel>
             <InputGroup>
               <InputGroup.Button>
-                <Button onClick={()=> removeCity(index)} className={index<min && inputs.length===1 && 'disabled'}>-</Button>
+                <Button onClick={()=> removeInput(index)} className={index<min && inputs.length===1 && 'disabled'}>-</Button>
               </InputGroup.Button>
               <FormControl type="text"
                 required
-                onChange={(e)=> updateCity(index,e.target.value)}
+                onChange={(e)=> updateInput(index,e.target.value)}
                 value={value} />
               <InputGroup.Button>
-                <Button onClick={()=> addCity(index)} className={index>=max-1 && 'disabled'}>+</Button>
+                <Button onClick={()=> addInput(index)} className={index>=max-1 && 'disabled'}>+</Button>
               </InputGroup.Button>
             </InputGroup>
           </FormGroup>
@@ -58,8 +58,8 @@ export const mapStateToProps = ({[NAME]:inputs}) => {
   }
 }
 export const mapDispatchToProps = (dispatch) => ({
-  addCity: (index) => dispatch(addCity(index)),
-  removeCity: (index) => dispatch(removeCity(index)),
-  updateCity: (index,value) => dispatch(updateCity(index,value))
+  addInput: (index) => dispatch(addInput(index)),
+  removeInput: (index) => dispatch(removeInput(index)),
+  updateInput: (index,value) => dispatch(updateInput(index,value))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(DynamicInputs)

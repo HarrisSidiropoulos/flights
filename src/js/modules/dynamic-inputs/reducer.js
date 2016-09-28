@@ -1,24 +1,24 @@
-import {RESET_CITIES, ADD_CITY, REMOVE_CITY, UPDATE_CITY} from './actionTypes'
+import {RESET_INPUTS, ADD_INPUT, REMOVE_INPUT, UPDATE_INPUT} from './actionTypes'
 export const INITIAL_STATE = [{value:"Athens", error:""}]
 
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case RESET_CITIES:
+  case RESET_INPUTS:
     return [
       ...INITIAL_STATE
     ]
-  case ADD_CITY:
+  case ADD_INPUT:
     return [
       ...state.slice(0, action.index+1),
       { value:"", error:"" },
       ...state.slice(action.index+1)
     ]
-  case REMOVE_CITY:
+  case REMOVE_INPUT:
     return [
       ...state.slice(0, action.index),
       ...state.slice(action.index+1)
     ]
-  case UPDATE_CITY:
+  case UPDATE_INPUT:
     return [
       ...state.slice(0, action.index),
       { value:action.value, error:"" },
