@@ -14,13 +14,14 @@ describe('getCityWeather', ()=> {
     const city = 'Athens'
     const units = 'metric'
 
-    nock(`${WEATHER_API_URL}`)
+    nock(WEATHER_API_URL)
       .get('')
       .query({q: city, units: units, cnt: cnt, APPID: WEATHER_API_KEY})
       .reply(200, expectedValue)
 
-    return getCityWeather(city, startDate, endDate, cnt, units).then((response)=> {
-      expect(response).toEqual(expectedValue)
-    })
+    return getCityWeather(city, startDate, endDate, cnt, units)
+      .then((response)=> {
+        expect(response).toEqual(expectedValue)
+      })
   })
 })
