@@ -1,17 +1,15 @@
-/*eslint no-console: */
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
 
-// const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
-const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
-// const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
-const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
+// export const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
+export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
+// export const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
+export const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
-
-export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const requestBody = {
     "request": {
       "slice": [
@@ -28,15 +26,17 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
     }
   }
 
-  const request = {
+  return {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify(requestBody)
   }
+}
+export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
 
-  return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, request)
+  return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, getFlightsHeaders(fromAirport, toAirport, date, solutions))
     .then((response) => {
       if (!response.ok) {
         switch(response.status) {

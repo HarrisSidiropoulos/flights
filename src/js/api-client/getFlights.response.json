@@ -1,0 +1,167 @@
+{
+  "kind": "qpxExpress#tripsSearch",
+  "trips": {
+    "kind": "qpxexpress#tripOptions",
+    "requestId": "TXFiZKt84ANHqIyh00PA0S",
+    "data": {
+      "kind": "qpxexpress#data",
+      "airport": [
+        {
+          "kind": "qpxexpress#airportData",
+          "code": "ATH",
+          "city": "ATH",
+          "name": "Athens Eleftherios Venizelos"
+        },
+        {
+          "kind": "qpxexpress#airportData",
+          "code": "SKG",
+          "city": "SKG",
+          "name": "Thessaloniki Makedonia"
+        }
+      ],
+      "city": [
+        {
+          "kind": "qpxexpress#cityData",
+          "code": "ATH",
+          "name": "Athens"
+        },
+        {
+          "kind": "qpxexpress#cityData",
+          "code": "SKG",
+          "name": "Thessaloniki"
+        }
+      ],
+      "aircraft": [
+        {
+          "kind": "qpxexpress#aircraftData",
+          "code": "320",
+          "name": "Airbus A320"
+        }
+      ],
+      "tax": [
+        {
+          "kind": "qpxexpress#taxData",
+          "id": "F8_001",
+          "name": "Greece Hcaa Passenger Fee"
+        },
+        {
+          "kind": "qpxexpress#taxData",
+          "id": "YQ_F",
+          "name": "A3 YQ surcharge"
+        },
+        {
+          "kind": "qpxexpress#taxData",
+          "id": "GR_001",
+          "name": "Greece Airport Development Charge"
+        }
+      ],
+      "carrier": [
+        {
+          "kind": "qpxexpress#carrierData",
+          "code": "A3",
+          "name": "Aegean Airlines S.A."
+        }
+      ]
+    },
+    "tripOption": [
+      {
+        "kind": "qpxexpress#tripOption",
+        "saleTotal": "EUR60.30",
+        "id": "KmWe2PeLrQSTjcFmwaDM7K001",
+        "slice": [
+          {
+            "kind": "qpxexpress#sliceInfo",
+            "duration": 50,
+            "segment": [
+              {
+                "kind": "qpxexpress#segmentInfo",
+                "duration": 50,
+                "flight": {
+                  "carrier": "A3",
+                  "number": "511"
+                },
+                "id": "G8PLjrF08dt8bai6",
+                "cabin": "COACH",
+                "bookingCode": "L",
+                "bookingCodeCount": 9,
+                "marriedSegmentGroup": "0",
+                "leg": [
+                  {
+                    "kind": "qpxexpress#legInfo",
+                    "id": "LV+OirdOYE6wlMcs",
+                    "aircraft": "320",
+                    "arrivalTime": "2016-09-29T00:45+03:00",
+                    "departureTime": "2016-09-28T23:55+03:00",
+                    "origin": "SKG",
+                    "destination": "ATH",
+                    "duration": 50,
+                    "mileage": 185,
+                    "meal": "Snack or Brunch"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "pricing": [
+          {
+            "kind": "qpxexpress#pricingInfo",
+            "fare": [
+              {
+                "kind": "qpxexpress#fareInfo",
+                "id": "A4KNq8m82q0iUu1f96BvkeNbW00CmAJU8mQjgR6eisNEF",
+                "carrier": "A3",
+                "origin": "SKG",
+                "destination": "ATH",
+                "basisCode": "LNOBAGD"
+              }
+            ],
+            "segmentPricing": [
+              {
+                "kind": "qpxexpress#segmentPricing",
+                "fareId": "A4KNq8m82q0iUu1f96BvkeNbW00CmAJU8mQjgR6eisNEF",
+                "segmentId": "G8PLjrF08dt8bai6"
+              }
+            ],
+            "baseFareTotal": "EUR45.00",
+            "saleFareTotal": "EUR45.00",
+            "saleTaxTotal": "EUR15.30",
+            "saleTotal": "EUR60.30",
+            "passengers": {
+              "kind": "qpxexpress#passengerCounts",
+              "adultCount": 1
+            },
+            "tax": [
+              {
+                "kind": "qpxexpress#taxInfo",
+                "id": "F8_001",
+                "chargeType": "GOVERNMENT",
+                "code": "F8",
+                "country": "GR",
+                "salePrice": "EUR0.30"
+              },
+              {
+                "kind": "qpxexpress#taxInfo",
+                "id": "GR_001",
+                "chargeType": "GOVERNMENT",
+                "code": "GR",
+                "country": "GR",
+                "salePrice": "EUR12.00"
+              },
+              {
+                "kind": "qpxexpress#taxInfo",
+                "id": "YQ_F",
+                "chargeType": "CARRIER_SURCHARGE",
+                "code": "YQ",
+                "salePrice": "EUR3.00"
+              }
+            ],
+            "fareCalculation": "SKG A3 ATH Q4.00 41.00LNOBAGD EUR 45.00 END XT 0.30F8 12.00GR 3.00YQ",
+            "latestTicketingTime": "2016-09-28T16:54-04:00",
+            "ptc": "ADT"
+          }
+        ]
+      }
+    ]
+  }
+}
