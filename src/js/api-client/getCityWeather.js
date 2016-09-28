@@ -1,8 +1,8 @@
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
 
-const WEATHER_API_KEY='d19be8b22d9cee2291ebb8577f647fcc'
-const WEATHER_API_URL='http://api.openweathermap.org/data/2.5/forecast/daily'
+export const WEATHER_API_KEY='d19be8b22d9cee2291ebb8577f647fcc'
+export const WEATHER_API_URL='http://api.openweathermap.org/data/2.5/forecast/daily'
 
 export function getDateAsNumber(date) {
   return parseInt(dateFormat('yyyyMMdd', date), 10);
