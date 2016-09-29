@@ -42,17 +42,18 @@ describe('getAirportCodes', ()=> {
         expect(error).toEqual(expectedValue)
       })
   })
-  it('should throw service error', () => {
+  it('should throw any error', () => {
+    const expectedValue = new Error('Gateway Timeout')
     const city='Thessaloniki'
     const limit=1
     nock(API_URL, REQUEST_HEADERS)
       .post('')
       .query({term:city, limit})
-      .replyWithError({'message': 'something awful happened', 'code': 'AWFUL_ERROR'});
+      .reply(504)
 
     return getAirportCodes(city,limit)
       .catch((error)=> {
-        expect(error).toThrow()
+        expect(error).toEqual(expectedValue)
       })
   })
 })
