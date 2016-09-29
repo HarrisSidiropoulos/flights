@@ -6,6 +6,11 @@ export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
 // export const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
 export const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 
+export const ERROR_400="Invalid inputs, including invalid API key. Do not retry without correcting inputs."
+export const ERROR_403="Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly."
+export const ERROR_500="Internal error. Try reproducing manually, and report a problem if it recurs."
+export const ERROR_503="Temporary overload. Wait before retrying."
+
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
@@ -41,13 +46,13 @@ export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), s
       if (!response.ok) {
         switch(response.status) {
         case 400:
-          throw new Error("Invalid inputs, including invalid API key. Do not retry without correcting inputs.")
+          throw new Error(ERROR_400)
         case 403:
-          throw new Error("Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly.")
+          throw new Error(ERROR_403)
         case 500:
-          throw new Error("Internal error. Try reproducing manually, and report a problem if it recurs.")
+          throw new Error(ERROR_500)
         case 503:
-          throw new Error("Temporary overload. Wait before retrying.")
+          throw new Error(ERROR_503)
         default:
           throw new Error(response.statusText)
         }
