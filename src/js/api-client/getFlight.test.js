@@ -1,8 +1,6 @@
 import nock from 'nock'
+import {mockFlight} from './getFlight.mock'
 import getFlight, {
-  getFlightHeaders,
-  QPX_API_URL,
-  QPX_API_KEY,
   ERROR_400,
   ERROR_403,
   ERROR_500,
@@ -30,12 +28,7 @@ describe('getFlight', ()=> {
       "arrivalTime":"2016-09-29T00:45+03:00",
       "departureTime":"2016-09-28T23:55+03:00"
     }
-    const nock_response = require('./getFlight.response.json')
-
-    nock(QPX_API_URL, getFlightHeaders(fromAirport, toAirport, date, solutions))
-      .post('')
-      .query({key: QPX_API_KEY})
-      .reply(200, nock_response)
+    mockFlight(fromAirport, toAirport, date, solutions)
 
     return getFlight(fromAirport, toAirport, date, solutions)
       .then((response)=> {
@@ -44,11 +37,7 @@ describe('getFlight', ()=> {
   })
   it('should throw error on bad request', () => {
     const expectedValue = new Error(ERROR_400)
-
-    nock(QPX_API_URL, getFlightHeaders(fromAirport, toAirport, date, solutions))
-      .post('')
-      .query({key: QPX_API_KEY})
-      .reply(400)
+    mockFlight(fromAirport, toAirport, date, solutions, 400)
 
     return getFlight(fromAirport, toAirport, date, solutions)
       .catch((error)=> {
@@ -57,11 +46,7 @@ describe('getFlight', ()=> {
   })
   it('should throw error when not authorized', () => {
     const expectedValue = new Error(ERROR_403)
-
-    nock(QPX_API_URL, getFlightHeaders(fromAirport, toAirport, date, solutions))
-      .post('')
-      .query({key: QPX_API_KEY})
-      .reply(403)
+    mockFlight(fromAirport, toAirport, date, solutions, 403)
 
     return getFlight(fromAirport, toAirport, date, solutions)
       .catch((error)=> {
@@ -70,11 +55,7 @@ describe('getFlight', ()=> {
   })
   it('should throw error when service has Internal error', () => {
     const expectedValue = new Error(ERROR_500)
-
-    nock(QPX_API_URL, getFlightHeaders(fromAirport, toAirport, date, solutions))
-      .post('')
-      .query({key: QPX_API_KEY})
-      .reply(500)
+    mockFlight(fromAirport, toAirport, date, solutions, 500)
 
     return getFlight(fromAirport, toAirport, date, solutions)
       .catch((error)=> {
@@ -83,11 +64,7 @@ describe('getFlight', ()=> {
   })
   it('should throw error when service is temporary overloaded', () => {
     const expectedValue = new Error(ERROR_503)
-
-    nock(QPX_API_URL, getFlightHeaders(fromAirport, toAirport, date, solutions))
-      .post('')
-      .query({key: QPX_API_KEY})
-      .reply(503)
+    mockFlight(fromAirport, toAirport, date, solutions, 503)
 
     return getFlight(fromAirport, toAirport, date, solutions)
       .catch((error)=> {
@@ -96,11 +73,7 @@ describe('getFlight', ()=> {
   })
   it('should throw any error', () => {
     const expectedValue = new Error('Gateway Timeout')
-
-    nock(QPX_API_URL, getFlightHeaders(fromAirport, toAirport, date, solutions))
-      .post('')
-      .query({key: QPX_API_KEY})
-      .reply(504)
+    mockFlight(fromAirport, toAirport, date, solutions, 504)
 
     return getFlight(fromAirport, toAirport, date, solutions)
       .catch((error)=> {
