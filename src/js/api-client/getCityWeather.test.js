@@ -1,5 +1,6 @@
 import nock from 'nock'
-import getCityWeather, {WEATHER_API_URL, WEATHER_API_KEY, WEATHER_DATE_ERROR} from './getCityWeather'
+import getCityWeather, {WEATHER_DATE_ERROR} from './getCityWeather'
+import {mockCityWeather} from './getCityWeather.mock'
 
 const startDate = new Date(1475056800000)
 const endDate   = new Date(1475056800000)
@@ -13,12 +14,7 @@ describe('getCityWeather', ()=> {
   })
   it('fetch city weather', () => {
     const expectedValue = require('./getCityWeather.response.json')
-    const nock_response = expectedValue
-
-    nock(WEATHER_API_URL)
-      .get('')
-      .query({q: city, units, cnt, APPID: WEATHER_API_KEY})
-      .reply(200, nock_response)
+    mockCityWeather(city,units,cnt)
 
     return getCityWeather(city, startDate, endDate, cnt, units)
       .then((response)=> {
@@ -27,15 +23,9 @@ describe('getCityWeather', ()=> {
   })
   it('should throw error if date was not found', () => {
     const expectedValue = new Error(WEATHER_DATE_ERROR)
-    const nock_response = require('./getCityWeather.response.json')
-
     const startDate = new Date(1575056800000)
     const endDate   = new Date(1575056800000)
-
-    nock(WEATHER_API_URL)
-      .get('')
-      .query({q: city, units, cnt, APPID: WEATHER_API_KEY})
-      .reply(200, nock_response)
+    mockCityWeather(city,units,cnt)
 
     return getCityWeather(city, startDate, endDate, cnt, units)
       .catch((error)=> {
@@ -44,11 +34,7 @@ describe('getCityWeather', ()=> {
   })
   it('should throw any error', () => {
     const expectedValue = new Error('Gateway Timeout')
-
-    nock(WEATHER_API_URL)
-      .get('')
-      .query({q: city, units, cnt, APPID: WEATHER_API_KEY})
-      .reply(504)
+    mockCityWeather(city,units,cnt,504)
 
     return getCityWeather(city, startDate, endDate, cnt, units)
       .catch((error)=> {
