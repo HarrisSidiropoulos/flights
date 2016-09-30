@@ -104,7 +104,7 @@
     "test": "jest",
     "watch:test": "npm t -- --watch",
     "check-coverage": "npm t -- --coverage",
-    "validate": "npm-run-all --parallel lint test --serial check-coverage",
+    "validate": "npm-run-all --parallel lint --serial check-coverage",
     "validate-webpack": "npm-run-all --parallel validate-webpack:*",
     "validate-webpack:dev": "webpack-validator webpack.config.js --env.dev",
     "validate-webpack:prod": "webpack-validator webpack.config.js --env.prod",

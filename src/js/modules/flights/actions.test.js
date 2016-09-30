@@ -26,7 +26,7 @@ describe('flights actions', ()=> {
     }
     expect(requestError(error)).toEqual(expectedAction)
   })
-  it('should create an action to receive data', () => {
+  it('should create an action when receive data', () => {
     const payload = 'payload'
     const expectedAction = {
       type: FETCH_DATA_SUCCESS,
