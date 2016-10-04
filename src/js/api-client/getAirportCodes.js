@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import {loadLocalValue, saveLocalValue} from './localStorage'
 
 export const APC_AUTH='1c6ac43d70'
 export const API_URL='https://www.air-port-codes.com/api/v1/multi'
@@ -8,7 +9,15 @@ export const REQUEST_HEADERS = {
     "APC-Auth": APC_AUTH
   }
 }
+export function getLocalStorageKey(city='London', limit=1) {
+  return `airport-codes-${city}-${limit}`
+}
 const getAirportCodes = (city='Thessaloniki', limit=1) => {
+  const localStorageKey = getLocalStorageKey(city,limit)
+  const airportCodesFromLocalStorage = loadLocalValue(localStorageKey)
+  if (airportCodesFromLocalStorage) {
+    return airportCodesFromLocalStorage
+  }
   return fetch(`${API_URL}?term=${city.trim()}&limit=${limit}`, REQUEST_HEADERS)
     .then((response) => {
       if (!response.ok) {
@@ -20,10 +29,12 @@ const getAirportCodes = (city='Thessaloniki', limit=1) => {
       if (response.statusCode!==200) {
         throw new Error(response.message)
       }
-      return {
+      const normResponse = {
         airport: response.airports[0].iata,
         city: response.airports[0].city
       }
+      saveLocalValue(localStorageKey, normResponse)
+      return normResponse
     })
 }
 

@@ -1,5 +1,6 @@
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
+import {loadLocalValue, saveLocalValue} from './sessionStorage'
 
 // export const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
 export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
@@ -39,7 +40,15 @@ export const getFlightHeaders = (fromAirport='SKG', toAirport="ATH", date=new Da
     body: JSON.stringify(requestBody)
   }
 }
+export function getLocalStorageKey(fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) {
+  return `flight-${fromAirport}-${toAirport}-${dateFormat('yyyyMMdd', date)}-${solutions}`
+}
 export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+  const localStorageKey = getLocalStorageKey(fromAirport,toAirport,date,solutions)
+  const localFlight = loadLocalValue(localStorageKey)
+  if (localFlight) {
+    return localFlight
+  }
   const headers = getFlightHeaders(fromAirport, toAirport, date, solutions)
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
     .then((response) => {
@@ -71,6 +80,7 @@ export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), s
         arrivalTime   : response.trips.tripOption[0].slice[0].segment[0].leg[0].arrivalTime,
         departureTime : response.trips.tripOption[0].slice[0].segment[0].leg[0].departureTime
       }
+      saveLocalValue(localStorageKey, filteredResponse)
       return filteredResponse
     })
 }
