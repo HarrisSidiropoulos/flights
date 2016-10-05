@@ -29,10 +29,12 @@ const getAirportCodes = (city='Thessaloniki', limit=1) => {
       if (response.statusCode!==200) {
         throw new Error(response.message)
       }
-      const normResponse = {
-        airport: response.airports[0].iata,
-        city: response.airports[0].city
-      }
+      const normResponse = response.airports.map(({iata,city})=> {
+        return {
+          airport: iata,
+          city
+        }
+      })
       saveLocalValue(localStorageKey, normResponse)
       return normResponse
     })

@@ -10,10 +10,10 @@ describe('getAirportCodes', ()=> {
   })
   it('fetch Airport code', () => {
     const city = "Thessaloniki"
-    const expectedValue = {
+    const expectedValue = [{
       "airport":"SKG",
       city
-    }
+    }]
     mockAirportCodes(city, limit)
 
     return getAirportCodes(city,limit)
