@@ -13,7 +13,9 @@ const FlightsResponse = ({cities}) => {
   return (
     <div className="row">
       {
-        cities.map(({flight, returnFlight, weather}, index)=> {
+        cities.map(({flights, returnFlights, weather}, index)=> {
+          const [flight] = flights
+          const [returnFlight] = returnFlights
           const title = flight ? `${flight.toCity}` : `${weather.city.name}`
           return (
             <div key={index} className={`col-md-${Math.floor(12/cities.length)}`}>

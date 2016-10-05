@@ -1,20 +1,20 @@
 import getAirportCodes from './getAirportCodes'
-import getFlight from './getFlight'
+import getFlights from './getFlights'
 import getCityWeather from './getCityWeather'
 
 export const getWeatherAndFlight = (fromAirport, toCity, startDate, endDate) => {
   return getAirportCodes(toCity)
     .then(([{airport, city}]) => {
       return Promise.all([
-        getFlight(fromAirport, airport, startDate),
-        getFlight(airport, fromAirport, endDate),
+        getFlights(fromAirport, airport, startDate),
+        getFlights(airport, fromAirport, endDate),
         getCityWeather(city, startDate, endDate)
       ])
     })
-    .then(([flight, returnFlight, weather])=> {
+    .then(([flights, returnFlights, weather])=> {
       return {
-        flight,
-        returnFlight,
+        flights,
+        returnFlights,
         weather
       }
     })

@@ -1,13 +1,13 @@
 import getAirportCodes from './getAirportCodes'
 import getCityWeather from './getCityWeather'
-import getFlight from './getFlight'
+import getFlights from './getFlights'
 import getWeatherAndFlights from './getWeatherAndFlights'
 import getWeatherAndFlight from './getWeatherAndFlight'
 
 export {
   getAirportCodes,
   getCityWeather,
-  getFlight,
+  getFlights,
   getWeatherAndFlights,
   getWeatherAndFlight
 }

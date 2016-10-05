@@ -15,7 +15,7 @@ export const ERROR_503="Temporary overload. Wait before retrying."
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
-export const getFlightHeaders = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const requestBody = {
     "request": {
       "slice": [
@@ -43,13 +43,13 @@ export const getFlightHeaders = (fromAirport='SKG', toAirport="ATH", date=new Da
 export function getLocalStorageKey(fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) {
   return `flight-${fromAirport}-${toAirport}-${dateFormat('yyyyMMdd', date)}-${solutions}`
 }
-export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const localStorageKey = getLocalStorageKey(fromAirport,toAirport,date,solutions)
   const localFlight = loadLocalValue(localStorageKey, SESSION_STORAGE)
   if (localFlight) {
     return localFlight
   }
-  const headers = getFlightHeaders(fromAirport, toAirport, date, solutions)
+  const headers = getFlightsHeaders(fromAirport, toAirport, date, solutions)
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
     .then((response) => {
       if (!response.ok) {
@@ -69,20 +69,25 @@ export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), s
       return response.json()
     })
     .then((response)=> {
-      const filteredResponse = {
-        toAirport     : response.trips.data.airport.filter(({city}) => city===toAirport)[0].name,
-        fromAirport   : response.trips.data.airport.filter(({city}) => city===fromAirport)[0].name,
-        toCity        : response.trips.data.city.filter(({code}) => code===toAirport)[0].name,
-        fromCity      : response.trips.data.city.filter(({code}) => code===fromAirport)[0].name,
-        carrier       : response.trips.data.carrier[0].name,
-        saleTotal     : response.trips.tripOption[0].saleTotal,
-        duration      : response.trips.tripOption[0].slice[0].duration,
-        arrivalTime   : response.trips.tripOption[0].slice[0].segment[0].leg[0].arrivalTime,
-        departureTime : response.trips.tripOption[0].slice[0].segment[0].leg[0].departureTime
-      }
+      const filteredResponse =
+        response.trips.tripOption.map(({saleTotal,slice})=> {
+          return {
+            toAirport     : response.trips.data.airport.filter(({city}) => city===toAirport)[0].name,
+            fromAirport   : response.trips.data.airport.filter(({city}) => city===fromAirport)[0].name,
+            toCity        : response.trips.data.city.filter(({code}) => code===toAirport)[0].name,
+            fromCity      : response.trips.data.city.filter(({code}) => code===fromAirport)[0].name,
+            saleTotal,
+            carrier       : response.trips.data.carrier.filter(({code}) => code===slice[0].segment[0].flight.carrier)[0].name,
+            duration      : slice[0].duration,
+            arrivalTime   : slice[0].segment[0].leg[0].arrivalTime,
+            departureTime : slice[0].segment[0].leg[0].departureTime,
+            flightNumber  : slice[0].segment[0].flight.carrier + slice[0].segment[0].flight.number
+          }
+        })
+
       saveLocalValue(localStorageKey, filteredResponse, SESSION_STORAGE)
       return filteredResponse
     })
 }
 
-export default getFlight
+export default getFlights
