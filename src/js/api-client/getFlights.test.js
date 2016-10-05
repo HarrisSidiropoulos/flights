@@ -23,7 +23,7 @@ describe('getFlights', ()=> {
       "toCity":"Athens",
       "fromCity":"Thessaloniki",
       "carrier":"Aegean Airlines S.A.",
-      "saleTotal":"EUR60.30",
+      "saleTotal":60.30,
       "duration":50,
       "arrivalTime":"2016-09-29T00:45+03:00",
       "departureTime":"2016-09-28T23:55+03:00",
