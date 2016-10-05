@@ -1,6 +1,6 @@
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
-import {loadLocalValue, saveLocalValue} from './sessionStorage'
+import {loadLocalValue, saveLocalValue, SESSION_STORAGE} from '../local-storage'
 
 // export const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
 export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
@@ -45,7 +45,7 @@ export function getLocalStorageKey(fromAirport='SKG', toAirport="ATH", date=new 
 }
 export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const localStorageKey = getLocalStorageKey(fromAirport,toAirport,date,solutions)
-  const localFlight = loadLocalValue(localStorageKey)
+  const localFlight = loadLocalValue(localStorageKey, SESSION_STORAGE)
   if (localFlight) {
     return localFlight
   }
@@ -80,7 +80,7 @@ export const getFlight = (fromAirport='SKG', toAirport="ATH", date=new Date(), s
         arrivalTime   : response.trips.tripOption[0].slice[0].segment[0].leg[0].arrivalTime,
         departureTime : response.trips.tripOption[0].slice[0].segment[0].leg[0].departureTime
       }
-      saveLocalValue(localStorageKey, filteredResponse)
+      saveLocalValue(localStorageKey, filteredResponse, SESSION_STORAGE)
       return filteredResponse
     })
 }

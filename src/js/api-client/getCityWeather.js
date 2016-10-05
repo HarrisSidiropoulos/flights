@@ -1,6 +1,6 @@
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
-import {loadLocalValue, saveLocalValue} from './sessionStorage'
+import {loadLocalValue, saveLocalValue, SESSION_STORAGE} from '../local-storage'
 
 export const WEATHER_API_KEY='d19be8b22d9cee2291ebb8577f647fcc'
 export const WEATHER_API_URL='http://api.openweathermap.org/data/2.5/forecast/daily'
@@ -14,7 +14,7 @@ export function getLocalStorageKey(city='London', startDate=new Date(), endDate=
 }
 export const getCityWeather = (city='London', startDate=new Date(), endDate=new Date(), cnt=14, units='metric') => {
   const localStorageKey = getLocalStorageKey(city,startDate,endDate,cnt,units)
-  const cityWeatherFromLocalStorage = loadLocalValue(localStorageKey)
+  const cityWeatherFromLocalStorage = loadLocalValue(localStorageKey, SESSION_STORAGE)
   if (cityWeatherFromLocalStorage) {
     return cityWeatherFromLocalStorage
   }
@@ -38,7 +38,7 @@ export const getCityWeather = (city='London', startDate=new Date(), endDate=new 
         ...response,
         list: filteredWeatherList
       }
-      saveLocalValue(localStorageKey, normResponse)
+      saveLocalValue(localStorageKey, normResponse, SESSION_STORAGE)
       return normResponse
     })
 }
