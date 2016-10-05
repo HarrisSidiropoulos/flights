@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react'
 import Panel from 'react-bootstrap/lib/Panel'
 import FlightResponse from './FlightResponse'
 import WeatherResponse from './WeatherResponse'
-import TotalCostResponse from '.TotalCostResponse'
+import TotalCostResponse from './TotalCostResponse'
 
 
 const FlightsResponse = ({cities}) => {

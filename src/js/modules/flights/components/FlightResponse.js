@@ -5,7 +5,7 @@ export const FlightResponse = ({flight})=> (
   <div className="col-md-12">
     <hr />
     <h4>Flight from {flight.fromCity} to {flight.toCity}</h4>
-    <strong>Sale Total:</strong>     {flight.saleTotal.replace(/\D+/,'')}€ <br/>
+    <strong>Sale Total:</strong>     {flight.saleTotal}€ <br/>
     <strong>From Airport:</strong>   {flight.fromAirport} <br/>
     <strong>To Airport:</strong>     {flight.toAirport} <br/>
     <strong>Carrier:</strong>        {flight.carrier} <br/>
