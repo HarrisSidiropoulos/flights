@@ -36,7 +36,12 @@ class FlightsForm extends Component {
     e.preventDefault()
     const {resetForm} = this.props
     ReactDOM.findDOMNode(this.startDateInput).value = defaultDate
+    ReactDOM.findDOMNode(this.endDateInput).value = defaultDate
     ReactDOM.findDOMNode(this.fromCityInput).value = defaultCity
+    this.setState({
+      ...this.state,
+      minEndDate: defaultDate
+    })
     resetForm()
   }
   onDateChange(value) {
