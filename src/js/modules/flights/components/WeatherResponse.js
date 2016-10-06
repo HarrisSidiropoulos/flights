@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 
 const getDay = (dt)=> {
   const date = new Date(dt*1000)
@@ -9,14 +9,15 @@ const getDay = (dt)=> {
 export const WeatherResponse = ({weather}) => (
   <div>
     {
-      weather.list.map((w, index) => {
+      weather.list.map(({weather,temp,dt}, index) => {
+        const [{icon,description}] = weather
         return (
           <div key={index} style={{width:110, height:150, float:'left'}}>
             <div className="text-center">
-              <img src={`http://openweathermap.org/img/w/${w.weather[0].icon}.png`} /><br/>
-              <strong>{getDay(w.dt)}</strong><br/>
-              {`(${Math.floor(w.temp.day)}C)`} <br/>
-              {`${w.weather[0].description}`}
+              <img src={`http://openweathermap.org/img/w/${icon}.png`} /><br/>
+              <strong>{getDay(dt)}</strong><br/>
+              {`(${Math.floor(temp.day)}C)`} <br/>
+              {`${description}`}
             </div>
           </div>
         )
@@ -24,5 +25,9 @@ export const WeatherResponse = ({weather}) => (
     }
   </div>
 )
+
+WeatherResponse.propTypes = {
+  weather: PropTypes.object.isRequired
+}
 
 export default WeatherResponse
