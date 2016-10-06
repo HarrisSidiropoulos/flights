@@ -1,11 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 
-import FormControl from 'react-bootstrap/lib/FormControl'
-import ControlLabel from 'react-bootstrap/lib/ControlLabel'
-import FormGroup from 'react-bootstrap/lib/FormGroup'
-import InputGroup from 'react-bootstrap/lib/InputGroup'
-import Button from 'react-bootstrap/lib/Button'
+import TextField from 'material-ui/TextField';
+import {Row, Col} from 'react-flexbox-grid';
 
 import {addInput,removeInput,updateInput} from '../actions'
 import {NAME} from '../constants'
@@ -20,23 +17,18 @@ export class DynamicInputs extends Component {
       <div className="row">
       {
         inputs.map(({value, error},index)=> (
-          <FormGroup key={index} className={`col-md-${Math.floor(12/inputs.length)}`}>
-            <ControlLabel>{label}:</ControlLabel>
-            <InputGroup>
-              <InputGroup.Button>
-                <Button onClick={()=> removeInput(index, min, inputs.length)}
-                  className={index<min && inputs.length===1 && 'disabled'}>-</Button>
-              </InputGroup.Button>
-              <FormControl type="text"
-                required
+          <Row key={index}>
+            <Col xs={12}>
+              <TextField
+                hintText="Hint Text"
+                fullWidth={true}
+                floatingLabelText={label}
+                errorText={value==="" && "This field is required"}
                 onChange={(e)=> updateInput(index,e.target.value)}
-                value={value} />
-              <InputGroup.Button>
-                <Button onClick={()=> addInput(index, max, inputs.length)}
-                  className={index>=max-1 && 'disabled'}>+</Button>
-              </InputGroup.Button>
-            </InputGroup>
-          </FormGroup>
+                value={value}
+                />
+            </Col>
+          </Row>
         ))
       }
       </div>

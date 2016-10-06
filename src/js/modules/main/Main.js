@@ -1,10 +1,14 @@
 import React, {Component} from 'react'
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import {OfflineUpdate, offlineProps} from '../offline-update'
 import {components as FlightsFormComponents} from '../flights'
 const {Flights} = FlightsFormComponents
 
-require('./styles/bootstrap.scss')
+injectTapEventPlugin()
+
 require('./styles/styles.scss')
 
 export class Main extends Component {
@@ -13,10 +17,12 @@ export class Main extends Component {
   }
   render() {
     return (
-      <div className="container">
-        <OfflineUpdate {...offlineProps()}/>
-        <Flights />
-      </div>
+      <MuiThemeProvider>
+        <div className="container">
+          <OfflineUpdate {...offlineProps()}/>
+          <Flights />
+        </div>
+      </MuiThemeProvider>
     )
   }
 }

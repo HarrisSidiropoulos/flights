@@ -1,105 +1,107 @@
 import React, {Component, PropTypes} from 'react'
-import ReactDOM from 'react-dom';
 
-import dateFormat from 'date-format'
-import Form from 'react-bootstrap/lib/Form'
-import ControlLabel from 'react-bootstrap/lib/ControlLabel'
-import FormGroup from 'react-bootstrap/lib/FormGroup'
-import ButtonToolbar from 'react-bootstrap/lib/ButtonToolbar'
-import Button from 'react-bootstrap/lib/Button'
-import FormControl from 'react-bootstrap/lib/FormControl'
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+
+import {Grid, Row, Col} from 'react-flexbox-grid';
+
 import {components as DynamicInputsComponents} from '../../dynamic-inputs'
+import RangeDatePicker from './RangeDatePicker'
 
 const {DynamicInputs} = DynamicInputsComponents
-
-const defaultDate = dateFormat('yyyy-MM-dd', new Date())
 const defaultCity = "Thessaloniki"
+const minDate = new Date();
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 13);
+const buttonStyles = {
+  marginTop: 30
+};
 
 class FlightsForm extends Component {
   constructor() {
     super()
     this.state = {
-      minEndDate: defaultDate
+      fromCity: defaultCity,
+      startDate: minDate,
+      endDate: minDate,
+      maxDate: maxDate,
+      minEndDate: maxDate
     }
+  }
+  onFromCityChange(value) {
+    this.setState({
+      ...this.state,
+      fromCity: value
+    })
+  }
+  onDateRangeChange(value) {
+    let {startDate, endDate} = value
+    if (startDate.getTime()>endDate.getTime()) {
+      endDate = startDate
+    }
+    this.setState({
+      ...this.state,
+      startDate,
+      endDate
+    })
   }
   submitForm(e) {
     e.preventDefault()
+    const {startDate, endDate, fromCity} = this.state
     const {loadData, cityInputs} = this.props
-    const startDate = new Date(ReactDOM.findDOMNode(this.startDateInput).value)
-    const endDate = new Date(ReactDOM.findDOMNode(this.endDateInput).value)
-    const fromCity = ReactDOM.findDOMNode(this.fromCityInput).value;
+
     loadData(fromCity, cityInputs.map(({value})=>value), startDate, endDate)
   }
   resetForm(e) {
     e.preventDefault()
     const {resetForm} = this.props
-    ReactDOM.findDOMNode(this.startDateInput).value = defaultDate
-    ReactDOM.findDOMNode(this.endDateInput).value = defaultDate
-    ReactDOM.findDOMNode(this.fromCityInput).value = defaultCity
     this.setState({
-      ...this.state,
-      minEndDate: defaultDate
+      fromCity: defaultCity,
+      startDate: minDate,
+      endDate: minDate
     })
+
     resetForm()
   }
-  onDateChange(value) {
-    this.setState({
-      ...this.state,
-      minEndDate: value
-    })
-    const startDate = new Date(value).getTime()
-    const endDate = new Date(ReactDOM.findDOMNode(this.endDateInput).value).getTime()
-    if (startDate>endDate) {
-      ReactDOM.findDOMNode(this.endDateInput).value = value
-    }
-  }
   render() {
-    const {loading} = this.props
+    const {fromCity} = this.state
     return (
-      <Form onSubmit={(e)=>this.submitForm(e)}
-            onReset={(e)=>this.resetForm(e)}
-            className={loading && 'loading'}>
-        <div className="row">
-          <FormGroup className="col-md-6">
-            <ControlLabel>Start Date:</ControlLabel>
-            <FormControl type="date" ref={node => {this.startDateInput = node}}
-              required
-              defaultValue={defaultDate}
-              onChange={(e)=>this.onDateChange(e.target.value)}
-              min={dateFormat('yyyy-MM-dd', new Date())}
-              max={dateFormat('yyyy-MM-dd', maxDate)} />
-          </FormGroup>
-          <FormGroup className="col-md-6">
-            <ControlLabel>End Date:</ControlLabel>
-            <FormControl type="date" ref={node => {this.endDateInput = node}}
-              required
-              defaultValue={defaultDate}
-              min={this.state.minEndDate}
-              max={dateFormat('yyyy-MM-dd', maxDate)} />
-          </FormGroup>
-        </div>
-        <FormGroup>
-          <ControlLabel>From city:</ControlLabel>
-          <FormControl
-            type="text"
-            required
-            ref={node => {this.fromCityInput = node}}
-            defaultValue={defaultCity} />
-        </FormGroup>
-        <DynamicInputs
-          label="To city"
-          ref={node => {this.toCityInputs = node}}
-          />
-        <ButtonToolbar>
-          <Button type="reset">Reset</Button>
-          <Button type="submit" bsStyle="primary"
-              className={loading && 'progress-bar-striped disabled'}>
-            <span>Submit</span>
-          </Button>
-        </ButtonToolbar>
-      </Form>
+      <Grid>
+        <form>
+          <RangeDatePicker
+            ref={node => {this.dateRangeInput = node}}
+            onChange={(value)=>this.onDateRangeChange(value)}
+            {...this.state}
+            />
+          <Row>
+            <Col xs={12}>
+              <TextField
+                hintText="Hint Text"
+                fullWidth={true}
+                required
+                errorText={fromCity==="" && "This field is required"}
+                floatingLabelText="From City"
+                onChange={(e,value)=>this.onFromCityChange(value)}
+                value={fromCity}
+                ref={node => {this.fromCityInput = node}}
+                />
+            </Col>
+          </Row>
+          <DynamicInputs
+            label="To City"
+            />
+          <RaisedButton
+            label="Reset"
+            style={{...buttonStyles, marginRight:20}}
+            onClick={(e)=>this.resetForm(e)}
+            />
+          <RaisedButton
+            label="Submit"
+            style={{...buttonStyles}}
+            onClick={(e)=>this.submitForm(e)}
+            />
+        </form>
+      </Grid>
     )
   }
 }
