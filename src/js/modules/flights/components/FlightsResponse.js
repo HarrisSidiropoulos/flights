@@ -18,8 +18,8 @@ const FlightsResponse = ({cities}) => {
           const title = flight ? `${flight.toCity}` : `${weather.city.name}`
           return (
             <Col key={index} xs={12} sm={Math.floor(12/cities.length)}>
-              <Card initiallyExpanded={true}>
-                <CardHeader title={title} actAsExpander={true}/>
+              <Card initiallyExpanded={true} showExpandableButton={true}>
+                <CardHeader title={title} actAsExpander={true} showExpandableButton={true}/>
                 <CardText expandable={true}>
                   <Row>
                     { <WeatherResponse weather={weather} />}
