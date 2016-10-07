@@ -26,7 +26,7 @@ module.exports = env => {
   const indexPath = env.prod?'../':''
   return removeEmpty({
     entry: removeEmpty({
-      vendor: ifProd(['react', 'react-dom', 'redux', 'react-redux', 'redux-observable', 'rxjs', 'date-format', 'isomorphic-fetch']),
+      vendor: ifProd(['react', 'react-dom', 'redux', 'react-redux', 'redux-observable', 'rxjs', 'date-format', 'isomorphic-fetch', 'material-ui']),
       app: removeEmpty([
         ifDev('webpack-hot-middleware/client?reload=true'),
         './js/index.js'
@@ -44,9 +44,10 @@ module.exports = env => {
       loaders: removeEmpty([
         {test: /\.js$/, loader: 'babel', query: { "presets": removeEmpty(["es2015", "stage-2", "react", ifDev("react-hmre")]), "plugins": ["transform-class-properties"] }, exclude: /node_modules/},
         {test: /\.jade$/, loader: 'jade'},
+        ifProd({test: /\.css$/, loader: 'style!css?modules', include: /flexboxgrid/}),
         ifDev({test: /\.css$/,   loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'}),
         ifDev({test: /\.scss$/,  loaders: ["style", "css", "sass?sourceMap"]}),
-        ifProd({test: /\.css$/,   loader: ExtractTextPlugin.extract("style-loader", "css-loader")}),
+        // ifProd({test: /\.css$/,   loader: ExtractTextPlugin.extract("style-loader", "css-loader")}),
         ifProd({test: /\.scss$/,  loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")}),
         {test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff"},
         {test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader"},
