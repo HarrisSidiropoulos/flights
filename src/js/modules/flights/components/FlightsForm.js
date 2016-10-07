@@ -4,9 +4,11 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import {Row, Col} from 'react-flexbox-grid';
+import RangeDatePicker from './RangeDatePicker'
+import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import {components as DynamicInputsComponents} from '../../dynamic-inputs'
-import RangeDatePicker from './RangeDatePicker'
+
 
 const {DynamicInputs} = DynamicInputsComponents
 const defaultCity = "Thessaloniki"
@@ -17,6 +19,11 @@ const buttonStyles = {
 const minDate = new Date();
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 13);
+
+const refreshStyles = {
+  display: 'inline-block',
+  position: 'relative'
+}
 
 class FlightsForm extends Component {
   constructor() {
@@ -66,6 +73,7 @@ class FlightsForm extends Component {
   }
   render() {
     const {fromCity} = this.state
+    const {loading} = this.props
     return (
       <form onSubmit={(e)=>this.submitForm(e)} onReset={(e)=>this.resetForm(e)}>
         <RangeDatePicker
@@ -98,7 +106,14 @@ class FlightsForm extends Component {
         <RaisedButton
           label="Submit"
           type="submit"
-          style={{...buttonStyles}}
+          style={{...buttonStyles, display: (loading?"none":"inline-block")}}
+          />
+        <RefreshIndicator
+          size={35}
+          left={10}
+          top={10}
+          status={loading?"loading":"hide"}
+          style={refreshStyles}
           />
       </form>
     )

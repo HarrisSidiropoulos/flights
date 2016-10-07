@@ -10,34 +10,38 @@ export const FlightResponse = ({flight})=> (
   <Col xs={12} className="flight-response">
     <hr />
     <h4>Flight from {flight.fromCity} to {flight.toCity}</h4>
-    <div>
-      <strong>Sale Total:</strong>
-      <span>{flight.saleTotal}€</span>
-    </div>
-    <div>
-      <strong>From Airport:</strong>
-      <span>{flight.fromAirport}</span>
-    </div>
-    <div>
-      <strong>To Airport:</strong>
-      <span>{flight.toAirport}</span>
-    </div>
-    <div>
-      <strong>Carrier:</strong>
-      <span>{flight.carrier}</span>
-    </div>
-    <div>
-      <strong>Departure Time:</strong>
-      <span>{formatDate(flight.departureTime)}</span>
-    </div>
-    <div>
-      <strong>Arrival Time:</strong>
-      <span>{formatDate(flight.arrivalTime)}</span>
-    </div>
-    <div>
-      <strong>Flight Number:</strong>
-      <span>{flight.flightNumber}</span>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td width="105">Sale Total:</td>
+          <td>{flight.saleTotal}€</td>
+        </tr>
+        <tr>
+          <td>From Airport:</td>
+          <td>{flight.fromAirport}</td>
+        </tr>
+        <tr>
+          <td>To Airport:</td>
+          <td>{flight.toAirport}</td>
+        </tr>
+        <tr>
+          <td>Carrier:</td>
+          <td>{flight.carrier}</td>
+        </tr>
+        <tr>
+          <td>Departure Time:</td>
+          <td>{formatDate(flight.departureTime)}</td>
+        </tr>
+        <tr>
+          <td>Arrival Time:</td>
+          <td>{formatDate(flight.arrivalTime)}</td>
+        </tr>
+        <tr>
+          <td>Flight Number:</td>
+          <td>{flight.flightNumber}</td>
+        </tr>
+      </tbody>
+    </table>
   </Col>
 )
 export default FlightResponse

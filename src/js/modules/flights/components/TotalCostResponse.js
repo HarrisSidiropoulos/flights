@@ -8,10 +8,14 @@ export const getPrice = (returnFlight,flight) => {
 export const TotalCostResponse = ({flight, returnFlight}) => (
   <Col xs={12} className="flight-response">
     <hr />
-    <div>
-      <strong>Total Cost:</strong>
-      <span>{getPrice(returnFlight,flight)}€</span>
-    </div>
+    <table>
+      <tbody>
+        <tr>
+          <td width="105">Total Cost:</td>
+          <td>{getPrice(returnFlight,flight)}€</td>
+        </tr>
+      </tbody>
+    </table>
   </Col>
 )
 
