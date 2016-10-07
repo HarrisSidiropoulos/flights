@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import {Grid} from 'react-flexbox-grid';
 
 import {OfflineUpdate, offlineProps} from '../offline-update'
 import {components as FlightsFormComponents} from '../flights'
@@ -18,10 +19,10 @@ export class Main extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div className="container">
+        <Grid>
           <OfflineUpdate {...offlineProps()}/>
           <Flights />
-        </div>
+        </Grid>
       </MuiThemeProvider>
     )
   }

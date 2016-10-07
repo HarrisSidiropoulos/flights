@@ -3,7 +3,7 @@ import React, {Component, PropTypes} from 'react'
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import {Grid, Row, Col} from 'react-flexbox-grid';
+import {Row, Col} from 'react-flexbox-grid';
 
 import {components as DynamicInputsComponents} from '../../dynamic-inputs'
 import RangeDatePicker from './RangeDatePicker'
@@ -14,7 +14,8 @@ const minDate = new Date();
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 13);
 const buttonStyles = {
-  marginTop: 30
+  marginTop: 30,
+  marginBottom: 30
 };
 
 class FlightsForm extends Component {
@@ -66,42 +67,40 @@ class FlightsForm extends Component {
   render() {
     const {fromCity} = this.state
     return (
-      <Grid>
-        <form>
-          <RangeDatePicker
-            ref={node => {this.dateRangeInput = node}}
-            onChange={(value)=>this.onDateRangeChange(value)}
-            {...this.state}
-            />
-          <Row>
-            <Col xs={12}>
-              <TextField
-                hintText="Hint Text"
-                fullWidth={true}
-                required
-                errorText={fromCity==="" && "This field is required"}
-                floatingLabelText="From City"
-                onChange={(e,value)=>this.onFromCityChange(value)}
-                value={fromCity}
-                ref={node => {this.fromCityInput = node}}
-                />
-            </Col>
-          </Row>
-          <DynamicInputs
-            label="To City"
-            />
-          <RaisedButton
-            label="Reset"
-            style={{...buttonStyles, marginRight:20}}
-            onClick={(e)=>this.resetForm(e)}
-            />
-          <RaisedButton
-            label="Submit"
-            style={{...buttonStyles}}
-            onClick={(e)=>this.submitForm(e)}
-            />
-        </form>
-      </Grid>
+      <form>
+        <RangeDatePicker
+          ref={node => {this.dateRangeInput = node}}
+          onChange={(value)=>this.onDateRangeChange(value)}
+          {...this.state}
+          />
+        <Row>
+          <Col xs={12}>
+            <TextField
+              hintText="Hint Text"
+              fullWidth={true}
+              required
+              errorText={fromCity==="" && "This field is required"}
+              floatingLabelText="From City"
+              onChange={(e,value)=>this.onFromCityChange(value)}
+              value={fromCity}
+              ref={node => {this.fromCityInput = node}}
+              />
+          </Col>
+        </Row>
+        <DynamicInputs
+          label="To City"
+          />
+        <RaisedButton
+          label="Reset"
+          style={{...buttonStyles, marginRight:20}}
+          onClick={(e)=>this.resetForm(e)}
+          />
+        <RaisedButton
+          label="Submit"
+          style={{...buttonStyles}}
+          onClick={(e)=>this.submitForm(e)}
+          />
+      </form>
     )
   }
 }

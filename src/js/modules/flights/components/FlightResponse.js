@@ -1,8 +1,9 @@
 import React from 'react'
 import dateFormat from 'date-format'
+import {Col} from 'react-flexbox-grid';
 
 export const FlightResponse = ({flight})=> (
-  <div className="col-md-12">
+  <Col xs={12}>
     <hr />
     <h4>Flight from {flight.fromCity} to {flight.toCity}</h4>
     <strong>Sale Total:</strong>     {flight.saleTotal}€ <br/>
@@ -12,6 +13,6 @@ export const FlightResponse = ({flight})=> (
     <strong>Departure Time:</strong> {dateFormat('MM-dd-yyyy hh:mm', new Date(flight.departureTime))} <br/>
     <strong>Arrival Time:</strong>   {dateFormat('MM-dd-yyyy hh:mm', new Date(flight.arrivalTime))} <br/>
     <strong>Flight Number:</strong>  {flight.flightNumber} <br/>
-  </div>
+  </Col>
 )
 export default FlightResponse

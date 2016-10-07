@@ -1,5 +1,5 @@
 import {RESET_INPUTS, ADD_INPUT, REMOVE_INPUT, UPDATE_INPUT} from './actionTypes'
-export const INITIAL_STATE = [{value:"Athens", error:""}]
+export const INITIAL_STATE = [{value:"Athens", error:""}, {value:"London", error:""}]
 
 export default function reducer(state = INITIAL_STATE, action) {
   switch (action.type) {

@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import {Col} from 'react-flexbox-grid';
 
 const getDay = (dt)=> {
   const date = new Date(dt*1000)
@@ -7,7 +8,7 @@ const getDay = (dt)=> {
 }
 
 export const WeatherResponse = ({weather}) => (
-  <div>
+  <Col xs={12}>
     {
       weather.list.map(({weather,temp,dt}, index) => {
         const [{icon,description}] = weather
@@ -23,7 +24,7 @@ export const WeatherResponse = ({weather}) => (
         )
       })
     }
-  </div>
+  </Col>
 )
 
 WeatherResponse.propTypes = {

@@ -12,26 +12,25 @@ export class DynamicInputs extends Component {
     super(props);
   }
   render() {
-    const {label, inputs, addInput, removeInput, updateInput, max, min} = this.props
+    const {label, inputs, updateInput} = this.props
+    // const {label, inputs, addInput, removeInput, updateInput, max, min} = this.props
     return (
-      <div className="row">
+      <Row>
       {
         inputs.map(({value, error},index)=> (
-          <Row key={index}>
-            <Col xs={12}>
-              <TextField
-                hintText="Hint Text"
-                fullWidth={true}
-                floatingLabelText={label}
-                errorText={value==="" && "This field is required"}
-                onChange={(e)=> updateInput(index,e.target.value)}
-                value={value}
-                />
-            </Col>
-          </Row>
+          <Col xs={12} sm={Math.floor(12/inputs.length)} key={index}>
+            <TextField
+              hintText="Hint Text"
+              fullWidth={true}
+              floatingLabelText={label}
+              errorText={value==="" && "This field is required"}
+              onChange={(e)=> updateInput(index,e.target.value)}
+              value={value}
+              />
+          </Col>
         ))
       }
-      </div>
+      </Row>
     );
   }
 }
