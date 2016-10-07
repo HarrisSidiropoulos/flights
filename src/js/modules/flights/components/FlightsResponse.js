@@ -6,7 +6,7 @@ import TotalCostResponse from './TotalCostResponse'
 
 import {Row, Col} from 'react-flexbox-grid';
 
-import {Card, CardText} from 'material-ui/Card';
+import {Card, CardText, CardHeader} from 'material-ui/Card';
 
 const FlightsResponse = ({cities}) => {
   return (
@@ -18,8 +18,9 @@ const FlightsResponse = ({cities}) => {
           const title = flight ? `${flight.toCity}` : `${weather.city.name}`
           return (
             <Col key={index} xs={12} sm={Math.floor(12/cities.length)}>
-              <Card header={title}>
-                <CardText>
+              <Card initiallyExpanded={true}>
+                <CardHeader title={title} actAsExpander={true}/>
+                <CardText expandable={true}>
                   <Row>
                     { <WeatherResponse weather={weather} />}
                   </Row>

@@ -3,11 +3,11 @@ import dateFormat from 'date-format'
 import {Col} from 'react-flexbox-grid';
 
 const formatDate = (date) => {
-  return dateFormat('MM-dd-yyyy hh:mm', new Date(date))
+  return dateFormat('dd-MM-yyyy hh:mm', new Date(date))
 }
 
 export const FlightResponse = ({flight})=> (
-  <Col xs={12}>
+  <Col xs={12} className="flight-response">
     <hr />
     <h4>Flight from {flight.fromCity} to {flight.toCity}</h4>
     <div>
