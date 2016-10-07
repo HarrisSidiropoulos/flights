@@ -67,7 +67,7 @@ class FlightsForm extends Component {
   render() {
     const {fromCity} = this.state
     return (
-      <form>
+      <form onSubmit={(e)=>this.submitForm(e)} onReset={(e)=>this.resetForm(e)}>
         <RangeDatePicker
           ref={node => {this.dateRangeInput = node}}
           onChange={(value)=>this.onDateRangeChange(value)}
@@ -93,12 +93,12 @@ class FlightsForm extends Component {
         <RaisedButton
           label="Reset"
           style={{...buttonStyles, marginRight:20}}
-          onClick={(e)=>this.resetForm(e)}
+          type="reset"
           />
         <RaisedButton
           label="Submit"
+          type="submit"
           style={{...buttonStyles}}
-          onClick={(e)=>this.submitForm(e)}
           />
       </form>
     )
