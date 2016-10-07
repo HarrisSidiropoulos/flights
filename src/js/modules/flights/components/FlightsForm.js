@@ -10,13 +10,13 @@ import RangeDatePicker from './RangeDatePicker'
 
 const {DynamicInputs} = DynamicInputsComponents
 const defaultCity = "Thessaloniki"
-const minDate = new Date();
-const maxDate = new Date();
-maxDate.setDate(maxDate.getDate() + 13);
 const buttonStyles = {
   marginTop: 30,
   marginBottom: 30
 };
+const minDate = new Date();
+const maxDate = new Date();
+maxDate.setDate(maxDate.getDate() + 13);
 
 class FlightsForm extends Component {
   constructor() {
