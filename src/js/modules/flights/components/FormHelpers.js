@@ -1,7 +1,9 @@
 import React from 'react'
+import {Field} from 'redux-form'
 import {Row, Col} from 'react-flexbox-grid';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
+import FlatButton from 'material-ui/FlatButton';
 
 export const renderDatePicker = ({ col, input, label, minDate, maxDate, meta: { touched, error } }) => {
   return (
@@ -13,7 +15,7 @@ export const renderDatePicker = ({ col, input, label, minDate, maxDate, meta: { 
         errorText={touched && error}
         minDate={minDate}
         maxDate={maxDate}
-        value={ input.value instanceof Date ? input.value : minDate}
+        value={input.value instanceof Date && input.value}
         onChange={(event, value) => input.onChange(value)}
         />
     </Col>
@@ -36,6 +38,7 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
           fullWidth={true}
           minDate={minDate}
           maxDate={maxDate}
+          errorText={startDate.touched && startDate.error}
           value={startDate.input.value}
           onChange={(event, value) => onChange(value)}
           />
@@ -47,6 +50,7 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
           fullWidth={true}
           minDate={startDate.input.value}
           maxDate={maxDate}
+          errorText={endDate.touched && endDate.error}
           value={endDate.input.value}
           onChange={(event, value) => endDate.input.onChange(value)}
           />
@@ -55,16 +59,46 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
   )
 }
 
-export const renderTextField = ({ col, input, label, meta: { touched, error }, ...custom }) => {
+export const renderInputs = ({fields}) => {
+  const getRemoveButton = ()=> {
+    if (fields.length>1) {
+      return <FlatButton label="Remove City" onClick={() => fields.pop()}/>
+    } else {
+      return <div/>
+    }
+  }
+  const getAddButton = ()=> {
+    if (fields.length<4) {
+      return <FlatButton label="add City" onClick={() => fields.push({})}/>
+    } else {
+      return <div/>
+    }
+  }
   return (
-    <Col {...col}>
-      <TextField hintText={label}
-        floatingLabelText={label}
-        fullWidth={true}
-        errorText={touched && error}
-        {...input}
-        {...custom}
-      />
-    </Col>
+    <Row>
+      {
+        fields.map((name, index) => {
+          return (
+            <Col xs={12} sm={12/fields.length} key={index}>
+              <Field name={`toCity${index+1}`} component={renderTextField} label={`To City #${index+1}`}/>
+            </Col>
+          )
+        })
+      }
+      {getRemoveButton()}
+      {getAddButton()}
+    </Row>
+  )
+}
+
+export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
+  return (
+    <TextField hintText={label}
+      floatingLabelText={label}
+      fullWidth={true}
+      errorText={touched && error}
+      {...input}
+      {...custom}
+    />
   )
 }

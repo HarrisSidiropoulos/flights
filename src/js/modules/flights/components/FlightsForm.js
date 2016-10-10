@@ -1,17 +1,12 @@
 import React, {Component, PropTypes} from 'react'
-import {Field, Fields, reduxForm} from 'redux-form'
+import {FieldArray, Field, Fields, reduxForm} from 'redux-form'
 import {connect} from 'react-redux'
 
-import {Row} from 'react-flexbox-grid';
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
-import {renderRangeDatePicker, renderTextField} from './FormHelpers'
+import {renderInputs, renderRangeDatePicker, renderTextField} from './FormHelpers'
 
-const buttonStyles = {
-  marginTop: 30,
-  marginBottom: 30
-};
 const minDate = new Date();
 const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 13);
@@ -19,8 +14,18 @@ maxDate.setDate(maxDate.getDate() + 13);
 const initialValues = {
   startDate: minDate,
   endDate: minDate,
-  fromCity: 'Thessaloniki'
+  fromCity: 'Thessaloniki',
+  toCities: ['',''],
+  toCity1: 'Athens',
+  toCity2: 'London',
+  toCity3: 'Bilbao',
+  toCity4: 'Paris'
 }
+
+const buttonStyles = {
+  marginTop: 30,
+  marginBottom: 30
+};
 
 const refreshStyles = {
   display: 'inline-block',
@@ -34,9 +39,8 @@ class FlightsForm extends Component {
       <form>
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
-        <Row>
-          <Field name="fromCity" component={renderTextField} label="From City" col={{xs:12}} />
-        </Row>
+        <Field name="fromCity" component={renderTextField} label="From City" />
+        <FieldArray name="toCities" component={renderInputs}/>
         <RaisedButton
           label="Reset"
           style={{...buttonStyles, marginRight:20}}
