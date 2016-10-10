@@ -85,7 +85,6 @@ class FlightsForm extends Component {
 FlightsForm.propTypes = {
   resetForm: PropTypes.func.isRequired,
   loadData: PropTypes.func.isRequired,
-  cityInputs: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired
 }
 

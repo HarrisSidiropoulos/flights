@@ -7,10 +7,6 @@ import FlightsResponse from './FlightsResponse'
 
 import {resetData, requestData} from '../actions'
 import {NAME as FLIGHTS_NAME} from '../constants'
-import {constants, actions} from '../../dynamic-inputs'
-
-const {resetInputs} = actions
-const {NAME:INPUTS_NAME} = constants
 
 require('./styles.scss')
 
@@ -35,14 +31,12 @@ Flights.propTypes = {
   cities: PropTypes.array.isRequired,
   resetForm: PropTypes.func.isRequired,
   loadData: PropTypes.func.isRequired,
-  cityInputs: PropTypes.array.isRequired,
   loading: PropTypes.bool.isRequired
 }
 
-export const mapStateToProps = ({ [FLIGHTS_NAME]:flights, [INPUTS_NAME]:inputs } ) => {
+export const mapStateToProps = ({ [FLIGHTS_NAME]:flights } ) => {
   return {
-    ...flights,
-    cityInputs: inputs
+    ...flights
   }
 };
 export const mapDispatchToProps = (dispatch) => ({
@@ -50,7 +44,6 @@ export const mapDispatchToProps = (dispatch) => ({
     dispatch(requestData(fromCity, toCities, startDate, endDate)),
   resetForm: () => {
     dispatch(resetData())
-    dispatch(resetInputs())
   }
 })
 
