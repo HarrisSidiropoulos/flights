@@ -60,14 +60,14 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
 }
 
 export const renderInputs = ({fields}) => {
-  const getRemoveButton = ()=> {
+  const renderRemoveButton = ()=> {
     if (fields.length>1) {
       return <FlatButton label="Remove City" onClick={() => fields.pop()}/>
     } else {
       return <div/>
     }
   }
-  const getAddButton = ()=> {
+  const renderAddButton = ()=> {
     if (fields.length<4) {
       return <FlatButton label="add City" onClick={() => fields.push({})}/>
     } else {
@@ -85,8 +85,8 @@ export const renderInputs = ({fields}) => {
           )
         })
       }
-      {getRemoveButton()}
-      {getAddButton()}
+      {renderRemoveButton()}
+      {renderAddButton()}
     </Row>
   )
 }
