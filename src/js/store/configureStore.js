@@ -13,7 +13,7 @@ const configureStore = (initialState = {})=> {
   const store =  createStore(
     rootReducer,
     initialState,
-    applyMiddleware(epicMiddleware, logger)
+    applyMiddleware(epicMiddleware)
   );
   return store;
 };
