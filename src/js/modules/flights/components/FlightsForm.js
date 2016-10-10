@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import {FieldArray, Field, Fields, reduxForm} from 'redux-form'
+import {FieldArray, Field, Fields, reduxForm, SubmissionError} from 'redux-form'
 import {connect} from 'react-redux'
 
 import RaisedButton from 'material-ui/RaisedButton';
@@ -32,11 +32,29 @@ const refreshStyles = {
   position: 'relative'
 }
 
+const validate = values => {
+  const errors = {}
+  for (const key in values) {
+    if (values[key]==="") {
+      errors[key] = `Field is required`
+    }
+  }
+  return errors
+}
+
 class FlightsForm extends Component {
+  submit(values) {
+    const {loadData} = this.props
+    if (validate(values).errors) {
+      throw new SubmissionError({ startDate: 'User does not exist', _error: 'Login failed!' })
+    }
+    const toCities = values.toCities.map((val,index)=>values[`toCity${index+1}`])
+    loadData(values.fromCity,toCities,values.startDate,values.endDate)
+  }
   render() {
-    const {loading} = this.props
+    const {invalid, handleSubmit, submitting, loading} = this.props
     return (
-      <form>
+      <form onSubmit={handleSubmit((values)=> this.submit(values))}>
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
         <Field name="fromCity" component={renderTextField} label="From City" />
@@ -49,13 +67,14 @@ class FlightsForm extends Component {
         <RaisedButton
           label="Submit"
           type="submit"
-          style={{...buttonStyles, display: (loading?"none":"inline-block")}}
+          disabled={loading || submitting || invalid}
+          style={{...buttonStyles, display: (loading || submitting?"none":"inline-block")}}
           />
         <RefreshIndicator
           size={35}
           left={10}
           top={10}
-          status={loading?"loading":"hide"}
+          status={loading || submitting?"loading":"hide"}
           style={refreshStyles}
           />
       </form>
@@ -79,5 +98,6 @@ export const mapStateToProps = ({ flights, form } ) => {
 };
 
 export default connect(mapStateToProps)(reduxForm({
-  form: 'flightForm'
+  form: 'flightForm',
+  validate
 })(FlightsForm))
