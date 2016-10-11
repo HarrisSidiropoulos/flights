@@ -2,8 +2,8 @@ import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
 import {loadLocalValue, saveLocalValue, SESSION_STORAGE} from '../local-storage'
 
-export const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
-// export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
+// export const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
+export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
 // export const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
 export const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 
@@ -11,6 +11,7 @@ export const ERROR_400="Invalid inputs, including invalid API key. Do not retry 
 export const ERROR_403="Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly."
 export const ERROR_500="Internal error. Try reproducing manually, and report a problem if it recurs."
 export const ERROR_503="Temporary overload. Wait before retrying."
+export const ERROR_NO_FLIGHTS="Could not find flights for airport"
 
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
@@ -69,6 +70,9 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
       return response.json()
     })
     .then((response)=> {
+      if (!response.trips.data.airport) {
+        throw new Error(`${ERROR_NO_FLIGHTS} ${fromAirport}`)
+      }
       const filteredResponse =
         response.trips.tripOption.map(({saleTotal,slice})=> {
           return {
