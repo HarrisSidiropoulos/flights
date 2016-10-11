@@ -3,8 +3,8 @@ import fetch from 'isomorphic-fetch';
 import {loadLocalValue, saveLocalValue, SESSION_STORAGE} from '../local-storage'
 
 // export const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
-export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
-// export const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
+// export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
+export const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
 export const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 
 export const ERROR_400="Invalid inputs, including invalid API key. Do not retry without correcting inputs."
@@ -71,7 +71,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
     })
     .then((response)=> {
       if (!response.trips.data.airport) {
-        throw new Error(`${ERROR_NO_FLIGHTS} ${fromAirport}`)
+        throw new Error(`${ERROR_NO_FLIGHTS} ${fromAirport} to ${toAirport} for date ${getFlightDate(date)}`)
       }
       const filteredResponse =
         response.trips.tripOption.map(({saleTotal,slice})=> {
