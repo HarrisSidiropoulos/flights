@@ -37,7 +37,7 @@ class FlightsForm extends Component {
   submit(values) {
     const {loadData} = this.props
     if (validate(values).errors) {
-      throw new SubmissionError({ startDate: 'User does not exist', _error: 'Login failed!' })
+      throw new SubmissionError(validate(values).errors)
     }
     const toCities = values.toCities.map((val,index)=>values[`toCity${index+1}`])
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
@@ -61,9 +61,9 @@ class FlightsForm extends Component {
           style={{...buttonStyles, marginRight:20}} />
         <RaisedButton label="Submit" type="submit"
           disabled={loading || submitting || invalid || typeof asyncValidating === 'string'}
-          style={{...buttonStyles, display: (loading || submitting?"none":"inline-block")}} />
+          style={{...buttonStyles, display: (loading || submitting || asyncValidating?"none":"inline-block")}} />
         <RefreshIndicator size={35} left={10} top={10}
-          status={loading || submitting?"loading":"hide"}
+          status={loading || submitting || asyncValidating?"loading":"hide"}
           style={refreshStyles} />
       </form>
     )

@@ -1,5 +1,12 @@
 import getAirportCodes from '../../../api-client/getAirportCodes'
 
+const getCities = (values) => {
+  const toCities = values.toCities.map((val,index)=>(
+    {key: `toCity${index+1}`, value:values[`toCity${index+1}`]})
+  )
+  return toCities.concat([{key:'fromCity', value:values.fromCity}])
+}
+
 export const validate = values => {
   const errors = {}
   for (const key in values) {
@@ -7,28 +14,24 @@ export const validate = values => {
       errors[key] = `Field is required`
     }
   }
-  for (const key in values) {
-    if (typeof key ==="string" && (/city/ig).test(key) && values[key].length<3) {
+  const cities = getCities(values)
+  cities.forEach(({value,key})=> {
+    if (value.length<3) {
       errors[key] = `Enter more than three characters`
     }
-  }
+  })
   return errors
 }
 
 export const asyncValidate = values => {
-  const cities = []
-  for (const key in values) {
-    if (typeof key ==="string" && (/city/ig).test(key) && values[key].length>=3) {
-      cities.push({input:key, city:values[key]})
-    }
-  }
-  return Promise.all(cities.map(({input,city})=> {
+  const cities = getCities(values)
+  return Promise.all(cities.map(({value,key})=> {
     const error = {}
-    error[input] = `${city} is not a city`
-    return getAirportCodes(city)
+    error[key] = `${value} is not a city`
+    return getAirportCodes(value)
       .then((response)=> {
         const filteredResponse =
-          response.filter((item)=>item.city.indexOf(city)>=0)
+          response.filter((item)=>item.city.indexOf(value)>=0)
         if (filteredResponse.length===0) {
           throw error
         }
