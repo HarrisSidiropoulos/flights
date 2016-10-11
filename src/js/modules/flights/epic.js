@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs'
 
 import {getWeatherAndFlights} from '../../api-client'
-import {RESET_DATA, FETCH_DATA_REQUEST} from './actionTypes'
+import {RESET_DATA, CANCEL_REQUEST, FETCH_DATA_REQUEST} from './actionTypes'
 import {receiveData, requestError} from './actions'
 
 const epic = action$ => {
@@ -13,6 +13,7 @@ const epic = action$ => {
         )
         .map((data) => receiveData(data))
         .takeUntil(action$.ofType(RESET_DATA))
+        .takeUntil(action$.ofType(CANCEL_REQUEST))
         .catch(error => Observable.of(requestError(error.toString())))
     }
   );

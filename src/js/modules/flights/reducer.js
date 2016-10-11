@@ -1,4 +1,11 @@
-import {RESET_DATA, FETCH_DATA_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_SUCCESS} from './actionTypes'
+import {
+  RESET_DATA,
+  CANCEL_REQUEST,
+  FETCH_DATA_REQUEST,
+  FETCH_DATA_FAILURE,
+  FETCH_DATA_SUCCESS
+} from './actionTypes'
+
 export const INITIAL_STATE = { loading: false, cities: [], error: false }
 
 export default function reducer(state = INITIAL_STATE, action) {
@@ -7,6 +14,12 @@ export default function reducer(state = INITIAL_STATE, action) {
     return {
       ...INITIAL_STATE
     }
+  case CANCEL_REQUEST: {
+    return {
+      ...state,
+      loading: false
+    }
+  }
   case FETCH_DATA_REQUEST:
     return {
       ...state,

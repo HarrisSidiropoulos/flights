@@ -43,10 +43,14 @@ class FlightsForm extends Component {
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
   reset(event) {
-    const {resetForm, initialize} = this.props
+    const {resetForm, cancelRequest, initialize, loading} = this.props
     event.preventDefault()
-    resetForm()
-    initialize(initialValues)
+    if (loading) {
+      cancelRequest()
+    } else {
+      resetForm()
+      initialize(initialValues)
+    }
   }
   render() {
     const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
@@ -57,7 +61,7 @@ class FlightsForm extends Component {
           minDate={minDate} maxDate={maxDate} />
         <Field name="fromCity" component={renderTextField} label="From City" />
         <FieldArray name="toCities" component={renderInputs}/>
-        <RaisedButton label="Reset" type="reset"
+        <RaisedButton label={loading?"Cancel":"Reset"} type="reset"
           style={{...buttonStyles, marginRight:20}} />
         <RaisedButton label="Submit" type="submit"
           disabled={loading || submitting || invalid || typeof asyncValidating === 'string'}
@@ -72,6 +76,7 @@ class FlightsForm extends Component {
 
 FlightsForm.propTypes = {
   resetForm: PropTypes.func.isRequired,
+  cancelRequest: PropTypes.func.isRequired,
   loadData: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired
 }

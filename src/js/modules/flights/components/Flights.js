@@ -6,7 +6,7 @@ import {red500} from 'material-ui/styles/colors'
 import FlightsForm from './FlightsForm'
 import FlightsResponse from './FlightsResponse'
 
-import {resetData, requestData} from '../actions'
+import {resetData, requestData, cancelRequest} from '../actions'
 import {NAME as FLIGHTS_NAME} from '../constants'
 
 require('./styles.scss')
@@ -31,6 +31,7 @@ class Flights extends Component {
 Flights.propTypes = {
   cities: PropTypes.array.isRequired,
   resetForm: PropTypes.func.isRequired,
+  cancelRequest: PropTypes.func.isRequired,
   loadData: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired
 }
@@ -45,6 +46,9 @@ export const mapDispatchToProps = (dispatch) => ({
     dispatch(requestData(fromCity, toCities, startDate, endDate)),
   resetForm: () => {
     dispatch(resetData())
+  },
+  cancelRequest: () => {
+    dispatch(cancelRequest())
   }
 })
 
