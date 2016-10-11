@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
-import Panel from 'react-bootstrap/lib/Panel'
+
+import {red500} from 'material-ui/styles/colors'
 
 import FlightsForm from './FlightsForm'
 import FlightsResponse from './FlightsResponse'
@@ -20,7 +21,7 @@ class Flights extends Component {
       <div>
         <FlightsForm {...this.props} />
         <br/>
-        { error && <Panel header="Error" bsStyle="danger">{error}</Panel> }
+        { error && <div style={{color: red500}}>{error}</div> }
         <FlightsResponse cities={cities} />
       </div>
     )
