@@ -40,10 +40,16 @@ class FlightsForm extends Component {
     const toCities = values.toCities.map((val,index)=>values[`toCity${index+1}`])
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
+  reset(event) {
+    const {resetForm} = this.props
+    event.preventDefault()
+    resetForm()
+  }
   render() {
     const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
     return (
-      <form onSubmit={handleSubmit((values)=> this.submit(values))}>
+      <form onSubmit={handleSubmit((values)=> this.submit(values))}
+            onReset={(e)=>this.reset(e)}>
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
         <Field name="fromCity" component={renderTextField} label="From City" />

@@ -5,11 +5,13 @@ export const validate = values => {
   for (const key in values) {
     if (values[key]==="") {
       errors[key] = `Field is required`
+      return errors
     }
   }
   for (const key in values) {
     if (typeof key ==="string" && (/city/ig).test(key) && values[key].length<3) {
       errors[key] = `Enter more than three characters`
+      return errors
     }
   }
   return errors
