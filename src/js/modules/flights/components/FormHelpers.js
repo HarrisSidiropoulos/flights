@@ -99,6 +99,7 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
       errorText={touched && error}
       {...input}
       {...custom}
+      value={typeof input.value==="string" ? input.value : ''}
     />
   )
 }

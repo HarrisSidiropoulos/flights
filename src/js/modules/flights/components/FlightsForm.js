@@ -18,7 +18,9 @@ const initialValues = {
   fromCity: 'Thessaloniki',
   toCities: ['',''],
   toCity1: 'Athens',
-  toCity2: 'London'
+  toCity2: 'London',
+  toCity3: '',
+  toCity4: ''
 }
 
 const buttonStyles = {
@@ -41,9 +43,10 @@ class FlightsForm extends Component {
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
   reset(event) {
-    const {resetForm} = this.props
+    const {resetForm, initialize} = this.props
     event.preventDefault()
     resetForm()
+    initialize(initialValues)
   }
   render() {
     const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
