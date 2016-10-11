@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import {renderInputs, renderRangeDatePicker, renderTextField} from './FormHelpers'
+import {validate, asyncValidate} from './FormValidation'
 
 const minDate = new Date();
 const maxDate = new Date();
@@ -17,9 +18,7 @@ const initialValues = {
   fromCity: 'Thessaloniki',
   toCities: ['',''],
   toCity1: 'Athens',
-  toCity2: 'London',
-  toCity3: 'Bilbao',
-  toCity4: 'Paris'
+  toCity2: 'London'
 }
 
 const buttonStyles = {
@@ -32,16 +31,6 @@ const refreshStyles = {
   position: 'relative'
 }
 
-const validate = values => {
-  const errors = {}
-  for (const key in values) {
-    if (values[key]==="") {
-      errors[key] = `Field is required`
-    }
-  }
-  return errors
-}
-
 class FlightsForm extends Component {
   submit(values) {
     const {loadData} = this.props
@@ -52,7 +41,7 @@ class FlightsForm extends Component {
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
   render() {
-    const {invalid, handleSubmit, submitting, loading} = this.props
+    const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
     return (
       <form onSubmit={handleSubmit((values)=> this.submit(values))}>
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
@@ -67,7 +56,7 @@ class FlightsForm extends Component {
         <RaisedButton
           label="Submit"
           type="submit"
-          disabled={loading || submitting || invalid}
+          disabled={loading || submitting || invalid || typeof asyncValidating === 'string'}
           style={{...buttonStyles, display: (loading || submitting?"none":"inline-block")}}
           />
         <RefreshIndicator
@@ -98,5 +87,7 @@ export const mapStateToProps = ({ flights, form } ) => {
 
 export default connect(mapStateToProps)(reduxForm({
   form: 'flightForm',
-  validate
+  validate,
+  asyncValidate,
+  asyncBlurFields: [ 'fromCity', 'toCity1', 'toCity2', 'toCity3', 'toCity4' ]
 })(FlightsForm))
