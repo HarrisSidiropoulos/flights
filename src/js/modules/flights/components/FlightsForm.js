@@ -14,13 +14,13 @@ maxDate.setDate(maxDate.getDate() + 13);
 
 const initialValues = {
   startDate: minDate,
-  endDate: minDate,
-  fromCity: 'Thessaloniki',
-  toCities: ['',''],
-  toCity1: 'Athens',
-  toCity2: 'London',
-  toCity3: '',
-  toCity4: ''
+  endDate  : minDate,
+  fromCity : 'Thessaloniki',
+  toCities : ['',''],
+  toCity1  : 'Athens',
+  toCity2  : 'London',
+  toCity3  : '',
+  toCity4  : ''
 }
 
 const buttonStyles = {
@@ -57,24 +57,14 @@ class FlightsForm extends Component {
           minDate={minDate} maxDate={maxDate} />
         <Field name="fromCity" component={renderTextField} label="From City" />
         <FieldArray name="toCities" component={renderInputs}/>
-        <RaisedButton
-          label="Reset"
-          style={{...buttonStyles, marginRight:20}}
-          type="reset"
-          />
-        <RaisedButton
-          label="Submit"
-          type="submit"
+        <RaisedButton label="Reset" type="reset"
+          style={{...buttonStyles, marginRight:20}} />
+        <RaisedButton label="Submit" type="submit"
           disabled={loading || submitting || invalid || typeof asyncValidating === 'string'}
-          style={{...buttonStyles, display: (loading || submitting?"none":"inline-block")}}
-          />
-        <RefreshIndicator
-          size={35}
-          left={10}
-          top={10}
+          style={{...buttonStyles, display: (loading || submitting?"none":"inline-block")}} />
+        <RefreshIndicator size={35} left={10} top={10}
           status={loading || submitting?"loading":"hide"}
-          style={refreshStyles}
-          />
+          style={refreshStyles} />
       </form>
     )
   }
