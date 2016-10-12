@@ -32,7 +32,6 @@ export const validate = values => {
 }
 
 export const asyncValidate = values => {
-  console.log("asyncValidate")
   const cities = getCities(values)
   return Promise.all(cities.map(({value,key})=> {
     if (value.length<3) {

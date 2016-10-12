@@ -1,5 +1,4 @@
 import React, {Component,PropTypes} from 'react'
-import ReactDOM from 'react-dom';
 import AutoComplete from 'material-ui/AutoComplete'
 import getAirportCodes from '../../../api-client/getAirportCodes'
 import unique from 'array-unique'
