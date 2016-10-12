@@ -42,6 +42,7 @@ class AsyncAutocomplete extends Component {
     return (
       <AutoComplete {...this.props}
         ref              = "item"
+        maxSearchResults = {5}
         onNewRequest     = {(value, index)=>this.onNewRequest(value, index)}
         filter           = {AutoComplete.noFilter}
         openOnFocus      = {true}
