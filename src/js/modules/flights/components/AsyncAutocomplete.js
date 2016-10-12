@@ -1,5 +1,6 @@
 import React, {Component,PropTypes} from 'react'
-import AutoComplete from 'material-ui/AutoComplete';
+import ReactDOM from 'react-dom';
+import AutoComplete from 'material-ui/AutoComplete'
 import getAirportCodes from '../../../api-client/getAirportCodes'
 import unique from 'array-unique'
 
@@ -11,17 +12,20 @@ class AsyncAutocomplete extends Component {
       inputValue : ''
     }
   }
-
+  hasTextFieldFocus() {
+    return document.activeElement === this.refs.item.refs.searchTextField.input
+  }
   onUpdateInput(inputValue) {
     const {onChange} = this.props
     this.setState({
       ...this.state,
       inputValue
     })
+    if (inputValue.length<3 || !this.hasTextFieldFocus()) return
     onChange(inputValue)
-    if (inputValue.length<3) return
     getAirportCodes(inputValue, 10)
       .then((response)=> {
+        if (!this.hasTextFieldFocus()) return false
         this.setState({
           ...this.state,
           dataSource:
