@@ -5,6 +5,8 @@ import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 
+import AsyncAutocomplete from './AsyncAutocomplete'
+
 export const renderDatePicker = ({ col, input, label, minDate, maxDate, meta: { touched, error } }) => {
   return (
     <Col {...col}>
@@ -80,7 +82,7 @@ export const renderInputs = ({fields}) => {
         fields.map((name, index) => {
           return (
             <Col xs={12} sm={12/fields.length} key={index}>
-              <Field name={`toCity${index+1}`} component={renderTextField} label={`To City #${index+1}`}/>
+              <Field name={`toCity${index+1}`} component={renderAsyncAutocomplete} label={`To City #${index+1}`}/>
             </Col>
           )
         })
@@ -100,6 +102,19 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
       {...input}
       {...custom}
       value={typeof input.value==="string" ? input.value : ''}
+    />
+  )
+}
+
+export const renderAsyncAutocomplete = ({ input, label, meta: { touched, error }, ...custom }) => {
+  return (
+    <AsyncAutocomplete hintText={label}
+      floatingLabelText={label}
+      fullWidth={true}
+      errorText={touched && error}
+      {...input}
+      {...custom}
+      searchText={input.value}
     />
   )
 }

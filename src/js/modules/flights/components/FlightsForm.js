@@ -5,7 +5,11 @@ import {connect} from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
-import {renderInputs, renderRangeDatePicker, renderTextField} from './FormHelpers'
+import {
+  renderInputs,
+  renderRangeDatePicker,
+  renderAsyncAutocomplete
+} from './FormHelpers'
 import {validate, asyncValidate} from './FormValidation'
 
 const minDate = new Date();
@@ -32,15 +36,23 @@ const refreshStyles = {
   display: 'inline-block',
   position: 'relative'
 }
-
+export const getCityValue = (value) => {
+  const airportReg = (/\(.+\)/)
+  if (airportReg.test(value)) {
+    value = airportReg.exec(value)[0].replace(/[\(\)]/g,'')
+  }
+  return value
+}
 class FlightsForm extends Component {
   submit(values) {
     const {loadData} = this.props
     if (validate(values).errors) {
       throw new SubmissionError(validate(values).errors)
     }
-    const toCities = values.toCities.map((val,index)=>values[`toCity${index+1}`])
-    loadData(values.fromCity,toCities,values.startDate,values.endDate)
+    const toCities = values.toCities.map((val,index)=>{
+      return getCityValue(values[`toCity${index+1}`])
+    })
+    loadData(getCityValue(values.fromCity),toCities,values.startDate,values.endDate)
   }
   reset(event) {
     const {resetForm, cancelRequest, initialize, loading} = this.props
@@ -59,7 +71,7 @@ class FlightsForm extends Component {
             onReset={(e)=>this.reset(e)}>
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
-        <Field name="fromCity" component={renderTextField} label="From City" />
+        <Field name="fromCity" component={renderAsyncAutocomplete} label="From City" />
         <FieldArray name="toCities" component={renderInputs}/>
         <RaisedButton label={loading?"Cancel":"Reset"} type="reset"
           style={{...buttonStyles, marginRight:20}} />
