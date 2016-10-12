@@ -19,8 +19,8 @@ export const validate = values => {
   }
   const cities = getCities(values)
   cities.forEach(({value,key})=> {
-    if (value.length<=3) {
-      errors[key] = `Enter more than three characters`
+    if (value.length<=2) {
+      errors[key] = `Enter more than two characters`
     }
   })
   getToCities(values).forEach(({value,key})=> {
