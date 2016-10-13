@@ -34,17 +34,18 @@ export const validate = values => {
 export const asyncValidate = values => {
   const cities = getCities(values)
   return Promise.all(cities.map(({value,key})=> {
-    const error = {}
     if (!value) {
       return new Promise((resolve) => resolve(true));
     }
+    const error = {}
+    error[key] = `${value} is not a city`
+
     if (value.length<3) {
       return new Promise((resolve,reject) => {
         error[key] = `Enter more than two characters`
         reject(error)
       });
     }
-    error[key] = `${value} is not a city`
     value = value.toLowerCase()
     return getAirportCodes(value,10)
       .then((response)=> {
