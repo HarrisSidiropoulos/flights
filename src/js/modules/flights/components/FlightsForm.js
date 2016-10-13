@@ -5,8 +5,14 @@ import {connect} from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
+import unique from 'array-unique'
+
+import {getToCities, getCities} from './FormValidation'
+import getAirportCodes from '../../../api-client/getAirportCodes'
+
+
 import {
-  renderInputs,
+  renderAsyncAutocompleteInputs,
   renderRangeDatePicker,
   renderAsyncAutocomplete
 } from './FormHelpers'
@@ -36,23 +42,23 @@ const refreshStyles = {
   display: 'inline-block',
   position: 'relative'
 }
-export const getCityValue = (value) => {
-  const airportReg = (/\(.+\)/)
-  if (airportReg.test(value)) {
-    value = airportReg.exec(value)[0].replace(/[\(\)]/g,'')
-  }
-  return value
+
+export const getCitiesFromInput = (inputValue) => {
+  if (inputValue.length<3) return new Promise((resolve,reject)=>reject(false))
+  return getAirportCodes(inputValue, 10)
+    .then((response) =>
+      unique(response.map(({city})=>(city)))
+    )
 }
+
 class FlightsForm extends Component {
   submit(values) {
     const {loadData} = this.props
     if (validate(values).errors) {
       throw new SubmissionError(validate(values).errors)
     }
-    const toCities = values.toCities.map((val,index)=>{
-      return getCityValue(values[`toCity${index+1}`])
-    })
-    loadData(getCityValue(values.fromCity),toCities,values.startDate,values.endDate)
+    const toCities = getToCities(values).map(({value})=>value)
+    loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
   reset(event) {
     const {resetForm, cancelRequest, initialize, loading} = this.props
@@ -71,8 +77,11 @@ class FlightsForm extends Component {
             onReset={(e)=>this.reset(e)}>
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
-        <Field name="fromCity" component={renderAsyncAutocomplete} label="From City" />
-        <FieldArray name="toCities" component={renderInputs}/>
+        <Field name="fromCity" component={renderAsyncAutocomplete} label="From City"
+          dataSourceCallback={getCitiesFromInput} maxSearchResults={5} openOnFocus={false}/>
+        <FieldArray name="toCities" component={renderAsyncAutocompleteInputs}
+          inputName="toCity" inputLabel="To City" removeLabel="Remove City" addLabel="Add City"
+          dataSourceCallback={getCitiesFromInput} maxSearchResults={5} openOnFocus={false}/>
         <RaisedButton label={loading?"Cancel":"Reset"} type="reset"
           style={{...buttonStyles, marginRight:20}} />
         <RaisedButton label="Submit" type="submit"
@@ -105,5 +114,5 @@ export default connect(mapStateToProps)(reduxForm({
   form: 'flightForm',
   validate,
   asyncValidate,
-  asyncBlurFields: [ 'fromCity', 'toCity1', 'toCity2', 'toCity3', 'toCity4' ]
+  asyncBlurFields: getCities(initialValues).map(({key})=>key)
 })(FlightsForm))

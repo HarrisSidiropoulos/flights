@@ -1,12 +1,12 @@
 import getAirportCodes from '../../../api-client/getAirportCodes'
 
-const getToCities = (values) => {
+export const getToCities = (values) => {
   return values.toCities.map((val,index)=>(
     {key: `toCity${index+1}`, value:values[`toCity${index+1}`]})
   )
 }
 
-const getCities = (values) => {
+export const getCities = (values) => {
   return getToCities(values).concat([{key:'fromCity', value:values.fromCity}])
 }
 

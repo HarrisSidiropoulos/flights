@@ -61,28 +61,31 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
   )
 }
 
-export const renderInputs = ({fields}) => {
+export const renderAsyncAutocompleteInputs = ({fields, meta, inputName, inputLabel, min=1, max=4, ...custom}) => {
   const renderRemoveButton = ()=> {
-    if (fields.length>1) {
-      return <FlatButton label="Remove City" onClick={() => fields.pop()}/>
+    if (fields.length>min) {
+      return <FlatButton label={custom.removeLabel || "Remove"} onClick={() => fields.pop()}/>
     } else {
       return <div/>
     }
   }
   const renderAddButton = ()=> {
-    if (fields.length<4) {
-      return <FlatButton label="add City" onClick={() => fields.push({})}/>
+    if (fields.length<max) {
+      return <FlatButton label={custom.addLabel || "Add"} onClick={() => fields.push({})}/>
     } else {
       return <div/>
     }
   }
   return (
-    <Row>
+    <Row {...meta}>
       {
         fields.map((name, index) => {
           return (
-            <Col xs={12} sm={12/fields.length} key={index}>
-              <Field name={`toCity${index+1}`} component={renderAsyncAutocomplete} label={`To City #${index+1}`}/>
+            <Col xs={12} sm={Math.max(12/fields.length, 3)} key={index}>
+              <Field {...custom}
+                name={`${inputName || 'Field'}${index+1}`}
+                component={renderAsyncAutocomplete}
+                label={`${inputLabel || 'Field'} #${index+1}`}/>
             </Col>
           )
         })
