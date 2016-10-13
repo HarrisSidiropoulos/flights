@@ -10,7 +10,7 @@ class AsyncAutocomplete extends Component {
       dataSource : ['Athens','Thessaloniki','London','Paris','Berlin','Bilbao']
     }
   }
-  onUpdateInput(inputValue) {
+  handleUpdateInput(inputValue) {
     const {onChange} = this.props
     if (inputValue.length<3 || !this.refs.item.state.focusTextField) return
     onChange(inputValue)
@@ -23,14 +23,19 @@ class AsyncAutocomplete extends Component {
         })
       })
   }
-  onNewRequest(value) {
+  handleNewRequest(value) {
     const {onChange} = this.props
     this.refs.item.focus()
     onChange(value)
   }
-  onBlur(e) {
+  handleBlur(e) {
     if (this.refs.item.state.focusTextField) {
       this.props.onBlur(e.target.value)
+    }
+  }
+  handleKeyDown(e) {
+    if (e.keyCode===27) {
+      this.refs.item.focus()
     }
   }
   render() {
@@ -39,12 +44,13 @@ class AsyncAutocomplete extends Component {
       <AutoComplete {...this.props}
         ref              = "item"
         maxSearchResults = {5}
-        onNewRequest     = {(value, index)=>this.onNewRequest(value, index)}
+        onNewRequest     = {(value, index)=>this.handleNewRequest(value, index)}
         filter           = {AutoComplete.noFilter}
         openOnFocus      = {false}
         dataSource       = {dataSource}
-        onUpdateInput    = {(val)=> this.onUpdateInput(val)}
-        onBlur           = {(e)=>this.onBlur(e)}
+        onUpdateInput    = {(val)=> this.handleUpdateInput(val)}
+        onBlur           = {(e)=>this.handleBlur(e)}
+        menuProps        = {{onKeyDown:(e)=>this.handleKeyDown(e)}}
         />
     )
   }
