@@ -51,7 +51,8 @@ class AsyncAutocomplete extends Component {
 }
 
 AsyncAutocomplete.propTypes = {
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  onBlur  : PropTypes.func
 }
 
 export default AsyncAutocomplete
