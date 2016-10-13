@@ -13,6 +13,10 @@ export const ERROR_500="Internal error. Try reproducing manually, and report a p
 export const ERROR_503="Temporary overload. Wait before retrying."
 export const ERROR_NO_FLIGHTS="Could not find flights for airport"
 
+export const getErrorNoFlights = (fromAirport,toAirport,date) => (
+  `${ERROR_NO_FLIGHTS} ${fromAirport} to ${toAirport} for date ${getFlightDate(date)}`
+)
+
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
@@ -73,9 +77,9 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
       if (!response.trips.data.airport ||
           response.trips.data.airport.filter(({city}) => city===toAirport).length===0 ||
           response.trips.data.airport.filter(({city}) => city===fromAirport).length===0 ||
-          response.trips.data.city.filter(({code}) => code===toAirport).length===0 ||
-          response.trips.data.city.filter(({code}) => code===fromAirport).length===0) {
-        throw new Error(`${ERROR_NO_FLIGHTS} ${fromAirport} to ${toAirport} for date ${getFlightDate(date)}`)
+          response.trips.data.city.filter(({code})    => code===toAirport).length===0 ||
+          response.trips.data.city.filter(({code})    => code===fromAirport).length===0) {
+        throw new Error(getErrorNoFlights(fromAirport,toAirport,date))
       }
       const filteredResponse =
         response.trips.tripOption.map(({saleTotal,slice})=> {

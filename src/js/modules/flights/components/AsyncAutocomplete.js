@@ -45,7 +45,7 @@ class AsyncAutocomplete extends Component {
         maxSearchResults = {5}
         onNewRequest     = {(value, index)=>this.onNewRequest(value, index)}
         filter           = {AutoComplete.noFilter}
-        openOnFocus      = {true}
+        openOnFocus      = {false}
         dataSource       = {dataSource}
         onUpdateInput    = {(val)=> this.onUpdateInput(val)}
         />
