@@ -7,26 +7,17 @@ class AsyncAutocomplete extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataSource : ['Athens','Thessaloniki','London','Paris','Berlin','Bilbao'],
-      inputValue : ''
+      dataSource : ['Athens','Thessaloniki','London','Paris','Berlin','Bilbao']
     }
-  }
-  hasTextFieldFocus() {
-    return document.activeElement === this.refs.item.refs.searchTextField.input
   }
   onUpdateInput(inputValue) {
     const {onChange} = this.props
-    this.setState({
-      ...this.state,
-      inputValue
-    })
-    if (inputValue.length<3 || !this.hasTextFieldFocus()) return
+    if (inputValue.length<3 || !this.refs.item.state.focusTextField) return
     onChange(inputValue)
     getAirportCodes(inputValue, 10)
       .then((response)=> {
-        if (!this.hasTextFieldFocus()) return false
+        if (!this.refs.item.state.focusTextField) return false
         this.setState({
-          ...this.state,
           dataSource:
             unique(response.map(({city})=>(city)))
         })
@@ -36,6 +27,11 @@ class AsyncAutocomplete extends Component {
     const {onChange} = this.props
     this.refs.item.focus()
     onChange(value)
+  }
+  onBlur(e) {
+    if (this.refs.item.state.focusTextField) {
+      this.props.onBlur(e.target.value)
+    }
   }
   render() {
     const {dataSource} = this.state
@@ -48,6 +44,7 @@ class AsyncAutocomplete extends Component {
         openOnFocus      = {false}
         dataSource       = {dataSource}
         onUpdateInput    = {(val)=> this.onUpdateInput(val)}
+        onBlur           = {(e)=>this.onBlur(e)}
         />
     )
   }
