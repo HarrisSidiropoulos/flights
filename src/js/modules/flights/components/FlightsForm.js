@@ -67,6 +67,15 @@ class FlightsForm extends Component {
       initialize(initialValues)
     }
   }
+  getSubmitLabel(loading, asyncValidating) {
+    if (loading) {
+      return 'Loading...'
+    } else if (asyncValidating) {
+      return 'Validating...'
+    } else {
+      return 'Submit'
+    }
+  }
   render() {
     const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
     return (
@@ -75,15 +84,16 @@ class FlightsForm extends Component {
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
         <Field name="fromCity" component={renderAsyncAutocomplete} label="From City"
-          dataSourceCallback={getCitiesFromInput} maxSearchResults={5} openOnFocus={false}/>
+          dataSourceCallback={getCitiesFromInput}
+          maxSearchResults={5} openOnFocus={false}/>
         <FieldArray name="toCities" component={renderAsyncAutocompleteInputs}
           inputName="toCity" inputLabel="To City" removeLabel="Remove City" addLabel="Add City"
           dataSourceCallback={getCitiesFromInput} maxSearchResults={5} openOnFocus={false}/>
         <RaisedButton label={loading?"Cancel":"Reset"} type="reset"
           style={{...buttonStyles, marginRight:20}} />
-        <RaisedButton label="Submit" type="submit"
-          disabled={loading || submitting || invalid || typeof asyncValidating === 'string'}
-          style={{...buttonStyles, display: (loading || submitting || asyncValidating?"none":"inline-block")}} />
+        <RaisedButton label={this.getSubmitLabel(loading,asyncValidating)} type="submit"
+          disabled={loading || submitting || invalid || (typeof asyncValidating==='boolean' && asyncValidating) || typeof asyncValidating==='string'}
+          style={buttonStyles} />
         <RefreshIndicator size={35} left={10} top={10}
           status={loading || submitting || asyncValidating?"loading":"hide"}
           style={refreshStyles} />
