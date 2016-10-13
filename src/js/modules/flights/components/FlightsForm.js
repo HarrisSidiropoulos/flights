@@ -6,17 +6,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import unique from 'array-unique'
-
-import {getToCities, getCities} from './FormValidation'
 import getAirportCodes from '../../../api-client/getAirportCodes'
-
+import {validate, asyncValidate, getToCities, getCities} from './FormValidation'
 
 import {
   renderAsyncAutocompleteInputs,
   renderRangeDatePicker,
   renderAsyncAutocomplete
 } from './FormHelpers'
-import {validate, asyncValidate} from './FormValidation'
 
 const minDate = new Date();
 const maxDate = new Date();
