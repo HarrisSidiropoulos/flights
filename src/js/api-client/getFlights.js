@@ -16,7 +16,6 @@ export const ERROR_NO_FLIGHTS="Could not find flights for airport"
 export const getErrorNoFlights = (fromAirport,toAirport,date) => (
   `${ERROR_NO_FLIGHTS} ${fromAirport} to ${toAirport} for date ${getFlightDate(date)}`
 )
-
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
@@ -48,11 +47,39 @@ export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new D
 export function getLocalStorageKey(fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) {
   return `flight-${fromAirport}-${toAirport}-${dateFormat('yyyyMMdd', date)}-${solutions}`
 }
+
+export const normalizeResponse = (response, fromAirport, toAirport, date) => {
+  if (Array.isArray(response)) return response
+  if (!response.trips.data.airport ||
+      response.trips.data.airport.filter(({city}) => city===toAirport).length===0 ||
+      response.trips.data.airport.filter(({city}) => city===fromAirport).length===0 ||
+      response.trips.data.city.filter(({code})    => code===toAirport).length===0 ||
+      response.trips.data.city.filter(({code})    => code===fromAirport).length===0) {
+    throw new Error(getErrorNoFlights(fromAirport,toAirport,date))
+  }
+  const filteredResponse =
+    response.trips.tripOption.map(({saleTotal,slice})=> {
+      return {
+        toAirport     : response.trips.data.airport.filter(({city}) => city===toAirport)[0].name,
+        fromAirport   : response.trips.data.airport.filter(({city}) => city===fromAirport)[0].name,
+        toCity        : response.trips.data.city.filter(({code}) => code===toAirport)[0].name,
+        fromCity      : response.trips.data.city.filter(({code}) => code===fromAirport)[0].name,
+        saleTotal     : parseFloat(saleTotal.replace(/\D+/,'')),
+        carrier       : response.trips.data.carrier.filter(({code}) => code===slice[0].segment[0].flight.carrier)[0].name,
+        duration      : slice[0].duration,
+        arrivalTime   : slice[0].segment[0].leg[0].arrivalTime,
+        departureTime : slice[0].segment[0].leg[0].departureTime,
+        flightNumber  : slice[0].segment[0].flight.carrier + slice[0].segment[0].flight.number
+      }
+    })
+  return filteredResponse
+}
+
 export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const localStorageKey = getLocalStorageKey(fromAirport,toAirport,date,solutions)
   const localFlight = loadLocalValue(localStorageKey, SESSION_STORAGE)
   if (localFlight) {
-    return localFlight
+    return localFlight.then(response=>normalizeResponse(response, fromAirport, toAirport, date))
   }
   const headers = getFlightsHeaders(fromAirport, toAirport, date, solutions)
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
@@ -74,32 +101,10 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
       return response.json()
     })
     .then((response)=> {
-      if (!response.trips.data.airport ||
-          response.trips.data.airport.filter(({city}) => city===toAirport).length===0 ||
-          response.trips.data.airport.filter(({city}) => city===fromAirport).length===0 ||
-          response.trips.data.city.filter(({code})    => code===toAirport).length===0 ||
-          response.trips.data.city.filter(({code})    => code===fromAirport).length===0) {
-        throw new Error(getErrorNoFlights(fromAirport,toAirport,date))
-      }
-      const filteredResponse =
-        response.trips.tripOption.map(({saleTotal,slice})=> {
-          return {
-            toAirport     : response.trips.data.airport.filter(({city}) => city===toAirport)[0].name,
-            fromAirport   : response.trips.data.airport.filter(({city}) => city===fromAirport)[0].name,
-            toCity        : response.trips.data.city.filter(({code}) => code===toAirport)[0].name,
-            fromCity      : response.trips.data.city.filter(({code}) => code===fromAirport)[0].name,
-            saleTotal     : parseFloat(saleTotal.replace(/\D+/,'')),
-            carrier       : response.trips.data.carrier.filter(({code}) => code===slice[0].segment[0].flight.carrier)[0].name,
-            duration      : slice[0].duration,
-            arrivalTime   : slice[0].segment[0].leg[0].arrivalTime,
-            departureTime : slice[0].segment[0].leg[0].departureTime,
-            flightNumber  : slice[0].segment[0].flight.carrier + slice[0].segment[0].flight.number
-          }
-        })
-
-      saveLocalValue(localStorageKey, filteredResponse, SESSION_STORAGE)
-      return filteredResponse
+      saveLocalValue(localStorageKey, response, SESSION_STORAGE)
+      return response
     })
+    .then(response=>normalizeResponse(response, fromAirport, toAirport, date))
 }
 
 export default getFlights

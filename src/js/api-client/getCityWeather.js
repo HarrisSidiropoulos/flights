@@ -12,11 +12,25 @@ export function getDateAsNumber(date) {
 export function getLocalStorageKey(city='London', startDate=new Date(), endDate=new Date(), cnt=14, units='metric') {
   return `city-weather-${city}-${dateFormat('yyyyMMdd', startDate)}-${dateFormat('yyyyMMdd', endDate)}-${cnt}-${units}`
 }
+export const normalizeResponse = (response, startDate, endDate) => {
+  const filteredWeatherList = response.list.filter(({dt})=> {
+    dt = getDateAsNumber(new Date(dt*1000))
+    return (dt >= getDateAsNumber(startDate) &&
+            dt <= getDateAsNumber(endDate))
+  })
+  if (filteredWeatherList.length===0) {
+    throw new Error(WEATHER_DATE_ERROR)
+  }
+  return {
+    ...response,
+    list: filteredWeatherList
+  }
+}
 export const getCityWeather = (city='London', startDate=new Date(), endDate=new Date(), cnt=14, units='metric') => {
   const localStorageKey = getLocalStorageKey(city,startDate,endDate,cnt,units)
   const cityWeatherFromLocalStorage = loadLocalValue(localStorageKey, SESSION_STORAGE)
   if (cityWeatherFromLocalStorage) {
-    return cityWeatherFromLocalStorage
+    return cityWeatherFromLocalStorage.then(response => normalizeResponse(response, startDate, endDate))
   }
   return fetch(`${WEATHER_API_URL}?q=${city}&units=${units}&cnt=${cnt}&APPID=${WEATHER_API_KEY}`)
     .then((response) => {
@@ -26,21 +40,10 @@ export const getCityWeather = (city='London', startDate=new Date(), endDate=new 
       return response.json()
     })
     .then((response)=> {
-      const filteredWeatherList = response.list.filter(({dt})=> {
-        dt = getDateAsNumber(new Date(dt*1000))
-        return (dt >= getDateAsNumber(startDate) &&
-                dt <= getDateAsNumber(endDate))
-      })
-      if (filteredWeatherList.length===0) {
-        throw new Error(WEATHER_DATE_ERROR)
-      }
-      const normResponse = {
-        ...response,
-        list: filteredWeatherList
-      }
-      saveLocalValue(localStorageKey, normResponse, SESSION_STORAGE)
-      return normResponse
+      saveLocalValue(localStorageKey, response, SESSION_STORAGE)
+      return response
     })
+    .then(response => normalizeResponse(response, startDate, endDate))
 }
 
 export default getCityWeather

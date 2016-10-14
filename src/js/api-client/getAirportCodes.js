@@ -12,11 +12,24 @@ export const REQUEST_HEADERS = {
 export function getLocalStorageKey(city='London', limit=1) {
   return `airport-codes-${city}-${limit}`
 }
+export const normalizeResponse = (response) => {
+  if (!response.statusCode) return response
+  if (response.statusCode!==200) {
+    throw new Error(response.message)
+  }
+  const normResponse = response.airports.map(({iata,city})=> {
+    return {
+      airport: iata,
+      city
+    }
+  })
+  return normResponse
+}
 const getAirportCodes = (city='Thessaloniki', limit=1) => {
   const localStorageKey = getLocalStorageKey(city,limit)
   const airportCodesFromLocalStorage = loadLocalValue(localStorageKey)
   if (airportCodesFromLocalStorage) {
-    return airportCodesFromLocalStorage
+    return airportCodesFromLocalStorage.then(normalizeResponse)
   }
   return fetch(`${API_URL}?term=${city.trim()}&limit=${limit}`, REQUEST_HEADERS)
     .then((response) => {
@@ -26,18 +39,10 @@ const getAirportCodes = (city='Thessaloniki', limit=1) => {
       return response.json()
     })
     .then((response)=> {
-      if (response.statusCode!==200) {
-        throw new Error(response.message)
-      }
-      const normResponse = response.airports.map(({iata,city})=> {
-        return {
-          airport: iata,
-          city
-        }
-      })
-      saveLocalValue(localStorageKey, normResponse)
-      return normResponse
+      saveLocalValue(localStorageKey, response)
+      return response
     })
+    .then(normalizeResponse)
 }
 
 export default getAirportCodes
