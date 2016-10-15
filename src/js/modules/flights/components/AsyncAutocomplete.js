@@ -1,5 +1,6 @@
 import React, {Component,PropTypes} from 'react'
 import AutoComplete from 'material-ui/AutoComplete'
+import Rx, {Observable} from 'rxjs'
 
 class AsyncAutocomplete extends Component {
   constructor(props) {
@@ -8,26 +9,32 @@ class AsyncAutocomplete extends Component {
       dataSource : []
     }
   }
+  componentWillMount() {
+    this.inputObserver$ =
+      new Rx.Subject()
+        .debounceTime(250)
+        .filter((val)=>val.length>2)
+        .mergeMap((inputValue)=>{
+          return Observable.fromPromise(this.props.dataSourceCallback(inputValue))
+            .takeWhile(()=>this.refs.autoComplete.state.focusTextField)
+            .catch(()=> Observable.of(this.state.dataSource))
+        })
+
+    this.inputObserver$.subscribe((val)=>this.handleObserver(val))
+  }
+  componentWillUnMount() {
+    this.inputObserver$.dispose()
+  }
+  handleObserver(dataSource) {
+    this.setState({ dataSource })
+  }
   handleUpdateInput(inputValue) {
-    const {onChange, dataSourceCallback} = this.props
-    if (!this.refs.autoComplete.state.focusTextField) return
-    onChange(inputValue)
-    const dataSourcePromise = dataSourceCallback(inputValue)
-    if (dataSourcePromise.then) {
-      dataSourcePromise.then((dataSource)=> {
-        if (this.refs.autoComplete.state.focusTextField) {
-          this.setState({ dataSource })
-        }
-      })
-      .catch(()=>(false))
-    } else {
-      throw new Error("You must return a promise from dataSourceCallback")
-    }
+    this.inputObserver$.next(inputValue)
+    this.props.onChange(inputValue)
   }
   handleNewRequest(value) {
-    const {onChange} = this.props
     this.refs.autoComplete.focus()
-    onChange(value)
+    this.props.onChange(value)
   }
   handleBlur(e) {
     if (this.refs.autoComplete.state.focusTextField) {
