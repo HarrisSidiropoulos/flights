@@ -33,13 +33,11 @@ export const validate = values => {
 
 export const asyncValidate = values => {
   const cities = getCities(values)
+  const error = {}
   return Promise.all(cities.map(({value,key})=> {
     if (!value) {
       return new Promise((resolve) => resolve(true));
     }
-    const error = {}
-    error[key] = `${value} is not a city`
-
     if (value.length<3) {
       return new Promise((resolve,reject) => {
         error[key] = `Enter more than two characters`
@@ -47,6 +45,7 @@ export const asyncValidate = values => {
       });
     }
     value = value.toLowerCase()
+    const ERROR_MESSAGE = `${value} is not a city`
     return getAirportCodes(value,10)
       .then((response)=> {
         const filteredResponse =
@@ -55,9 +54,11 @@ export const asyncValidate = values => {
                    item.airport.toLowerCase().indexOf(value)>=0
           })
         if (filteredResponse.length===0) {
+          error[key] = ERROR_MESSAGE
           throw error
         }
       }).catch(()=>{
+        error[key] = ERROR_MESSAGE
         throw error
       })
   }))
