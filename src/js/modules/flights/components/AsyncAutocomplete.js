@@ -22,7 +22,7 @@ class AsyncAutocomplete extends Component {
 
     this.inputObserver$.subscribe((val)=>this.handleObserver(val))
   }
-  componentWillUnMount() {
+  componentWillUnmount() {
     this.inputObserver$.dispose()
   }
   handleObserver(dataSource) {
