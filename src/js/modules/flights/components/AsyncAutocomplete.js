@@ -20,10 +20,10 @@ class AsyncAutocomplete extends Component {
             .catch(()=> Observable.of(this.state.dataSource))
         })
 
-    this.inputObserver$.subscribe((val)=>this.handleObserver(val))
+    this.subscription = this.inputObserver$.subscribe((val)=>this.handleObserver(val))
   }
   componentWillUnmount() {
-    this.inputObserver$.unsubscribe()
+    this.subscription.unsubscribe()
   }
   handleObserver(dataSource) {
     this.setState({ dataSource })
