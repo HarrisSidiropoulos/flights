@@ -12,10 +12,17 @@ class AsyncAutocomplete extends Component {
   componentWillMount() {
     this.inputObserver$ =
       new Rx.Subject()
+        .do((val)=>{
+          this.refs.autoComplete.setState({
+            ...this.refs.autoComplete.state,
+            focusTextField: true
+          })
+          this.props.onChange(val)
+        })
         .debounceTime(250)
         .filter((val)=>val.length>2)
-        .mergeMap((inputValue)=>{
-          return Observable.fromPromise(this.props.dataSourceCallback(inputValue))
+        .mergeMap((val)=>{
+          return Observable.fromPromise(this.props.dataSourceCallback(val))
             .takeWhile(()=>this.refs.autoComplete.state.focusTextField)
             .catch(()=> Observable.of(this.state.dataSource))
         })
@@ -27,14 +34,6 @@ class AsyncAutocomplete extends Component {
   }
   handleObserver(dataSource) {
     this.setState({ dataSource })
-  }
-  handleUpdateInput(inputValue) {
-    this.refs.autoComplete.setState({
-      ...this.refs.autoComplete.state,
-      focusTextField: true
-    })
-    this.inputObserver$.next(inputValue)
-    this.props.onChange(inputValue)
   }
   handleNewRequest(value) {
     this.refs.autoComplete.focus()
@@ -57,7 +56,7 @@ class AsyncAutocomplete extends Component {
         onNewRequest  = {(value, index)=>this.handleNewRequest(value, index)}
         filter        = {AutoComplete.noFilter}
         dataSource    = {this.state.dataSource}
-        onUpdateInput = {(val)=> this.handleUpdateInput(val)}
+        onUpdateInput = {(val)=> this.inputObserver$.next(val)}
         onBlur        = {(e)=>this.handleBlur(e)}
         menuProps     = {{onKeyDown:(e)=>this.handleMenuKeyDown(e)}}
         />
