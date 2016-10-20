@@ -41,7 +41,6 @@ const refreshStyles = {
 }
 
 export const getCitiesFromInput = (inputValue) => {
-  if (inputValue.length<3) return new Promise((resolve,reject)=>reject(false))
   return getAirportCodes(inputValue, 10)
     .then((response) =>
       unique(response.map(({city})=>(city)))
