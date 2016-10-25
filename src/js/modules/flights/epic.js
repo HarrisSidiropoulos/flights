@@ -1,5 +1,10 @@
 import {Observable} from 'rxjs/Observable'
+import {fromPromise} from 'rxjs/observable/fromPromise'
+Observable.fromPromise = fromPromise
 import 'rxjs/add/operator/mergeMap'
+import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/takeUntil'
+import 'rxjs/add/operator/catch'
 
 import {getWeatherAndFlights} from '../../api-client'
 import {RESET_DATA, CANCEL_REQUEST, FETCH_DATA_REQUEST} from './actionTypes'
