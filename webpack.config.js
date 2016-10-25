@@ -26,7 +26,7 @@ module.exports = env => {
   const indexPath = env.prod?'../':''
   return removeEmpty({
     entry: removeEmpty({
-      vendor: ifProd(['react', 'react-dom', 'redux', 'react-redux', 'redux-observable', 'rxjs', 'date-format', 'isomorphic-fetch', 'material-ui']),
+      vendor: ifProd(['react', 'react-dom', 'redux', 'react-redux', 'redux-observable', 'rxjs/Observable', 'rxjs/Subject', 'date-format', 'isomorphic-fetch', 'material-ui']),
       app: removeEmpty([
         ifDev('webpack-hot-middleware/client?reload=true'),
         './js/index.js'

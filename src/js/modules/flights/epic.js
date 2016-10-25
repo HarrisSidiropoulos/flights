@@ -1,4 +1,5 @@
-import {Observable} from 'rxjs'
+import {Observable} from 'rxjs/Observable'
+import 'rxjs/add/operator/mergeMap'
 
 import {getWeatherAndFlights} from '../../api-client'
 import {RESET_DATA, CANCEL_REQUEST, FETCH_DATA_REQUEST} from './actionTypes'
