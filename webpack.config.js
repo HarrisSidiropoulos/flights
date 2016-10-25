@@ -8,6 +8,15 @@ const packageJSON = require('./package.json')
 
 module.exports = env => {
   env = env || {};
+  const rxjs = ['rxjs/Observable', 'rxjs/Subject', 'rxjs/observable/fromPromise', 'rxjs/add/operator/mergeMap', 'rxjs/add/operator/do', 'rxjs/add/operator/debounceTime', 'rxjs/add/operator/filter', 'rxjs/add/operator/takeWhile', 'rxjs/add/operator/takeUntil', 'rxjs/add/operator/catch', 'rxjs/add/operator/map']
+  const material = ['material-ui/RaisedButton','material-ui/RefreshIndicator','material-ui/Card','material-ui/TextField','material-ui/DatePicker','material-ui/FlatButton','material-ui/AutoComplete','material-ui/styles/MuiThemeProvider']
+  let dependencies = []
+  for (let key in packageJSON.dependencies) {
+    if (!(key=='rxjs' || key=='material-ui')) {
+      dependencies.push(key)
+    }
+  }
+  dependencies = dependencies.concat(rxjs).concat(material)
   const specifyProp = (add, value) => add ? value : undefined
   const ifProd = value => specifyProp(env.prod, value)
   const ifDev = value => specifyProp(!env.prod, value)
@@ -26,7 +35,7 @@ module.exports = env => {
   const indexPath = env.prod?'../':''
   return removeEmpty({
     entry: removeEmpty({
-      vendor: ifProd(['react', 'react-dom', 'redux', 'react-redux', 'redux-observable', 'rxjs/Observable', 'rxjs/Subject', 'date-format', 'isomorphic-fetch', 'material-ui']),
+      vendor: ifProd(dependencies),
       app: removeEmpty([
         ifDev('webpack-hot-middleware/client?reload=true'),
         './js/index.js'
@@ -84,7 +93,7 @@ module.exports = env => {
       ifDev(new webpack.HotModuleReplacementPlugin()),
       ifDev(new webpack.NoErrorsPlugin()),
       new webpack.DefinePlugin({'process.env.NODE_ENV': JSON.stringify(env.prod ?'production':'development')}),
-      ifProd(new OfflinePlugin({ServiceWorker:{events:true}}))
+      ifProd(new OfflinePlugin({ServiceWorker:{events:true},AppCache:false}))
     ])
   })
 }
