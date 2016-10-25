@@ -5,19 +5,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OfflinePlugin = require('offline-plugin')
 const packageJSON = require('./package.json')
-const CompressionPlugin = require("compression-webpack-plugin");
+const CompressionPlugin = require("compression-webpack-plugin")
+const convert = require('object-array-converter')
 
 module.exports = env => {
   env = env || {};
   const rxjs = ['rxjs/Observable', 'rxjs/Subject', 'rxjs/observable/fromPromise', 'rxjs/observable/of', 'rxjs/observable/merge', 'rxjs/add/operator/mergeMap', 'rxjs/add/operator/do', 'rxjs/add/operator/debounceTime', 'rxjs/add/operator/filter', 'rxjs/add/operator/takeWhile', 'rxjs/add/operator/takeUntil', 'rxjs/add/operator/catch', 'rxjs/add/operator/map', 'rxjs/operator/switchMap']
   const material = ['material-ui/RaisedButton','material-ui/RefreshIndicator','material-ui/Card','material-ui/TextField','material-ui/DatePicker','material-ui/FlatButton','material-ui/AutoComplete','material-ui/styles/MuiThemeProvider']
-  let dependencies = []
-  for (let key in packageJSON.dependencies) {
-    if (!(key=='rxjs' || key=='material-ui')) {
-      dependencies.push(key)
-    }
-  }
-  dependencies = dependencies.concat(rxjs).concat(material)
+  let dependencies = convert.toArray(packageJSON.dependencies)
+    .map(({key})=>key)
+    .filter(val=>val!=='rxjs')
+    .filter(val=>val!=='material-ui')
+    .concat(rxjs).concat(material)
   const specifyProp = (add, value) => add ? value : undefined
   const ifProd = value => specifyProp(env.prod, value)
   const ifDev = value => specifyProp(!env.prod, value)

@@ -63,6 +63,7 @@
     "nock": "8.0.0",
     "node-sass": "3.8.0",
     "npm-run-all": "2.2.2",
+    "object-array-converter": "^1.0.0",
     "offline-plugin": "3.4.1",
     "opt-cli": "1.5.1",
     "pug": "2.0.0-beta3",
