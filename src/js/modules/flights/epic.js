@@ -1,6 +1,8 @@
 import {Observable} from 'rxjs/Observable'
 import {fromPromise} from 'rxjs/observable/fromPromise'
+import {of} from 'rxjs/observable/of'
 Observable.fromPromise = fromPromise
+Observable.of = of
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/takeUntil'
