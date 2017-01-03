@@ -1,7 +1,6 @@
 import nock from 'nock'
 import {mockFlights} from './getFlights.mock'
-import {
-  getFlights,
+import getFlights, {
   ERROR_400,
   ERROR_403,
   ERROR_500,

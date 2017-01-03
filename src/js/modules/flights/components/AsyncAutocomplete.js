@@ -24,7 +24,6 @@ class AsyncAutocomplete extends Component {
       new Subject()
         .do((val)=>{
           this.refs.autoComplete.setState({
-            ...this.refs.autoComplete.state,
             focusTextField: true
           })
           this.props.onChange(val)

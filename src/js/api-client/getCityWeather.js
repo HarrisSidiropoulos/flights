@@ -34,4 +34,4 @@ export const getCityWeather = (city='London', startDate=new Date(), endDate=new 
     })
 }
 
-export default memoize(getCityWeather, true)
+export default memoize(getCityWeather, {isPromise:true})

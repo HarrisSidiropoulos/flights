@@ -93,4 +93,4 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
     })
 }
 
-export default memoize(getFlights, true)
+export default memoize(getFlights, {isPromise:true})
