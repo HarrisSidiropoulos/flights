@@ -9,7 +9,7 @@
 // Check for Local Storage Support
 export function supportLocalStorage() {
   try {
-    return 'localStorage' in window && window['localStorage'] != null;
+    return !!window && 'localStorage' in window && window['localStorage'] != null;
   } catch (e) {
     return false;
   }
@@ -35,10 +35,11 @@ export default function memoize( fn, isPromise=false, useLocalStorage=false ) {
         mem[hash] = serializedState
         return new Promise(resolve => resolve(serializedState))
       } else {
-        fn.apply(this, args).then((response)=> {
+        return fn.apply(this, args).then((response)=> {
           mem[hash] = response
-          if (useLocalStorage && supportLocalStorage())
+          if (useLocalStorage && supportLocalStorage()) {
             localStorage.setItem(`${fn.name}-${hash}`, JSON.stringify(response));
+          }
           return response
         })
       }
