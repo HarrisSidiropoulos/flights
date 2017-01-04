@@ -15,14 +15,7 @@ export function supportLocalStorage() {
   }
 }
 
-export default function memoize( fn, options={} ) {
-  const {isPromise, useLocalStorage, localStorageKey} = {
-    isPromise: false,
-    useLocalStorage: false,
-    localStorageKey: fn.name,
-    ...options
-  }
-
+export default function memoize( fn, options=null ) {
   return function () {
     let args = Array.prototype.slice.call(arguments),
       hash = "",
@@ -34,18 +27,18 @@ export default function memoize( fn, options={} ) {
       hash += (currentArg === Object(currentArg)) ?
       JSON.stringify(currentArg) : currentArg;
     }
-    if (isPromise) {
+    if (options && options.isPromise) {
       if (hash in mem) {
         return new Promise(resolve => resolve(mem[hash]))
-      } else if (useLocalStorage && supportLocalStorage() && !!localStorageKey && localStorage.getItem(`${localStorageKey}-${hash}`)) {
-        const serializedState = JSON.parse(localStorage.getItem(`${localStorageKey}-${hash}`))
+      } else if (options.useLocalStorage && supportLocalStorage() && !!options.localStorageKey && localStorage.getItem(`${options.localStorageKey}-${hash}`)) {
+        const serializedState = JSON.parse(localStorage.getItem(`${options.localStorageKey}-${hash}`))
         mem[hash] = serializedState
         return new Promise(resolve => resolve(serializedState))
       } else {
         return fn.apply(this, args).then((response)=> {
           mem[hash] = response
-          if (useLocalStorage && supportLocalStorage() && !!localStorageKey) {
-            localStorage.setItem(`${localStorageKey}-${hash}`, JSON.stringify(response));
+          if (options.useLocalStorage && supportLocalStorage() && !!options.localStorageKey) {
+            localStorage.setItem(`${options.localStorageKey}-${hash}`, JSON.stringify(response));
           }
           return response
         })
