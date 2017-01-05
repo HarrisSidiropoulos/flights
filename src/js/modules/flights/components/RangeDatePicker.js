@@ -58,8 +58,8 @@ RangeDatePicker.propTypes = {
 RangeDatePicker.defaultProps = {
   startDate: minDate,
   endDate:   minDate,
-  minDate:   minDate,
-  maxDate:   maxDate
+  minDate,
+  maxDate
 }
 
 export default RangeDatePicker

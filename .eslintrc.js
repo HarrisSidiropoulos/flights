@@ -20,6 +20,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+       "object-shorthand": ["error", "always"],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "indent": [

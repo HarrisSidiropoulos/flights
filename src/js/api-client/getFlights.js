@@ -22,6 +22,7 @@ export function getFlightDate(date) {
 export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
   const requestBody = {
     "request": {
+      solutions,
       "slice": [
         {
           "origin": fromAirport,
@@ -31,8 +32,7 @@ export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new D
       ],
       "passengers": {
         "adultCount": 1
-      },
-      "solutions": solutions
+      }
     }
   }
 
