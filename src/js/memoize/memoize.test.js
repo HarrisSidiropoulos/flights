@@ -19,4 +19,10 @@ describe('memoize', ()=> {
     const end = new Date().getTime()-start
     expect(end).toEqual(0)
   })
+  it('should be able to memoize promises!', ()=> {
+    const fun = ()=> new Promise((resolve)=>resolve(1+1))
+    memoize(fun, {isPromise:true})().then(result=>{
+      expect(result).toEqual(2)
+    })
+  })
 })
