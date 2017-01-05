@@ -31,4 +31,10 @@ export const getAirportCodes = (city='Thessaloniki', limit=1) => {
       return normResponse
     })
 }
-export default memoize(getAirportCodes, {isPromise:true, useLocalStorage:true, localStorageKey:'getAirportCodes'})
+const memoizeOptions = {
+  isPromise:true,
+  useLocalStorage:true,
+  localStorageKey:'getAirportCodes'
+}
+
+export default memoize(getAirportCodes, memoizeOptions)
