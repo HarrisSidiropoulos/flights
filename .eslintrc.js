@@ -36,6 +36,7 @@ module.exports = {
         "no-dupe-class-members": "error",
         "no-duplicate-imports": "error",
         "no-iterator": "error",
+        "eqeqeq": "error",
         "no-restricted-syntax": ["error", "WithStatement"],
         "prefer-const": "error",
         "prefer-arrow-callback": "error",

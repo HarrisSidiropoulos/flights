@@ -9,7 +9,7 @@
 // Check for Local Storage Support
 export const supportLocalStorage = function () {
   try {
-    return !!window && 'localStorage' in window && window['localStorage'] != null;
+    return !!window && 'localStorage' in window && window['localStorage'] !== null;
   } catch (e) {
     return false;
   }
@@ -21,7 +21,7 @@ export default function memoize ( fn, options=null ) {
     let i = args.length;
     let currentArg = null;
     const mem = fn.memoize || (fn.memoize = {});
-    
+
     while (i--) {
       currentArg = args[i];
       hash += (currentArg === Object(currentArg)) ?
