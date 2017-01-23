@@ -62,14 +62,14 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
 }
 
 export const renderAsyncAutocompleteInputs = ({fields, meta, inputName, inputLabel, min=1, max=4, ...custom}) => {
-  const renderRemoveButton = ()=> {
+  const renderRemoveButton = () => {
     if (fields.length>min) {
       return <FlatButton label={custom.removeLabel || "Remove"} onClick={() => fields.pop()}/>
     } else {
       return <div/>
     }
   }
-  const renderAddButton = ()=> {
+  const renderAddButton = () => {
     if (fields.length<max) {
       return <FlatButton label={custom.addLabel || "Add"} onClick={() => fields.push({})}/>
     } else {

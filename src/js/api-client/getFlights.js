@@ -65,7 +65,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
       }
       return response.json()
     })
-    .then(response=>{
+    .then(response => {
       if (Array.isArray(response)) return response
       if (!response.trips.data.airport ||
           response.trips.data.airport.filter(({city}) => city===toAirport).length===0 ||
@@ -75,7 +75,7 @@ export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), 
         throw new Error(getErrorNoFlights(fromAirport,toAirport,date))
       }
       const filteredResponse =
-        response.trips.tripOption.map(({saleTotal,slice})=> {
+        response.trips.tripOption.map(({saleTotal,slice}) => {
           return {
             toAirport     : response.trips.data.airport.filter(({city}) => city===toAirport)[0].name,
             fromAirport   : response.trips.data.airport.filter(({city}) => city===fromAirport)[0].name,

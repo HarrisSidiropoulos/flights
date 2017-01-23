@@ -1,7 +1,7 @@
 import getAirportCodes from '../../../api-client/getAirportCodes'
 
 export const getToCities = (values) => {
-  return values.toCities.map((val,index)=>(
+  return values.toCities.map((val,index) => (
     {key: `toCity${index+1}`, value:values[`toCity${index+1}`]})
   )
 }
@@ -18,12 +18,12 @@ export const validate = values => {
     }
   }
   const cities = getCities(values)
-  cities.forEach(({value,key})=> {
+  cities.forEach(({value,key}) => {
     if (value.length<=2) {
       errors[key] = `Enter more than two characters`
     }
   })
-  getToCities(values).forEach(({value,key})=> {
+  getToCities(values).forEach(({value,key}) => {
     if (value===values.fromCity) {
       errors[key] = `The field "To City" must not be the same with field "from City"`
     }
@@ -34,7 +34,7 @@ export const validate = values => {
 export const asyncValidate = values => {
   const cities = getCities(values)
   const error = {}
-  return Promise.all(cities.map(({value,key})=> {
+  return Promise.all(cities.map(({value,key}) => {
     if (!value) {
       return new Promise((resolve) => resolve(true));
     }
@@ -44,23 +44,23 @@ export const asyncValidate = values => {
         reject(error)
       });
     }
-    value = value.toLowerCase()
-    const ERROR_MESSAGE = `${value} is not a city`
+    const value_lowercase = value.toLowerCase()
+    const ERROR_MESSAGE = `${value_lowercase} is not a city`
     return getAirportCodes(value,10)
-      .then((response)=> {
+      .then((response) => {
         const filteredResponse =
-          response.filter((item)=> {
-            return item.city.toLowerCase().indexOf(value)>=0 ||
-                   item.airport.toLowerCase().indexOf(value)>=0
+          response.filter((item) => {
+            return item.city.toLowerCase().indexOf(value_lowercase)>=0 ||
+                   item.airport.toLowerCase().indexOf(value_lowercase)>=0
           })
         if (filteredResponse.length===0) {
           error[key] = ERROR_MESSAGE
           throw error
         }
-      }).catch(()=>{
+      }).catch(() => {
         error[key] = ERROR_MESSAGE
         throw error
       })
   }))
-  .then(()=>true)
+  .then(() => true)
 }

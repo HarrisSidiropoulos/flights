@@ -11,7 +11,7 @@ export const getWeatherAndFlight = (fromAirport, toCity, startDate, endDate) => 
         getCityWeather(city, startDate, endDate)
       ])
     })
-    .then(([flights, returnFlights, weather])=> {
+    .then(([flights, returnFlights, weather]) => {
       return {
         flights,
         returnFlights,

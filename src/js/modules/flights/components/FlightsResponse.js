@@ -12,7 +12,7 @@ const FlightsResponse = ({cities}) => {
   return (
     <Row>
       {
-        cities.map(({flights, returnFlights, weather}, index)=> {
+        cities.map(({flights, returnFlights, weather}, index) => {
           const [flight] = flights
           const [returnFlight] = returnFlights
           const title = flight ? `${flight.toCity}` : `${weather.city.name}`

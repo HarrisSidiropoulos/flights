@@ -5,7 +5,7 @@ export const getWeatherAndFlights = (fromCity, toCities, startDate, endDate) => 
   return getAirportCodes(fromCity)
     .then(([{airport}]) => {
       return Promise.all(
-        toCities.map((toCity)=> {
+        toCities.map((toCity) => {
           return getWeatherAndFlight(airport, toCity, startDate, endDate)
         })
       )

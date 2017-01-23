@@ -20,7 +20,15 @@ module.exports = {
         "react"
     ],
     "rules": {
-       "object-shorthand": ["error", "always"],
+        "object-shorthand": ["error", "always"],
+        "array-callback-return": "error",
+        "no-loop-func": "error",
+        "no-new-func": "error",
+        "no-param-reassign": "error",
+        "prefer-arrow-callback": "error",
+        "arrow-spacing": ["error", { "before": true, "after": true }],
+        "prefer-spread": "error",
+        "prefer-rest-params": "error",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "indent": [

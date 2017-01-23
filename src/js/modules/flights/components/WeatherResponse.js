@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Col} from 'react-flexbox-grid';
 
-const getDay = (dt)=> {
+const getDay = (dt) => {
   const date = new Date(dt*1000)
   const name = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][date.getDay()]
   return `${name} ${date.getDate()}`

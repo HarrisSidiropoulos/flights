@@ -43,7 +43,7 @@ const refreshStyles = {
 export const getCitiesFromInput = (inputValue) => {
   return getAirportCodes(inputValue, 10)
     .then((response) =>
-      unique(response.map(({city})=>(city)))
+      unique(response.map(({city}) => (city)))
     )
 }
 
@@ -53,7 +53,7 @@ class FlightsForm extends Component {
     if (validate(values).errors) {
       throw new SubmissionError(validate(values).errors)
     }
-    const toCities = getToCities(values).map(({value})=>value)
+    const toCities = getToCities(values).map(({value}) => value)
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
   reset(event) {
@@ -78,8 +78,8 @@ class FlightsForm extends Component {
   render() {
     const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
     return (
-      <form onSubmit={handleSubmit((values)=> this.submit(values))}
-            onReset={(e)=>this.reset(e)}>
+      <form onSubmit={handleSubmit((values) => this.submit(values))}
+            onReset={(e) => this.reset(e)}>
         <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
         <Field name="fromCity" component={renderAsyncAutocomplete} label="From City"
@@ -120,5 +120,5 @@ export default connect(mapStateToProps)(reduxForm({
   form: 'flightForm',
   validate,
   asyncValidate,
-  asyncBlurFields: getCities(initialValues).map(({key})=>key)
+  asyncBlurFields: getCities(initialValues).map(({key}) => key)
 })(FlightsForm))

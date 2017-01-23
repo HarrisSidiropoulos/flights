@@ -8,7 +8,7 @@ import rootEpic from './rootEpic'
 
 const epicMiddleware = createEpicMiddleware(rootEpic)
 
-const configureStore = (initialState = {})=> {
+const configureStore = (initialState = {}) => {
   const store =  createStore(
     rootReducer,
     initialState,

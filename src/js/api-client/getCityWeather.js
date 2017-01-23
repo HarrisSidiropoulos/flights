@@ -19,10 +19,10 @@ export const getCityWeather = (city='London', startDate=new Date(), endDate=new 
       return response.json()
     })
     .then(response => {
-      const filteredWeatherList = response.list.filter(({dt})=> {
-        dt = getDateAsNumber(new Date(dt*1000))
-        return (dt >= getDateAsNumber(startDate) &&
-                dt <= getDateAsNumber(endDate))
+      const filteredWeatherList = response.list.filter(({dt}) => {
+        const dtAsNumber = getDateAsNumber(new Date(dt*1000))
+        return (dtAsNumber >= getDateAsNumber(startDate) &&
+                dtAsNumber <= getDateAsNumber(endDate))
       })
       if (filteredWeatherList.length===0) {
         throw new Error(WEATHER_DATE_ERROR)

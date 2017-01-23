@@ -1,7 +1,7 @@
-const offlineProps = (env=process.env.NODE_ENV)=> {
+const offlineProps = (env=process.env.NODE_ENV) => {
   let {install, applyUpdate} = {
-    install : ()=>{},
-    applyUpdate : ()=>{},
+    install : () => {},
+    applyUpdate : () => {},
     env
   }
   if (env==="production") {

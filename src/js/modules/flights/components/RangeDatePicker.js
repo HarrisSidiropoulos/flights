@@ -18,7 +18,7 @@ export class RangeDatePicker extends Component {
       <Row>
         <Col xs={12} sm={6}>
           <DatePicker
-            onChange={(e, date)=>onChange({startDate:date,endDate})}
+            onChange={(e, date) => onChange({startDate:date,endDate})}
             hintText="Hint Text"
             autoOk
             fullWidth={true}
@@ -31,7 +31,7 @@ export class RangeDatePicker extends Component {
         </Col>
         <Col xs={12} sm={6}>
           <DatePicker
-          onChange={(e, date)=>onChange({startDate,endDate:date})}
+          onChange={(e, date) => onChange({startDate,endDate:date})}
             hintText="Hint Text"
             autoOk
             fullWidth={true}

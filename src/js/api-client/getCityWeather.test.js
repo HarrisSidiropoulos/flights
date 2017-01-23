@@ -8,7 +8,7 @@ const cnt  = 1
 const city = 'Athens'
 const units = 'metric'
 
-describe('getCityWeather', ()=> {
+describe('getCityWeather', () => {
   afterEach(() => {
     nock.cleanAll()
   })
@@ -17,7 +17,7 @@ describe('getCityWeather', ()=> {
     mockCityWeather(city,units,cnt)
 
     return getCityWeather(city, startDate, endDate, cnt, units)
-      .then((response)=> {
+      .then((response) => {
         expect(response).toEqual(expectedValue)
       })
   })
@@ -28,7 +28,7 @@ describe('getCityWeather', ()=> {
     mockCityWeather(city,units,cnt)
 
     return getCityWeather(city, startDate, endDate, cnt, units)
-      .catch((error)=> {
+      .catch((error) => {
         expect(error).toEqual(expectedValue)
       })
   })
@@ -37,7 +37,7 @@ describe('getCityWeather', ()=> {
     mockCityWeather(city,units,cnt,504)
 
     return getCityWeather(city, startDate, endDate, cnt, units)
-      .catch((error)=> {
+      .catch((error) => {
         expect(error).toEqual(expectedValue)
       })
   })

@@ -16,11 +16,10 @@ export function supportLocalStorage() {
 }
 
 export default function memoize( fn, options=null ) {
-  return function () {
-    let args = Array.prototype.slice.call(arguments),
-      hash = "",
-      i = args.length;
-    let currentArg = null;
+  return function (...args) {
+    let hash = "",
+      i = args.length,
+      currentArg = null;
     const mem = fn.memoize || (fn.memoize = {});
     while (i--) {
       currentArg = args[i];
@@ -35,7 +34,7 @@ export default function memoize( fn, options=null ) {
         mem[hash] = serializedState
         return new Promise(resolve => resolve(serializedState))
       } else {
-        return fn.apply(this, args).then((response)=> {
+        return fn.apply(this, args).then((response) => {
           mem[hash] = response
           if (options.useLocalStorage && supportLocalStorage() && !!options.localStorageKey) {
             localStorage.setItem(`${options.localStorageKey}-${hash}`, JSON.stringify(response));

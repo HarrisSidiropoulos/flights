@@ -16,13 +16,13 @@ class OfflineUpdate extends Component {
     }
     const {install} = props
     install({
-      onInstalled: ()=> this.onInstalled(),
-      onUpdating: ()=> this.onUpdating(),
-      onUpdateReady: ()=> this.onUpdateReady(),
-      onUpdateFailed: ()=> this.onUpdateFailed(),
-      onUpdated: ()=> this.onUpdated(),
-      onReload: ()=> this.reload(),
-      onDismiss: ()=> this.dismiss()
+      onInstalled:    () => this.onInstalled(),
+      onUpdating:     () => this.onUpdating(),
+      onUpdateReady:  () => this.onUpdateReady(),
+      onUpdateFailed: () => this.onUpdateFailed(),
+      onUpdated:      () => this.onUpdated(),
+      onReload:       () => this.reload(),
+      onDismiss:      () => this.dismiss()
     })
   }
   onInstalled() {
@@ -80,9 +80,9 @@ class OfflineUpdate extends Component {
     }
     return (
       <span>
-        <a href="javascript:" onClick={()=> this.reload()}>Reload</a>
+        <a href="javascript:" onClick={() => this.reload()}>Reload</a>
         <span> page to apply update or </span>
-        <a href="javascript:" onClick={()=> this.dismiss()}>dismiss</a>
+        <a href="javascript:" onClick={() => this.dismiss()}>dismiss</a>
         <span> notification.</span>
       </span>
     )

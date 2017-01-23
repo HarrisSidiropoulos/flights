@@ -11,7 +11,7 @@ import {
   requestData
 } from './actions'
 
-describe('flights actions', ()=> {
+describe('flights actions', () => {
   it('should create an action to reset all data', () => {
     const expectedAction = {
       type: RESET_DATA
