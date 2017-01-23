@@ -12,7 +12,7 @@ export const getDateAsNumber = function (date) {
 
 export const getCityWeather = (city='London', startDate=new Date(), endDate=new Date(), cnt=14, units='metric') => {
   return fetch(`${WEATHER_API_URL}?q=${city}&units=${units}&cnt=${cnt}&APPID=${WEATHER_API_KEY}`)
-    .then((response) => {
+    .then(response => {
       if (!response.ok) {
         throw new Error(response.statusText)
       }

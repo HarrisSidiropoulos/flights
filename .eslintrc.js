@@ -20,6 +20,7 @@ module.exports = {
         "react"
     ],
     "rules": {
+        "arrow-parens": ["error", "as-needed"],
         "object-shorthand": ["error", "always"],
         "quote-props": ["error", "as-needed"],
         "array-callback-return": "error",

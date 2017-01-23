@@ -25,7 +25,7 @@ export const renderDatePicker = ({ col, input, label, minDate, maxDate, meta: { 
 }
 
 export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) => {
-  const onChange = (value) => {
+  const onChange = value => {
     startDate.input.onChange(value)
     if (value.getTime()>endDate.input.value.getTime()) {
       endDate.input.onChange(value)

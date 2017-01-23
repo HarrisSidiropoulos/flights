@@ -19,7 +19,7 @@ const epic = action$ => {
       return Observable.fromPromise(
           getWeatherAndFlights(fromCity, toCities, startDate, endDate)
         )
-        .map((data) => receiveData(data))
+        .map(data => receiveData(data))
         .takeUntil(action$.ofType(RESET_DATA))
         .takeUntil(action$.ofType(CANCEL_REQUEST))
         .catch(error => Observable.of(requestError(error.toString())))

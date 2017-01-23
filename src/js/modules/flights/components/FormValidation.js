@@ -1,12 +1,12 @@
 import getAirportCodes from '../../../api-client/getAirportCodes'
 
-export const getToCities = (values) => {
+export const getToCities = values => {
   return values.toCities.map((val,index) => (
     {key: `toCity${index+1}`, value:values[`toCity${index+1}`]})
   )
 }
 
-export const getCities = (values) => {
+export const getCities = values => {
   return getToCities(values).concat([{key:'fromCity', value:values.fromCity}])
 }
 
@@ -36,7 +36,7 @@ export const asyncValidate = values => {
   const error = {}
   return Promise.all(cities.map(({value,key}) => {
     if (!value) {
-      return new Promise((resolve) => resolve(true));
+      return new Promise(resolve => resolve(true));
     }
     if (value.length<3) {
       return new Promise((resolve,reject) => {
@@ -47,9 +47,9 @@ export const asyncValidate = values => {
     const value_lowercase = value.toLowerCase()
     const ERROR_MESSAGE = `${value_lowercase} is not a city`
     return getAirportCodes(value,10)
-      .then((response) => {
+      .then(response => {
         const filteredResponse =
-          response.filter((item) => {
+          response.filter(item => {
             return item.city.toLowerCase().indexOf(value_lowercase)>=0 ||
                    item.airport.toLowerCase().indexOf(value_lowercase)>=0
           })

@@ -17,7 +17,7 @@ describe('getAirportCodes', () => {
     mockAirportCodes(city, limit)
 
     return getAirportCodes(city,limit)
-      .then((response) => {
+      .then(response => {
         expect(response).toEqual(expectedValue)
       })
   })
@@ -29,7 +29,7 @@ describe('getAirportCodes', () => {
     mockAirportCodes(city, limit, 200, nock_response)
 
     return getAirportCodes(city,limit)
-      .catch((error) => {
+      .catch(error => {
         expect(error).toEqual(expectedValue)
       })
   })
@@ -40,7 +40,7 @@ describe('getAirportCodes', () => {
     mockAirportCodes(city, limit, 504)
 
     return getAirportCodes(city,limit)
-      .catch((error) => {
+      .catch(error => {
         expect(error).toEqual(expectedValue)
       })
   })

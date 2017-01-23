@@ -41,7 +41,7 @@ export const mapStateToProps = ({ [FLIGHTS_NAME]:flights } ) => {
     ...flights
   }
 };
-export const mapDispatchToProps = (dispatch) => ({
+export const mapDispatchToProps = dispatch => ({
   loadData: (fromCity, toCities, startDate, endDate) =>
     dispatch(requestData(fromCity, toCities, startDate, endDate)),
   resetForm: () => {

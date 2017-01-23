@@ -48,7 +48,7 @@ export const getFlightsHeaders = (fromAirport='SKG', toAirport='ATH', date=new D
 export const getFlights = (fromAirport='SKG', toAirport='ATH', date=new Date(), solutions=1) => {
   const headers = getFlightsHeaders(fromAirport, toAirport, date, solutions)
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
-    .then((response) => {
+    .then(response => {
       if (!response.ok) {
         switch(response.status) {
         case 400:

@@ -32,7 +32,7 @@ describe('getFlights', () => {
     mockFlights(fromAirport, toAirport, date, solutions)
 
     return getFlights(fromAirport, toAirport, date, solutions)
-      .then((response) => {
+      .then(response => {
         expect(response).toEqual(expectedValue)
       })
   })
@@ -41,7 +41,7 @@ describe('getFlights', () => {
     mockFlights(fromAirport, toAirport, date, solutions, 400)
 
     return getFlights(fromAirport, toAirport, date, solutions)
-      .catch((error) => {
+      .catch(error => {
         expect(error).toEqual(expectedValue)
       })
   })
@@ -50,7 +50,7 @@ describe('getFlights', () => {
     mockFlights(fromAirport, toAirport, date, solutions, 403)
 
     return getFlights(fromAirport, toAirport, date, solutions)
-      .catch((error) => {
+      .catch(error => {
         expect(error).toEqual(expectedValue)
       })
   })
@@ -59,7 +59,7 @@ describe('getFlights', () => {
     mockFlights(fromAirport, toAirport, date, solutions, 500)
 
     return getFlights(fromAirport, toAirport, date, solutions)
-      .catch((error) => {
+      .catch(error => {
         expect(error).toEqual(expectedValue)
       })
   })
@@ -68,7 +68,7 @@ describe('getFlights', () => {
     mockFlights(fromAirport, toAirport, date, solutions, 503)
 
     return getFlights(fromAirport, toAirport, date, solutions)
-      .catch((error) => {
+      .catch(error => {
         expect(error).toEqual(expectedValue)
       })
   })
@@ -77,7 +77,7 @@ describe('getFlights', () => {
     mockFlights(fromAirport, toAirport, date, solutions, 504)
 
     return getFlights(fromAirport, toAirport, date, solutions)
-      .catch((error) => {
+      .catch(error => {
         expect(error).toEqual(expectedValue)
       })
   })

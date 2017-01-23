@@ -34,7 +34,7 @@ export default function memoize ( fn, options=null ) {
         mem[hash] = serializedState
         return new Promise(resolve => resolve(serializedState))
       } else {
-        return fn.apply(this, args).then((response) => {
+        return fn.apply(this, args).then(response => {
           mem[hash] = response
           if (options.useLocalStorage && supportLocalStorage() && !!options.localStorageKey) {
             localStorage.setItem(`${options.localStorageKey}-${hash}`, JSON.stringify(response));

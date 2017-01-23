@@ -11,13 +11,13 @@ export const REQUEST_HEADERS = {
 }
 export const getAirportCodes = (city='Thessaloniki', limit=1) => {
   return fetch(`${API_URL}?term=${city.trim()}&limit=${limit}`, REQUEST_HEADERS)
-    .then((response) => {
+    .then(response => {
       if (!response.ok) {
         throw new Error(response.statusText)
       }
       return response.json()
     })
-    .then((response) => {
+    .then(response => {
       if (!response.statusCode) return response
       if (response.statusCode!==200) {
         throw new Error(response.message)

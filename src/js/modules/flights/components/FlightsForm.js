@@ -40,9 +40,9 @@ const refreshStyles = {
   position: 'relative'
 }
 
-export const getCitiesFromInput = (inputValue) => {
+export const getCitiesFromInput = inputValue => {
   return getAirportCodes(inputValue, 10)
-    .then((response) =>
+    .then(response =>
       unique(response.map(({city}) => (city)))
     )
 }
@@ -78,8 +78,8 @@ class FlightsForm extends Component {
   render () {
     const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
     return (
-      <form onSubmit={handleSubmit((values) => this.submit(values))}
-            onReset={(e) => this.reset(e)}>
+      <form onSubmit={handleSubmit(values => this.submit(values))}
+            onReset={e => this.reset(e)}>
         <Fields names={['startDate','endDate']} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
         <Field name='fromCity' component={renderAsyncAutocomplete} label='From City'

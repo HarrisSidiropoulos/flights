@@ -2,7 +2,7 @@ import React from 'react'
 import dateFormat from 'date-format'
 import {Col} from 'react-flexbox-grid';
 
-const formatDate = (date) => {
+const formatDate = date => {
   return dateFormat('dd-MM-yyyy hh:mm', new Date(date))
 }
 
