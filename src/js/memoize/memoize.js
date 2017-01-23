@@ -7,7 +7,7 @@
 * Released under an MIT license.
 */
 // Check for Local Storage Support
-export function supportLocalStorage() {
+export const supportLocalStorage = function() {
   try {
     return !!window && 'localStorage' in window && window['localStorage'] != null;
   } catch (e) {

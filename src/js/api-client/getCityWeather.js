@@ -6,7 +6,7 @@ export const WEATHER_API_KEY='d19be8b22d9cee2291ebb8577f647fcc'
 export const WEATHER_API_URL='http://api.openweathermap.org/data/2.5/forecast/daily'
 export const WEATHER_DATE_ERROR='Could not find weather date!'
 
-export function getDateAsNumber(date) {
+export const getDateAsNumber = function (date) {
   return parseInt(dateFormat('yyyyMMdd', date), 10);
 }
 

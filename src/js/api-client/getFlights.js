@@ -16,7 +16,7 @@ export const ERROR_NO_FLIGHTS='Could not find flights for airport'
 export const getErrorNoFlights = (fromAirport,toAirport,date) => (
   `${ERROR_NO_FLIGHTS} ${fromAirport} to ${toAirport} for date ${getFlightDate(date)}`
 )
-export function getFlightDate(date) {
+export const getFlightDate = function (date) {
   return dateFormat('yyyy-MM-dd', date);
 }
 export const getFlightsHeaders = (fromAirport='SKG', toAirport='ATH', date=new Date(), solutions=1) => {

@@ -35,7 +35,9 @@ module.exports = {
         "prefer-template": "error",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
+        "no-useless-escape": "error",
         "quotes": ["error", "single"],
+        "func-style": ["error", "expression"],
         "indent": [
             "error",
             2
