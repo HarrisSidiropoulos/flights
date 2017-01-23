@@ -9,7 +9,7 @@ describe('memoize', () => {
   })
   it('should return the same result', () => {
     const expectedValue = fib(10)
-    let value = memoize(fib)(10)
+    const value = memoize(fib)(10)
     expect(value).toEqual(expectedValue)
   })
   it('should be fast!', () => {
