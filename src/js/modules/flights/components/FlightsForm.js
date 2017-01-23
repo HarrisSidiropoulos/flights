@@ -80,21 +80,21 @@ class FlightsForm extends Component {
     return (
       <form onSubmit={handleSubmit((values) => this.submit(values))}
             onReset={(e) => this.reset(e)}>
-        <Fields names={["startDate","endDate"]} component={renderRangeDatePicker}
+        <Fields names={['startDate','endDate']} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
-        <Field name="fromCity" component={renderAsyncAutocomplete} label="From City"
+        <Field name='fromCity' component={renderAsyncAutocomplete} label='From City'
           dataSourceCallback={getCitiesFromInput}
           maxSearchResults={5} openOnFocus={false}/>
-        <FieldArray name="toCities" component={renderAsyncAutocompleteInputs}
-          inputName="toCity" inputLabel="To City" removeLabel="Remove City" addLabel="Add City"
+        <FieldArray name='toCities' component={renderAsyncAutocompleteInputs}
+          inputName='toCity' inputLabel='To City' removeLabel='Remove City' addLabel='Add City'
           dataSourceCallback={getCitiesFromInput} maxSearchResults={5} openOnFocus={false}/>
-        <RaisedButton label={loading?"Cancel":"Reset"} type="reset"
+        <RaisedButton label={loading?'Cancel':'Reset'} type='reset'
           style={{...buttonStyles, marginRight:20}} />
-        <RaisedButton label={this.getSubmitLabel(loading,asyncValidating)} type="submit"
+        <RaisedButton label={this.getSubmitLabel(loading,asyncValidating)} type='submit'
           disabled={loading || submitting || invalid || (typeof asyncValidating==='boolean' && asyncValidating) || typeof asyncValidating==='string'}
           style={buttonStyles} />
         <RefreshIndicator size={35} left={10} top={10}
-          status={loading || submitting || asyncValidating?"loading":"hide"}
+          status={loading || submitting || asyncValidating?'loading':'hide'}
           style={refreshStyles} />
       </form>
     )

@@ -21,7 +21,10 @@ module.exports = {
     ],
     "rules": {
         "object-shorthand": ["error", "always"],
+        "quote-props": ["error", "as-needed"],
         "array-callback-return": "error",
+        "no-new-object": "error",
+        "no-array-constructor": "error",
         "no-loop-func": "error",
         "no-new-func": "error",
         "no-param-reassign": "error",
@@ -29,8 +32,10 @@ module.exports = {
         "arrow-spacing": ["error", { "before": true, "after": true }],
         "prefer-spread": "error",
         "prefer-rest-params": "error",
+        "prefer-template": "error",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
+        "quotes": ["error", "single"],
         "indent": [
             "error",
             2

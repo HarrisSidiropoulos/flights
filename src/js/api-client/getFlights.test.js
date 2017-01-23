@@ -8,7 +8,7 @@ import getFlights, {
 } from './getFlights'
 
 const fromAirport='SKG'
-const toAirport="ATH"
+const toAirport='ATH'
 const date=new Date(1475056800000)
 const solutions=1
 
@@ -18,16 +18,16 @@ describe('getFlights', () => {
   })
   it('fetch flights', () => {
     const expectedValue = [{
-      "toAirport":"Athens Eleftherios Venizelos",
-      "fromAirport":"Thessaloniki Makedonia",
-      "toCity":"Athens",
-      "fromCity":"Thessaloniki",
-      "carrier":"Aegean Airlines S.A.",
-      "saleTotal":60.30,
-      "duration":50,
-      "arrivalTime":"2016-09-29T00:45+03:00",
-      "departureTime":"2016-09-28T23:55+03:00",
-      "flightNumber":"A3511"
+      toAirport:'Athens Eleftherios Venizelos',
+      fromAirport:'Thessaloniki Makedonia',
+      toCity:'Athens',
+      fromCity:'Thessaloniki',
+      carrier:'Aegean Airlines S.A.',
+      saleTotal:60.30,
+      duration:50,
+      arrivalTime:'2016-09-29T00:45+03:00',
+      departureTime:'2016-09-28T23:55+03:00',
+      flightNumber:'A3511'
     }]
     mockFlights(fromAirport, toAirport, date, solutions)
 

@@ -35,8 +35,8 @@ describe('flights actions', () => {
     expect(receiveData(payload)).toEqual(expectedAction)
   })
   it('should create an action to request data', () => {
-    const fromCity = "Thessaloniki"
-    const toCities = ["Athens"]
+    const fromCity = 'Thessaloniki'
+    const toCities = ['Athens']
     const startDate = new Date()
     const endDate = new Date()
     const expectedAction = {

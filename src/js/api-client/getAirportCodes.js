@@ -4,9 +4,9 @@ import memoize from '../memoize'
 export const APC_AUTH='c3dc5fb1e4'
 export const API_URL='https://www.air-port-codes.com/api/v1/multi'
 export const REQUEST_HEADERS = {
-  method: "POST",
+  method: 'POST',
   headers: {
-    "APC-Auth": APC_AUTH
+    'APC-Auth': APC_AUTH
   }
 }
 export const getAirportCodes = (city='Thessaloniki', limit=1) => {

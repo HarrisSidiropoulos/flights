@@ -3,7 +3,7 @@ import {Col} from 'react-flexbox-grid';
 
 const getDay = (dt) => {
   const date = new Date(dt*1000)
-  const name = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][date.getDay()]
+  const name = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][date.getDay()]
   return `${name} ${date.getDate()}`
 }
 
@@ -14,7 +14,7 @@ export const WeatherResponse = ({weather}) => (
         const [{icon,description}] = weather
         return (
           <div key={index} style={{width:110, height:150, float:'left'}}>
-            <div className="text-center">
+            <div className='text-center'>
               <img src={`http://openweathermap.org/img/w/${icon}.png`} /><br/>
               <strong>{getDay(dt)}</strong><br/>
               {`(${Math.floor(temp.day)}C)`} <br/>

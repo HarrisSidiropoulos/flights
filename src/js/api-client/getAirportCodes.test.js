@@ -9,9 +9,9 @@ describe('getAirportCodes', () => {
     nock.cleanAll()
   })
   it('fetch Airport code', () => {
-    const city = "Thessaloniki"
+    const city = 'Thessaloniki'
     const expectedValue = [{
-      "airport":"SKG",
+      airport:'SKG',
       city
     }]
     mockAirportCodes(city, limit)
@@ -22,7 +22,7 @@ describe('getAirportCodes', () => {
       })
   })
   it('should throw error if city was not found', () => {
-    const expectedValue = new Error("No results found for search term.")
+    const expectedValue = new Error('No results found for search term.')
     const city='blabla'
     const nock_response = require('./getAirportCodes.response.error.json')
 

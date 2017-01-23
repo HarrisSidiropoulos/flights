@@ -8,7 +8,7 @@ class OfflineUpdate extends Component {
     super(props);
     this.state = {
       status: '',
-      message: "Quiz has been updated.",
+      message: 'Quiz has been updated.',
       hidden: true
     }
     if (props.NODE_ENV!=='production') { //eslint-disable-line
@@ -26,10 +26,10 @@ class OfflineUpdate extends Component {
     })
   }
   onInstalled() {
-    console.log("onInstalled")
+    console.log('onInstalled')
   }
   onUpdating() {
-    console.log("onUpdating")
+    console.log('onUpdating')
     this.setState({
       ...this.state,
       status: 'updating',
@@ -39,7 +39,7 @@ class OfflineUpdate extends Component {
   }
   onUpdateReady() {
     const {applyUpdate} = this.props
-    console.log("onUpdateReady")
+    console.log('onUpdateReady')
     applyUpdate()
     this.setState({
       ...this.state,
@@ -48,10 +48,10 @@ class OfflineUpdate extends Component {
     })
   }
   onUpdateFailed() {
-    console.log("onUpdateFailed")
+    console.log('onUpdateFailed')
     this.setState({
       ...this.state,
-      message: "Quiz has not been updated.",
+      message: 'Quiz has not been updated.',
       status: 'update-failed',
       hidden: false
     })
@@ -60,7 +60,7 @@ class OfflineUpdate extends Component {
     this.setState({
       ...this.state,
       status: 'updated',
-      message: "Quiz has been updated.",
+      message: 'Quiz has been updated.',
       hidden: false
     })
   }
@@ -80,9 +80,9 @@ class OfflineUpdate extends Component {
     }
     return (
       <span>
-        <a href="javascript:" onClick={() => this.reload()}>Reload</a>
+        <a href='javascript:' onClick={() => this.reload()}>Reload</a>
         <span> page to apply update or </span>
-        <a href="javascript:" onClick={() => this.dismiss()}>dismiss</a>
+        <a href='javascript:' onClick={() => this.dismiss()}>dismiss</a>
         <span> notification.</span>
       </span>
     )
@@ -91,7 +91,7 @@ class OfflineUpdate extends Component {
     const {hidden, message} = this.state;
     return (
       <div className={`offline-update${hidden?' hidden':''}`}>
-        <div className="container">
+        <div className='container'>
           <span>{message} </span>
           {this.renderActions()}
         </div>

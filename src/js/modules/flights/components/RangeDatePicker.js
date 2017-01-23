@@ -19,11 +19,11 @@ export class RangeDatePicker extends Component {
         <Col xs={12} sm={6}>
           <DatePicker
             onChange={(e, date) => onChange({startDate:date,endDate})}
-            hintText="Hint Text"
+            hintText='Hint Text'
             autoOk
             fullWidth={true}
-            floatingLabelText="Start Date"
-            errorText={!startDate && "This field is required"}
+            floatingLabelText='Start Date'
+            errorText={!startDate && 'This field is required'}
             minDate={minDate}
             maxDate={maxDate}
             value={startDate}
@@ -32,11 +32,11 @@ export class RangeDatePicker extends Component {
         <Col xs={12} sm={6}>
           <DatePicker
           onChange={(e, date) => onChange({startDate,endDate:date})}
-            hintText="Hint Text"
+            hintText='Hint Text'
             autoOk
             fullWidth={true}
-            floatingLabelText="End Date"
-            errorText={!endDate && "This field is required"}
+            floatingLabelText='End Date'
+            errorText={!endDate && 'This field is required'}
             minDate={startDate}
             maxDate={maxDate}
             value={endDate}

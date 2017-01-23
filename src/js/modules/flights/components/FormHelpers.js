@@ -35,8 +35,8 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
     <Row>
       <Col xs={12} sm={6}>
         <DatePicker
-          hintText="Start Date"
-          floatingLabelText="Start Date"
+          hintText='Start Date'
+          floatingLabelText='Start Date'
           fullWidth={true}
           minDate={minDate}
           maxDate={maxDate}
@@ -47,8 +47,8 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
       </Col>
       <Col xs={12} sm={6}>
         <DatePicker
-          hintText="End Date"
-          floatingLabelText="End Date"
+          hintText='End Date'
+          floatingLabelText='End Date'
           fullWidth={true}
           minDate={startDate.input.value}
           maxDate={maxDate}
@@ -64,14 +64,14 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
 export const renderAsyncAutocompleteInputs = ({fields, meta, inputName, inputLabel, min=1, max=4, ...custom}) => {
   const renderRemoveButton = () => {
     if (fields.length>min) {
-      return <FlatButton label={custom.removeLabel || "Remove"} onClick={() => fields.pop()}/>
+      return <FlatButton label={custom.removeLabel || 'Remove'} onClick={() => fields.pop()}/>
     } else {
       return <div/>
     }
   }
   const renderAddButton = () => {
     if (fields.length<max) {
-      return <FlatButton label={custom.addLabel || "Add"} onClick={() => fields.push({})}/>
+      return <FlatButton label={custom.addLabel || 'Add'} onClick={() => fields.push({})}/>
     } else {
       return <div/>
     }
@@ -104,7 +104,7 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
       errorText={touched && error}
       {...input}
       {...custom}
-      value={typeof input.value==="string" ? input.value : ''}
+      value={typeof input.value==='string' ? input.value : ''}
     />
   )
 }

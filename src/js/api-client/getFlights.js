@@ -7,11 +7,11 @@ export const QPX_API_KEY='AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
 // export const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
 export const QPX_API_URL='https://www.googleapis.com/qpxExpress/v1/trips/search'
 
-export const ERROR_400="Invalid inputs, including invalid API key. Do not retry without correcting inputs."
-export const ERROR_403="Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly."
-export const ERROR_500="Internal error. Try reproducing manually, and report a problem if it recurs."
-export const ERROR_503="Temporary overload. Wait before retrying."
-export const ERROR_NO_FLIGHTS="Could not find flights for airport"
+export const ERROR_400='Invalid inputs, including invalid API key. Do not retry without correcting inputs.'
+export const ERROR_403='Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly.'
+export const ERROR_500='Internal error. Try reproducing manually, and report a problem if it recurs.'
+export const ERROR_503='Temporary overload. Wait before retrying.'
+export const ERROR_NO_FLIGHTS='Could not find flights for airport'
 
 export const getErrorNoFlights = (fromAirport,toAirport,date) => (
   `${ERROR_NO_FLIGHTS} ${fromAirport} to ${toAirport} for date ${getFlightDate(date)}`
@@ -19,33 +19,33 @@ export const getErrorNoFlights = (fromAirport,toAirport,date) => (
 export function getFlightDate(date) {
   return dateFormat('yyyy-MM-dd', date);
 }
-export const getFlightsHeaders = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+export const getFlightsHeaders = (fromAirport='SKG', toAirport='ATH', date=new Date(), solutions=1) => {
   const requestBody = {
-    "request": {
+    request: {
       solutions,
-      "slice": [
+      slice: [
         {
-          "origin": fromAirport,
-          "destination": toAirport,
-          "date": getFlightDate(date)
+          origin: fromAirport,
+          destination: toAirport,
+          date: getFlightDate(date)
         }
       ],
-      "passengers": {
-        "adultCount": 1
+      passengers: {
+        adultCount: 1
       }
     }
   }
 
   return {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(requestBody)
   }
 }
 
-export const getFlights = (fromAirport='SKG', toAirport="ATH", date=new Date(), solutions=1) => {
+export const getFlights = (fromAirport='SKG', toAirport='ATH', date=new Date(), solutions=1) => {
   const headers = getFlightsHeaders(fromAirport, toAirport, date, solutions)
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
     .then((response) => {

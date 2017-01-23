@@ -13,19 +13,19 @@ export const getCities = (values) => {
 export const validate = values => {
   const errors = {}
   for (const key in values) {
-    if (values[key]==="") {
-      errors[key] = `Field is required`
+    if (values[key]==='') {
+      errors[key] = 'Field is required'
     }
   }
   const cities = getCities(values)
   cities.forEach(({value,key}) => {
     if (value.length<=2) {
-      errors[key] = `Enter more than two characters`
+      errors[key] = 'Enter more than two characters'
     }
   })
   getToCities(values).forEach(({value,key}) => {
     if (value===values.fromCity) {
-      errors[key] = `The field "To City" must not be the same with field "from City"`
+      errors[key] = 'The field \'To City\' must not be the same with field \'from City\''
     }
   })
   return errors
@@ -40,7 +40,7 @@ export const asyncValidate = values => {
     }
     if (value.length<3) {
       return new Promise((resolve,reject) => {
-        error[key] = `Enter more than two characters`
+        error[key] = 'Enter more than two characters'
         reject(error)
       });
     }
