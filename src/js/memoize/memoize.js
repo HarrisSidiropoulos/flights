@@ -7,7 +7,7 @@
 * Released under an MIT license.
 */
 // Check for Local Storage Support
-export const supportLocalStorage = function() {
+export const supportLocalStorage = function () {
   try {
     return !!window && 'localStorage' in window && window['localStorage'] != null;
   } catch (e) {
@@ -15,7 +15,7 @@ export const supportLocalStorage = function() {
   }
 }
 
-export default function memoize( fn, options=null ) {
+export default function memoize ( fn, options=null ) {
   return function (...args) {
     let hash = '',
       i = args.length,

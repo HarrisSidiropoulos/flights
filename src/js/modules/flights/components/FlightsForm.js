@@ -48,7 +48,7 @@ export const getCitiesFromInput = (inputValue) => {
 }
 
 class FlightsForm extends Component {
-  submit(values) {
+  submit (values) {
     const {loadData} = this.props
     if (validate(values).errors) {
       throw new SubmissionError(validate(values).errors)
@@ -56,7 +56,7 @@ class FlightsForm extends Component {
     const toCities = getToCities(values).map(({value}) => value)
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
-  reset(event) {
+  reset (event) {
     const {resetForm, cancelRequest, initialize, loading} = this.props
     event.preventDefault()
     if (loading) {
@@ -66,7 +66,7 @@ class FlightsForm extends Component {
       initialize(initialValues)
     }
   }
-  getSubmitLabel(loading, asyncValidating) {
+  getSubmitLabel (loading, asyncValidating) {
     if (loading) {
       return 'Loading...'
     } else if (asyncValidating) {
@@ -75,7 +75,7 @@ class FlightsForm extends Component {
       return 'Submit'
     }
   }
-  render() {
+  render () {
     const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
     return (
       <form onSubmit={handleSubmit((values) => this.submit(values))}

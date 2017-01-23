@@ -8,7 +8,7 @@ import {
 
 export const INITIAL_STATE = { loading: false, cities: [], error: false }
 
-export default function reducer(state = INITIAL_STATE, action) {
+export default function reducer (state = INITIAL_STATE, action) {
   switch (action.type) {
   case RESET_DATA:
     return {

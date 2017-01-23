@@ -4,7 +4,7 @@ import React, {Component, PropTypes} from 'react'
 require('./styles.scss')
 
 class OfflineUpdate extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       status: '',
@@ -25,10 +25,10 @@ class OfflineUpdate extends Component {
       onDismiss:      () => this.dismiss()
     })
   }
-  onInstalled() {
+  onInstalled () {
     console.log('onInstalled')
   }
-  onUpdating() {
+  onUpdating () {
     console.log('onUpdating')
     this.setState({
       ...this.state,
@@ -37,7 +37,7 @@ class OfflineUpdate extends Component {
       hidden: false
     })
   }
-  onUpdateReady() {
+  onUpdateReady () {
     const {applyUpdate} = this.props
     console.log('onUpdateReady')
     applyUpdate()
@@ -47,7 +47,7 @@ class OfflineUpdate extends Component {
       hidden: false
     })
   }
-  onUpdateFailed() {
+  onUpdateFailed () {
     console.log('onUpdateFailed')
     this.setState({
       ...this.state,
@@ -56,7 +56,7 @@ class OfflineUpdate extends Component {
       hidden: false
     })
   }
-  onUpdated() {
+  onUpdated () {
     this.setState({
       ...this.state,
       status: 'updated',
@@ -64,16 +64,16 @@ class OfflineUpdate extends Component {
       hidden: false
     })
   }
-  reload() {
+  reload () {
     window.location.reload()
   }
-  dismiss() {
+  dismiss () {
     this.setState({
       ...this.state,
       hidden: true
     })
   }
-  renderActions() {
+  renderActions () {
     const {status} = this.state;
     if (status==='updating') {
       return '';
@@ -87,7 +87,7 @@ class OfflineUpdate extends Component {
       </span>
     )
   }
-  render() {
+  render () {
     const {hidden, message} = this.state;
     return (
       <div className={`offline-update${hidden?' hidden':''}`}>

@@ -8,7 +8,7 @@ const maxDate = new Date();
 maxDate.setDate(maxDate.getDate() + 1000);
 
 export class RangeDatePicker extends Component {
-  render() {
+  render () {
     const {startDate, minDate, maxDate, onChange} = this.props
     let {endDate} = this.props
     if (startDate.getTime()>endDate.getTime()) {

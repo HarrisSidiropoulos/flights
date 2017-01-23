@@ -13,13 +13,13 @@ import 'rxjs/add/operator/takeWhile'
 import 'rxjs/add/operator/catch'
 
 class AsyncAutocomplete extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       dataSource : []
     }
   }
-  componentWillMount() {
+  componentWillMount () {
     this.inputObserver$ =
       new Subject()
         .do((val) => {
@@ -38,27 +38,27 @@ class AsyncAutocomplete extends Component {
 
     this.subscription = this.inputObserver$.subscribe((val) => this.handleObserver(val))
   }
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.subscription.unsubscribe()
   }
-  handleObserver(dataSource) {
+  handleObserver (dataSource) {
     this.setState({ dataSource })
   }
-  handleNewRequest(value) {
+  handleNewRequest (value) {
     this.refs.autoComplete.focus()
     this.props.onChange(value)
   }
-  handleBlur(e) {
+  handleBlur (e) {
     if (this.refs.autoComplete.state.focusTextField) {
       this.props.onBlur(e.target.value)
     }
   }
-  handleMenuKeyDown(e) {
+  handleMenuKeyDown (e) {
     if (e.keyCode===27) {
       this.refs.autoComplete.focus()
     }
   }
-  render() {
+  render () {
     return (
       <AutoComplete {...this.props}
         ref           = "autoComplete"
