@@ -17,10 +17,11 @@ export const supportLocalStorage = function () {
 
 export default function memoize ( fn, options=null ) {
   return function (...args) {
-    let hash = '',
-      i = args.length,
-      currentArg = null;
+    let hash = '';
+    let i = args.length;
+    let currentArg = null;
     const mem = fn.memoize || (fn.memoize = {});
+    
     while (i--) {
       currentArg = args[i];
       hash += (currentArg === Object(currentArg)) ?

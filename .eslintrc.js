@@ -49,6 +49,7 @@ module.exports = {
         "react/jsx-uses-vars": "error",
         "quotes": ["error", "single"],
         "func-style": ["error", "expression"],
+        "one-var": ["error", "never"],
         "indent": [
           "error",
           2
