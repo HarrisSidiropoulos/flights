@@ -13,9 +13,6 @@ injectTapEventPlugin()
 require('./styles/styles.scss')
 
 export class Main extends Component {
-  constructor (props) {
-    super(props);
-  }
   render () {
     return (
       <MuiThemeProvider>

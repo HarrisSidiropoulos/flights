@@ -24,31 +24,33 @@ module.exports = {
         "object-shorthand": ["error", "always"],
         "quote-props": ["error", "as-needed"],
         "array-callback-return": "error",
+        "no-useless-constructor": "error",
         "no-new-object": "error",
         "no-array-constructor": "error",
         "no-loop-func": "error",
         "no-new-func": "error",
         "no-param-reassign": "error",
+        "no-confusing-arrow": "error",
+        "no-loop-func": "error",
+        "no-useless-escape": "error",
         "prefer-arrow-callback": "error",
-        "arrow-spacing": ["error", { "before": true, "after": true }],
-        "space-before-function-paren": ["error", "always"],
-        "space-before-blocks": "error",
         "prefer-spread": "error",
         "prefer-rest-params": "error",
         "prefer-template": "error",
+        "arrow-spacing": ["error", { "before": true, "after": true }],
+        "space-before-function-paren": ["error", "always"],
+        "space-before-blocks": "error",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
-        "no-useless-escape": "error",
-        "no-loop-func": "error",
         "quotes": ["error", "single"],
         "func-style": ["error", "expression"],
         "indent": [
-            "error",
-            2
+          "error",
+          2
         ],
         "linebreak-style": [
-            "error",
-            "unix"
+          "error",
+          "unix"
         ]
     },
 };

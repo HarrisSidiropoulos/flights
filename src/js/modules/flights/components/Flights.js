@@ -12,9 +12,6 @@ import {NAME as FLIGHTS_NAME} from '../constants'
 require('./styles.scss')
 
 class Flights extends Component {
-  constructor (props) {
-    super(props);
-  }
   render () {
     const {cities, error} = this.props
     return (
