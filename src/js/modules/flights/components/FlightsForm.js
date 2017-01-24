@@ -80,7 +80,7 @@ class FlightsForm extends Component {
     const { invalid, handleSubmit, submitting, loading, asyncValidating, } = this.props;
     return (
       <form onSubmit={handleSubmit(values => this.submit(values))}
-            onReset={e => this.reset(e)}>
+            onReset={event => this.reset(event)}>
         <Fields names={['startDate','endDate',]} component={renderRangeDatePicker}
           minDate={minDate} maxDate={maxDate} />
         <Field name='fromCity' component={renderAsyncAutocomplete} label='From City'

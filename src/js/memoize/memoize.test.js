@@ -1,3 +1,4 @@
+/*eslint-disable id-length*/
 import memoize from './memoize';
 
 describe('memoize', () => {

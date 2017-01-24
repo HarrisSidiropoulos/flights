@@ -56,6 +56,7 @@ module.exports = {
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "eol-last": "error",
+    "id-length": "error",
     "max-len": ["error", 100],
     "comma-dangle": ["error", "always"],
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],

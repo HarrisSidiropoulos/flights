@@ -1,3 +1,4 @@
+/*eslint-disable id-length*/
 import nock from 'nock';
 import { WEATHER_API_URL, WEATHER_API_KEY, } from './getCityWeather';
 

@@ -8,7 +8,7 @@ import {
 
 export const resetData     = ()      => ({ type: RESET_DATA, });
 export const cancelRequest = ()      => ({ type: CANCEL_REQUEST, });
-export const requestError  = e       => ({ type: FETCH_DATA_FAILURE, error: e, });
+export const requestError  = error   => ({ type: FETCH_DATA_FAILURE, error, });
 export const receiveData   = payload => ({ type: FETCH_DATA_SUCCESS, payload, });
 export const requestData   = (fromCity, toCities, startDate, endDate) => ({
   type: FETCH_DATA_REQUEST,

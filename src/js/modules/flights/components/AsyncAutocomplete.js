@@ -48,13 +48,13 @@ class AsyncAutocomplete extends Component {
     this.refs.autoComplete.focus();
     this.props.onChange(value);
   }
-  handleBlur (e) {
+  handleBlur (event) {
     if (this.refs.autoComplete.state.focusTextField) {
-      this.props.onBlur(e.target.value);
+      this.props.onBlur(event.target.value);
     }
   }
-  handleMenuKeyDown (e) {
-    if (e.keyCode === 27) {
+  handleMenuKeyDown (event) {
+    if (event.keyCode === 27) {
       this.refs.autoComplete.focus();
     }
   }
@@ -66,8 +66,8 @@ class AsyncAutocomplete extends Component {
         filter        = {AutoComplete.noFilter}
         dataSource    = {this.state.dataSource}
         onUpdateInput = {val => this.inputObserver$.next(val)}
-        onBlur        = {e => this.handleBlur(e)}
-        menuProps     = {{ onKeyDown:e => this.handleMenuKeyDown(e), }}
+        onBlur        = {event => this.handleBlur(event)}
+        menuProps     = {{ onKeyDown:event => this.handleMenuKeyDown(event), }}
         />
     );
   }

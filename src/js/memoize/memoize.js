@@ -1,3 +1,4 @@
+/*eslint-disable id-length*/
 /*
 * memoize.js
 * by @philogb and @addyosmani
