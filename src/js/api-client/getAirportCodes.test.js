@@ -23,7 +23,7 @@ describe('getAirportCodes', () => {
   })
   it('should throw error if city was not found', () => {
     const expectedValue = new Error('No results found for search term.')
-    const city='blabla'
+    const city = 'blabla'
     const nock_response = require('./getAirportCodes.response.error.json')
 
     mockAirportCodes(city, limit, 200, nock_response)
@@ -35,7 +35,7 @@ describe('getAirportCodes', () => {
   })
   it('should throw any error', () => {
     const expectedValue = new Error('Gateway Timeout')
-    const city='Thessaloniki'
+    const city = 'Thessaloniki'
 
     mockAirportCodes(city, limit, 504)
 

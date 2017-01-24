@@ -2,7 +2,7 @@ import React from 'react'
 import {Col} from 'react-flexbox-grid';
 
 export const getPrice = (returnFlight,flight) => {
-  return Math.floor((returnFlight.saleTotal + flight.saleTotal) * 100)/100
+  return Math.floor((returnFlight.saleTotal + flight.saleTotal) * 100) / 100
 }
 
 export const TotalCostResponse = ({flight, returnFlight}) => (

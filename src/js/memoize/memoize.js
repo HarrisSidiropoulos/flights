@@ -15,7 +15,7 @@ export const supportLocalStorage = function () {
   }
 }
 
-export default function memoize ( fn, options=null ) {
+export default function memoize ( fn, options = null ) {
   return function (...args) {
     let hash = '';
     let i = args.length;

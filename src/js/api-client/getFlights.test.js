@@ -7,10 +7,10 @@ import getFlights, {
   ERROR_503
 } from './getFlights'
 
-const fromAirport='SKG'
-const toAirport='ATH'
-const date=new Date(1475056800000)
-const solutions=1
+const fromAirport = 'SKG'
+const toAirport = 'ATH'
+const date = new Date(1475056800000)
+const solutions = 1
 
 describe('getFlights', () => {
   afterEach(() => {

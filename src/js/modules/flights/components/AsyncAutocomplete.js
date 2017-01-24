@@ -29,7 +29,7 @@ class AsyncAutocomplete extends Component {
           this.props.onChange(val)
         })
         .debounceTime(250)
-        .filter(val => val.length>2)
+        .filter(val => val.length > 2)
         .mergeMap(val => {
           return Observable.fromPromise(this.props.dataSourceCallback(val))
             .takeWhile(() => this.refs.autoComplete.state.focusTextField)
@@ -54,7 +54,7 @@ class AsyncAutocomplete extends Component {
     }
   }
   handleMenuKeyDown (e) {
-    if (e.keyCode===27) {
+    if (e.keyCode === 27) {
       this.refs.autoComplete.focus()
     }
   }

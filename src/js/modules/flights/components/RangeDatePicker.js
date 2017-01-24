@@ -11,7 +11,7 @@ export class RangeDatePicker extends Component {
   render () {
     const {startDate, minDate, maxDate, onChange} = this.props
     let {endDate} = this.props
-    if (startDate.getTime()>endDate.getTime()) {
+    if (startDate.getTime() > endDate.getTime()) {
       endDate = startDate
     }
     return (

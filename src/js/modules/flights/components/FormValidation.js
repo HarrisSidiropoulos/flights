@@ -2,7 +2,7 @@ import getAirportCodes from '../../../api-client/getAirportCodes'
 
 export const getToCities = values => {
   return values.toCities.map((val,index) => (
-    {key: `toCity${index+1}`, value:values[`toCity${index+1}`]})
+    {key: `toCity${index + 1}`, value:values[`toCity${index + 1}`]})
   )
 }
 
@@ -13,18 +13,18 @@ export const getCities = values => {
 export const validate = values => {
   const errors = {}
   for (const key in values) {
-    if (values[key]==='') {
+    if (values[key] === '') {
       errors[key] = 'Field is required'
     }
   }
   const cities = getCities(values)
   cities.forEach(({value,key}) => {
-    if (value.length<=2) {
+    if (value.length <= 2) {
       errors[key] = 'Enter more than two characters'
     }
   })
   getToCities(values).forEach(({value,key}) => {
-    if (value===values.fromCity) {
+    if (value === values.fromCity) {
       errors[key] = 'The field \'To City\' must not be the same with field \'from City\''
     }
   })
@@ -38,7 +38,7 @@ export const asyncValidate = values => {
     if (!value) {
       return new Promise(resolve => resolve(true));
     }
-    if (value.length<3) {
+    if (value.length < 3) {
       return new Promise((resolve,reject) => {
         error[key] = 'Enter more than two characters'
         reject(error)
@@ -50,10 +50,10 @@ export const asyncValidate = values => {
       .then(response => {
         const filteredResponse =
           response.filter(item => {
-            return item.city.toLowerCase().indexOf(value_lowercase)>=0 ||
-                   item.airport.toLowerCase().indexOf(value_lowercase)>=0
+            return item.city.toLowerCase().indexOf(value_lowercase) >= 0 ||
+                   item.airport.toLowerCase().indexOf(value_lowercase) >= 0
           })
-        if (filteredResponse.length===0) {
+        if (filteredResponse.length === 0) {
           error[key] = ERROR_MESSAGE
           throw error
         }

@@ -75,7 +75,7 @@ class OfflineUpdate extends Component {
   }
   renderActions () {
     const {status} = this.state;
-    if (status==='updating') {
+    if (status === 'updating') {
       return '';
     }
     return (
@@ -90,7 +90,7 @@ class OfflineUpdate extends Component {
   render () {
     const {hidden, message} = this.state;
     return (
-      <div className={`offline-update${hidden?' hidden':''}`}>
+      <div className={`offline-update${hidden ? ' hidden' : ''}`}>
         <div className='container'>
           <span>{message} </span>
           {this.renderActions()}

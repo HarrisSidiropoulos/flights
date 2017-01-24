@@ -27,7 +27,7 @@ export const renderDatePicker = ({ col, input, label, minDate, maxDate, meta: { 
 export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) => {
   const onChange = value => {
     startDate.input.onChange(value)
-    if (value.getTime()>endDate.input.value.getTime()) {
+    if (value.getTime() > endDate.input.value.getTime()) {
       endDate.input.onChange(value)
     }
   }
@@ -61,16 +61,16 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
   )
 }
 
-export const renderAsyncAutocompleteInputs = ({fields, meta, inputName, inputLabel, min=1, max=4, ...custom}) => {
+export const renderAsyncAutocompleteInputs = ({fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom}) => {
   const renderRemoveButton = () => {
-    if (fields.length>min) {
+    if (fields.length > min) {
       return <FlatButton label={custom.removeLabel || 'Remove'} onClick={() => fields.pop()}/>
     } else {
       return <div/>
     }
   }
   const renderAddButton = () => {
-    if (fields.length<max) {
+    if (fields.length < max) {
       return <FlatButton label={custom.addLabel || 'Add'} onClick={() => fields.push({})}/>
     } else {
       return <div/>
@@ -81,11 +81,11 @@ export const renderAsyncAutocompleteInputs = ({fields, meta, inputName, inputLab
       {
         fields.map((name, index) => {
           return (
-            <Col xs={12} sm={Math.max(12/fields.length, 3)} key={index}>
+            <Col xs={12} sm={Math.max(12 / fields.length, 3)} key={index}>
               <Field {...custom}
-                name={`${inputName || 'Field'}${index+1}`}
+                name={`${inputName || 'Field'}${index + 1}`}
                 component={renderAsyncAutocomplete}
-                label={`${inputLabel || 'Field'} #${index+1}`}/>
+                label={`${inputLabel || 'Field'} #${index + 1}`}/>
             </Col>
           )
         })
@@ -104,7 +104,7 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
       errorText={touched && error}
       {...input}
       {...custom}
-      value={typeof input.value==='string' ? input.value : ''}
+      value={typeof input.value === 'string' ? input.value : ''}
     />
   )
 }

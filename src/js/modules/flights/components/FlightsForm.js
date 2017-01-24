@@ -88,13 +88,13 @@ class FlightsForm extends Component {
         <FieldArray name='toCities' component={renderAsyncAutocompleteInputs}
           inputName='toCity' inputLabel='To City' removeLabel='Remove City' addLabel='Add City'
           dataSourceCallback={getCitiesFromInput} maxSearchResults={5} openOnFocus={false}/>
-        <RaisedButton label={loading?'Cancel':'Reset'} type='reset'
+        <RaisedButton label={loading ? 'Cancel' : 'Reset'} type='reset'
           style={{...buttonStyles, marginRight:20}} />
         <RaisedButton label={this.getSubmitLabel(loading,asyncValidating)} type='submit'
-          disabled={loading || submitting || invalid || (typeof asyncValidating==='boolean' && asyncValidating) || typeof asyncValidating==='string'}
+          disabled={loading || submitting || invalid || (typeof asyncValidating === 'boolean' && asyncValidating) || typeof asyncValidating === 'string'}
           style={buttonStyles} />
         <RefreshIndicator size={35} left={10} top={10}
-          status={loading || submitting || asyncValidating?'loading':'hide'}
+          status={loading || submitting || asyncValidating ? 'loading' : 'hide'}
           style={refreshStyles} />
       </form>
     )

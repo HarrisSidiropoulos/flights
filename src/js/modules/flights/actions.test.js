@@ -19,7 +19,7 @@ describe('flights actions', () => {
     expect(resetData()).toEqual(expectedAction)
   })
   it('should create an action to all data errors', () => {
-    const error='error'
+    const error = 'error'
     const expectedAction = {
       type: FETCH_DATA_FAILURE,
       error
