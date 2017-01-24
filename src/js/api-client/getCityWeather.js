@@ -10,7 +10,13 @@ export const getDateAsNumber = function (date) {
   return parseInt(dateFormat('yyyyMMdd', date), 10);
 }
 
-export const getCityWeather = (city = 'London', startDate = new Date(), endDate = new Date(), cnt = 14, units = 'metric') => {
+export const getCityWeather = (
+  city = 'London',
+  startDate = new Date(), 
+  endDate = new Date(),
+  cnt = 14,
+  units = 'metric'
+) => {
   return fetch(`${WEATHER_API_URL}?q=${city}&units=${units}&cnt=${cnt}&APPID=${WEATHER_API_KEY}`)
     .then(response => {
       if (!response.ok) {

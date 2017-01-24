@@ -1,3 +1,4 @@
+/*eslint-disable max-len*/
 import React, { Component, PropTypes } from 'react'
 import { FieldArray, Field, Fields, reduxForm, SubmissionError } from 'redux-form'
 import { connect } from 'react-redux'

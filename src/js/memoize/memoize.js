@@ -30,8 +30,13 @@ export default function memoize (fn, options = null) {
     if (options && options.isPromise) {
       if (hash in mem) {
         return new Promise(resolve => resolve(mem[hash]))
-      } else if (options.useLocalStorage && supportLocalStorage() && !!options.localStorageKey && localStorage.getItem(`${options.localStorageKey}-${hash}`)) {
-        const serializedState = JSON.parse(localStorage.getItem(`${options.localStorageKey}-${hash}`))
+      } else if (options.useLocalStorage &&
+        supportLocalStorage() &&
+        !!options.localStorageKey &&
+        localStorage.getItem(`${options.localStorageKey}-${hash}`)
+      ) {
+        const serializedState =
+          JSON.parse(localStorage.getItem(`${options.localStorageKey}-${hash}`))
         mem[hash] = serializedState
         return new Promise(resolve => resolve(serializedState))
       } else {

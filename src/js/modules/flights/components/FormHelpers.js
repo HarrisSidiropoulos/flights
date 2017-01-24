@@ -7,7 +7,9 @@ import FlatButton from 'material-ui/FlatButton';
 
 import AsyncAutocomplete from './AsyncAutocomplete'
 
-export const renderDatePicker = ({ col, input, label, minDate, maxDate, meta: { touched, error } }) => {
+export const renderDatePicker = (
+  { col, input, label, minDate, maxDate, meta: { touched, error } }
+) => {
   return (
     <Col {...col}>
       <DatePicker
@@ -61,7 +63,9 @@ export const renderRangeDatePicker = ({ startDate, endDate, maxDate, minDate }) 
   )
 }
 
-export const renderAsyncAutocompleteInputs = ({ fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom }) => {
+export const renderAsyncAutocompleteInputs = (
+  { fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom }
+) => {
   const renderRemoveButton = () => {
     if (fields.length > min) {
       return <FlatButton label={custom.removeLabel || 'Remove'} onClick={() => fields.pop()}/>

@@ -31,7 +31,10 @@ const FlightsResponse = ({ cities }) => {
                     { returnFlight && <FlightResponse flight={returnFlight}/> }
                   </Row>
                   <Row>
-                    { flight && returnFlight && <TotalCostResponse flight={flight} returnFlight={returnFlight} /> }
+                    {
+                      flight && returnFlight && 
+                        <TotalCostResponse flight={flight} returnFlight={returnFlight} />
+                    }
                   </Row>
                 </CardText>
               </Card>

@@ -1,3 +1,4 @@
+/*eslint-disable max-len*/
 import dateFormat from 'date-format'
 import fetch from 'isomorphic-fetch';
 import memoize from '../memoize'
@@ -19,7 +20,12 @@ export const getErrorNoFlights = (fromAirport,toAirport,date) => (
 export const getFlightDate = function (date) {
   return dateFormat('yyyy-MM-dd', date);
 }
-export const getFlightsHeaders = (fromAirport = 'SKG', toAirport = 'ATH', date = new Date(), solutions = 1) => {
+export const getFlightsHeaders = (
+  fromAirport = 'SKG',
+  toAirport = 'ATH',
+  date = new Date(),
+  solutions = 1
+) => {
   const requestBody = {
     request: {
       solutions,
@@ -45,7 +51,12 @@ export const getFlightsHeaders = (fromAirport = 'SKG', toAirport = 'ATH', date =
   }
 }
 
-export const getFlights = (fromAirport = 'SKG', toAirport = 'ATH', date = new Date(), solutions = 1) => {
+export const getFlights = (
+  fromAirport = 'SKG',
+  toAirport = 'ATH',
+  date = new Date(),
+  solutions = 1
+) => {
   const headers = getFlightsHeaders(fromAirport, toAirport, date, solutions)
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
     .then(response => {
