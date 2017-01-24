@@ -1,3 +1,4 @@
+/*eslint-disable camelcase*/
 import nock from 'nock';
 import { API_URL, REQUEST_HEADERS, } from './getAirportCodes';
 

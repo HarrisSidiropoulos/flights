@@ -1,3 +1,4 @@
+/*eslint-disable camelcase*/
 import nock from 'nock';
 import { QPX_API_URL, QPX_API_KEY, getFlightsHeaders, } from './getFlights';
 

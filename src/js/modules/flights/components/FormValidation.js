@@ -44,14 +44,14 @@ export const asyncValidate = values => {
         reject(error);
       });
     }
-    const value_lowercase = value.toLowerCase();
-    const ERROR_MESSAGE = `${value_lowercase} is not a city`;
+    const valueLowercase = value.toLowerCase();
+    const ERROR_MESSAGE = `${valueLowercase} is not a city`;
     return getAirportCodes(value,10)
       .then(response => {
         const filteredResponse =
           response.filter(item => {
-            return item.city.toLowerCase().indexOf(value_lowercase) >= 0 ||
-                   item.airport.toLowerCase().indexOf(value_lowercase) >= 0;
+            return item.city.toLowerCase().indexOf(valueLowercase) >= 0 ||
+                   item.airport.toLowerCase().indexOf(valueLowercase) >= 0;
           });
         if (filteredResponse.length === 0) {
           error[key] = ERROR_MESSAGE;

@@ -1,3 +1,4 @@
+/*eslint-disable camelcase*/
 import nock from 'nock';
 import getAirportCodes from './getAirportCodes';
 import { mockAirportCodes, } from './getAirportCode.mock';

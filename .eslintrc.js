@@ -26,6 +26,7 @@ module.exports = {
     "keyword-spacing": ["error", { "before": true }],
     "space-infix-ops": ["error", {"int32Hint": false}],
     "brace-style": "error",
+    "camelcase": "error",
     "array-callback-return": "error",
     "no-useless-constructor": "error",
     "no-new-object": "error",
