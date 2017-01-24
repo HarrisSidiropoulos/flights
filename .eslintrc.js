@@ -54,7 +54,9 @@ module.exports = {
         "space-before-blocks": "error",
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
+        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
         "quotes": ["error", "single"],
+        "eol-last": "error",
         "func-style": ["error", "expression"],
         "one-var": ["error", "never"],
         "indent": [

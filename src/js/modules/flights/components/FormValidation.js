@@ -57,7 +57,8 @@ export const asyncValidate = values => {
           error[key] = ERROR_MESSAGE
           throw error
         }
-      }).catch(() => {
+      })
+      .catch(() => {
         error[key] = ERROR_MESSAGE
         throw error
       })
