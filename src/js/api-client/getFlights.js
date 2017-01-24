@@ -50,7 +50,7 @@ export const getFlights = (fromAirport='SKG', toAirport='ATH', date=new Date(), 
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
     .then(response => {
       if (!response.ok) {
-        switch(response.status) {
+        switch (response.status) {
         case 400:
           throw new Error(ERROR_400)
         case 403:
