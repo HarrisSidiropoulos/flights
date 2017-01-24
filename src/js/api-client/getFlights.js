@@ -68,21 +68,21 @@ export const getFlights = (fromAirport = 'SKG', toAirport = 'ATH', date = new Da
     .then(response => {
       if (Array.isArray(response)) return response
       if (!response.trips.data.airport ||
-          response.trips.data.airport.filter(({city}) => city === toAirport).length === 0 ||
-          response.trips.data.airport.filter(({city}) => city === fromAirport).length === 0 ||
-          response.trips.data.city.filter(({code})    => code === toAirport).length === 0 ||
-          response.trips.data.city.filter(({code})    => code === fromAirport).length === 0) {
+          response.trips.data.airport.filter(({ city }) => city === toAirport).length === 0 ||
+          response.trips.data.airport.filter(({ city }) => city === fromAirport).length === 0 ||
+          response.trips.data.city.filter(({ code })    => code === toAirport).length === 0 ||
+          response.trips.data.city.filter(({ code })    => code === fromAirport).length === 0) {
         throw new Error(getErrorNoFlights(fromAirport,toAirport,date))
       }
       const filteredResponse =
-        response.trips.tripOption.map(({saleTotal,slice}) => {
+        response.trips.tripOption.map(({ saleTotal,slice }) => {
           return {
-            toAirport     : response.trips.data.airport.filter(({city}) => city === toAirport)[0].name,
-            fromAirport   : response.trips.data.airport.filter(({city}) => city === fromAirport)[0].name,
-            toCity        : response.trips.data.city.filter(({code}) => code === toAirport)[0].name,
-            fromCity      : response.trips.data.city.filter(({code}) => code === fromAirport)[0].name,
+            toAirport     : response.trips.data.airport.filter(({ city }) => city === toAirport)[0].name,
+            fromAirport   : response.trips.data.airport.filter(({ city }) => city === fromAirport)[0].name,
+            toCity        : response.trips.data.city.filter(({ code }) => code === toAirport)[0].name,
+            fromCity      : response.trips.data.city.filter(({ code }) => code === fromAirport)[0].name,
             saleTotal     : parseFloat(saleTotal.replace(/\D+/,'')),
-            carrier       : response.trips.data.carrier.filter(({code}) => code === slice[0].segment[0].flight.carrier)[0].name,
+            carrier       : response.trips.data.carrier.filter(({ code }) => code === slice[0].segment[0].flight.carrier)[0].name,
             duration      : slice[0].duration,
             arrivalTime   : slice[0].segment[0].leg[0].arrivalTime,
             departureTime : slice[0].segment[0].leg[0].departureTime,
@@ -93,4 +93,4 @@ export const getFlights = (fromAirport = 'SKG', toAirport = 'ATH', date = new Da
     })
 }
 
-export default memoize(getFlights, {isPromise:true})
+export default memoize(getFlights, { isPromise:true })

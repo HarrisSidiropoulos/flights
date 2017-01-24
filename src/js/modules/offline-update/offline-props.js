@@ -1,5 +1,5 @@
 const offlineProps = (env = process.env.NODE_ENV) => {
-  let {install, applyUpdate} = {
+  let { install, applyUpdate } = {
     install : () => {},
     applyUpdate : () => {},
     env

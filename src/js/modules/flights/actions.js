@@ -12,5 +12,5 @@ export const requestError  = e       => ({ type: FETCH_DATA_FAILURE, error: e })
 export const receiveData   = payload => ({ type: FETCH_DATA_SUCCESS, payload })
 export const requestData   = (fromCity, toCities, startDate, endDate) => ({
   type: FETCH_DATA_REQUEST,
-  payload: {fromCity, toCities, startDate, endDate}
+  payload: { fromCity, toCities, startDate, endDate }
 })

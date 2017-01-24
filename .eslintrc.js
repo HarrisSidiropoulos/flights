@@ -1,74 +1,76 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "commonjs": true,
-        "es6": true,
-        "jest": true,
-        "embertest": true,
-        "node": true
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "embertest": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "classes": true,
+      "experimentalObjectRestSpread": true,
+      "jsx": true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "classes": true,
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "arrow-parens": ["error", "as-needed"],
+    "object-shorthand": ["error", "always"],
+    "quote-props": ["error", "as-needed"],
+    "keyword-spacing": ["error", { "before": true }],
+    "space-infix-ops": ["error", {"int32Hint": false}],
+    "brace-style": "error",
+    "array-callback-return": "error",
+    "no-useless-constructor": "error",
+    "no-new-object": "error",
+    "no-array-constructor": "error",
+    "no-loop-func": "error",
+    "no-new-func": "error",
+    "no-param-reassign": "error",
+    "no-confusing-arrow": "error",
+    "no-loop-func": "error",
+    "no-useless-escape": "error",
+    "no-dupe-class-members": "error",
+    "no-duplicate-imports": "error",
+    "no-case-declarations": "error",
+    "no-nested-ternary": "error",
+    "no-unneeded-ternary": "error",
+    "no-iterator": "error",
+    "eqeqeq": "error",
+    "no-restricted-syntax": ["error", "WithStatement"],
+    "prefer-const": "error",
+    "prefer-arrow-callback": "error",
+    "prefer-spread": "error",
+    "prefer-rest-params": "error",
+    "prefer-template": "error",
+    "no-whitespace-before-property": "error",
+    "arrow-spacing": ["error", { "before": true, "after": true }],
+    "space-before-function-paren": ["error", "always"],
+    "space-before-blocks": "error",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "eol-last": "error",
+    "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+    "object-curly-spacing": ["error", "always"],
+    "array-bracket-spacing": ["error", "never"],
+    "quotes": ["error", "single"],
+    "space-in-parens": ["error", "never"],
+    "padded-blocks": ["error", "never"],
+    "func-style": ["error", "expression"],
+    "one-var": ["error", "never"],
+    "indent": [
+      "error",
+      2
     ],
-    "rules": {
-        "arrow-parens": ["error", "as-needed"],
-        "object-shorthand": ["error", "always"],
-        "quote-props": ["error", "as-needed"],
-        "keyword-spacing": ["error", { "before": true }],
-        "space-infix-ops": ["error", {"int32Hint": false}],
-        "brace-style": "error",
-        "array-callback-return": "error",
-        "no-useless-constructor": "error",
-        "no-new-object": "error",
-        "no-array-constructor": "error",
-        "no-loop-func": "error",
-        "no-new-func": "error",
-        "no-param-reassign": "error",
-        "no-confusing-arrow": "error",
-        "no-loop-func": "error",
-        "no-useless-escape": "error",
-        "no-dupe-class-members": "error",
-        "no-duplicate-imports": "error",
-        "no-case-declarations": "error",
-        "no-nested-ternary": "error",
-        "no-unneeded-ternary": "error",
-        "no-iterator": "error",
-        "eqeqeq": "error",
-        "no-restricted-syntax": ["error", "WithStatement"],
-        "prefer-const": "error",
-        "prefer-arrow-callback": "error",
-        "prefer-spread": "error",
-        "prefer-rest-params": "error",
-        "prefer-template": "error",
-        "no-whitespace-before-property": "error",
-        "arrow-spacing": ["error", { "before": true, "after": true }],
-        "space-before-function-paren": ["error", "always"],
-        "space-before-blocks": "error",
-        "react/jsx-uses-react": "error",
-        "react/jsx-uses-vars": "error",
-        "eol-last": "error",
-        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
-        "quotes": ["error", "single"],
-        "space-in-parens": ["error", "never"],
-        "padded-blocks": ["error", "never"],
-        "func-style": ["error", "expression"],
-        "one-var": ["error", "never"],
-        "indent": [
-          "error",
-          2
-        ],
-        "linebreak-style": [
-          "error",
-          "unix"
-        ]
-    },
+    "linebreak-style": [
+      "error",
+      "unix"
+    ]
+  },
 };

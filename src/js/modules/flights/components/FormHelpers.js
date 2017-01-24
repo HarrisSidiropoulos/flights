@@ -1,6 +1,6 @@
 import React from 'react'
-import {Field} from 'redux-form'
-import {Row, Col} from 'react-flexbox-grid';
+import { Field } from 'redux-form'
+import { Row, Col } from 'react-flexbox-grid';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
@@ -24,7 +24,7 @@ export const renderDatePicker = ({ col, input, label, minDate, maxDate, meta: { 
   )
 }
 
-export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) => {
+export const renderRangeDatePicker = ({ startDate, endDate, maxDate, minDate }) => {
   const onChange = value => {
     startDate.input.onChange(value)
     if (value.getTime() > endDate.input.value.getTime()) {
@@ -61,7 +61,7 @@ export const renderRangeDatePicker = ({startDate, endDate, maxDate, minDate}) =>
   )
 }
 
-export const renderAsyncAutocompleteInputs = ({fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom}) => {
+export const renderAsyncAutocompleteInputs = ({ fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom }) => {
   const renderRemoveButton = () => {
     if (fields.length > min) {
       return <FlatButton label={custom.removeLabel || 'Remove'} onClick={() => fields.pop()}/>

@@ -1,9 +1,9 @@
-import React, {Component,PropTypes} from 'react'
+import React, { Component,PropTypes } from 'react'
 import AutoComplete from 'material-ui/AutoComplete'
 
-import {Observable} from 'rxjs/Observable'
-import {Subject} from 'rxjs/Subject'
-import {fromPromise} from 'rxjs/observable/fromPromise'
+import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject'
+import { fromPromise } from 'rxjs/observable/fromPromise'
 Observable.fromPromise = fromPromise
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/do'
@@ -67,7 +67,7 @@ class AsyncAutocomplete extends Component {
         dataSource    = {this.state.dataSource}
         onUpdateInput = {val => this.inputObserver$.next(val)}
         onBlur        = {e => this.handleBlur(e)}
-        menuProps     = {{onKeyDown:e => this.handleMenuKeyDown(e)}}
+        menuProps     = {{ onKeyDown:e => this.handleMenuKeyDown(e) }}
         />
     )
   }

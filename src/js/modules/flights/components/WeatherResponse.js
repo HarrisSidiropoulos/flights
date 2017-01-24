@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react'
-import {Col} from 'react-flexbox-grid';
+import React, { PropTypes } from 'react'
+import { Col } from 'react-flexbox-grid';
 
 const getDay = dt => {
   const date = new Date(dt * 1000)
@@ -7,13 +7,13 @@ const getDay = dt => {
   return `${name} ${date.getDate()}`
 }
 
-export const WeatherResponse = ({weather}) => (
+export const WeatherResponse = ({ weather }) => (
   <Col xs={12}>
     {
-      weather.list.map(({weather,temp,dt}, index) => {
-        const [{icon,description}] = weather
+      weather.list.map(({ weather,temp,dt }, index) => {
+        const [{ icon,description }] = weather
         return (
-          <div key={index} style={{width:110, height:150, float:'left'}}>
+          <div key={index} style={{ width:110, height:150, float:'left' }}>
             <div className='text-center'>
               <img src={`http://openweathermap.org/img/w/${icon}.png`} /><br/>
               <strong>{getDay(dt)}</strong><br/>

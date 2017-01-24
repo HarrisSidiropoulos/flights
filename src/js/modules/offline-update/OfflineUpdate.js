@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-import React, {Component, PropTypes} from 'react'
+import React, { Component, PropTypes } from 'react'
 
 require('./styles.scss')
 
@@ -14,7 +14,7 @@ class OfflineUpdate extends Component {
     if (props.NODE_ENV!=='production') { //eslint-disable-line
       return;
     }
-    const {install} = props
+    const { install } = props
     install({
       onInstalled:    () => this.onInstalled(),
       onUpdating:     () => this.onUpdating(),
@@ -38,7 +38,7 @@ class OfflineUpdate extends Component {
     })
   }
   onUpdateReady () {
-    const {applyUpdate} = this.props
+    const { applyUpdate } = this.props
     console.log('onUpdateReady')
     applyUpdate()
     this.setState({
@@ -74,7 +74,7 @@ class OfflineUpdate extends Component {
     })
   }
   renderActions () {
-    const {status} = this.state;
+    const { status } = this.state;
     if (status === 'updating') {
       return '';
     }
@@ -88,7 +88,7 @@ class OfflineUpdate extends Component {
     )
   }
   render () {
-    const {hidden, message} = this.state;
+    const { hidden, message } = this.state;
     return (
       <div className={`offline-update${hidden ? ' hidden' : ''}`}>
         <div className='container'>

@@ -1,6 +1,6 @@
 import nock from 'nock'
 import getAirportCodes from './getAirportCodes'
-import {mockAirportCodes} from './getAirportCode.mock'
+import { mockAirportCodes } from './getAirportCode.mock'
 
 const limit = 1
 

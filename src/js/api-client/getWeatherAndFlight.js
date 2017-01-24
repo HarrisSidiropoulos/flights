@@ -4,7 +4,7 @@ import getCityWeather from './getCityWeather'
 
 export const getWeatherAndFlight = (fromAirport, toCity, startDate, endDate) => {
   return getAirportCodes(toCity)
-    .then(([{airport, city}]) => {
+    .then(([{ airport, city }]) => {
       return Promise.all([
         getFlights(fromAirport, airport, startDate),
         getFlights(airport, fromAirport, endDate),

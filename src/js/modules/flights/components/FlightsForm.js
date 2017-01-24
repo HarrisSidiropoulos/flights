@@ -1,13 +1,13 @@
-import React, {Component, PropTypes} from 'react'
-import {FieldArray, Field, Fields, reduxForm, SubmissionError} from 'redux-form'
-import {connect} from 'react-redux'
+import React, { Component, PropTypes } from 'react'
+import { FieldArray, Field, Fields, reduxForm, SubmissionError } from 'redux-form'
+import { connect } from 'react-redux'
 
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
 import unique from 'array-unique'
 import getAirportCodes from '../../../api-client/getAirportCodes'
-import {validate, asyncValidate, getToCities, getCities} from './FormValidation'
+import { validate, asyncValidate, getToCities, getCities } from './FormValidation'
 
 import {
   renderAsyncAutocompleteInputs,
@@ -43,21 +43,21 @@ const refreshStyles = {
 export const getCitiesFromInput = inputValue => {
   return getAirportCodes(inputValue, 10)
     .then(response =>
-      unique(response.map(({city}) => (city)))
+      unique(response.map(({ city }) => (city)))
     )
 }
 
 class FlightsForm extends Component {
   submit (values) {
-    const {loadData} = this.props
+    const { loadData } = this.props
     if (validate(values).errors) {
       throw new SubmissionError(validate(values).errors)
     }
-    const toCities = getToCities(values).map(({value}) => value)
+    const toCities = getToCities(values).map(({ value }) => value)
     loadData(values.fromCity,toCities,values.startDate,values.endDate)
   }
   reset (event) {
-    const {resetForm, cancelRequest, initialize, loading} = this.props
+    const { resetForm, cancelRequest, initialize, loading } = this.props
     event.preventDefault()
     if (loading) {
       cancelRequest()
@@ -76,7 +76,7 @@ class FlightsForm extends Component {
     }
   }
   render () {
-    const {invalid, handleSubmit, submitting, loading, asyncValidating} = this.props
+    const { invalid, handleSubmit, submitting, loading, asyncValidating } = this.props
     return (
       <form onSubmit={handleSubmit(values => this.submit(values))}
             onReset={e => this.reset(e)}>
@@ -89,7 +89,7 @@ class FlightsForm extends Component {
           inputName='toCity' inputLabel='To City' removeLabel='Remove City' addLabel='Add City'
           dataSourceCallback={getCitiesFromInput} maxSearchResults={5} openOnFocus={false}/>
         <RaisedButton label={loading ? 'Cancel' : 'Reset'} type='reset'
-          style={{...buttonStyles, marginRight:20}} />
+          style={{ ...buttonStyles, marginRight:20 }} />
         <RaisedButton label={this.getSubmitLabel(loading,asyncValidating)} type='submit'
           disabled={loading || submitting || invalid || (typeof asyncValidating === 'boolean' && asyncValidating) || typeof asyncValidating === 'string'}
           style={buttonStyles} />
@@ -120,5 +120,5 @@ export default connect(mapStateToProps)(reduxForm({
   form: 'flightForm',
   validate,
   asyncValidate,
-  asyncBlurFields: getCities(initialValues).map(({key}) => key)
+  asyncBlurFields: getCities(initialValues).map(({ key }) => key)
 })(FlightsForm))

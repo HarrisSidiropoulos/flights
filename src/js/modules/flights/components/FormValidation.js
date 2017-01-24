@@ -2,12 +2,12 @@ import getAirportCodes from '../../../api-client/getAirportCodes'
 
 export const getToCities = values => {
   return values.toCities.map((val,index) => (
-    {key: `toCity${index + 1}`, value:values[`toCity${index + 1}`]})
+    { key: `toCity${index + 1}`, value:values[`toCity${index + 1}`] })
   )
 }
 
 export const getCities = values => {
-  return getToCities(values).concat([{key:'fromCity', value:values.fromCity}])
+  return getToCities(values).concat([{ key:'fromCity', value:values.fromCity }])
 }
 
 export const validate = values => {
@@ -18,12 +18,12 @@ export const validate = values => {
     }
   }
   const cities = getCities(values)
-  cities.forEach(({value,key}) => {
+  cities.forEach(({ value,key }) => {
     if (value.length <= 2) {
       errors[key] = 'Enter more than two characters'
     }
   })
-  getToCities(values).forEach(({value,key}) => {
+  getToCities(values).forEach(({ value,key }) => {
     if (value === values.fromCity) {
       errors[key] = 'The field \'To City\' must not be the same with field \'from City\''
     }
@@ -34,7 +34,7 @@ export const validate = values => {
 export const asyncValidate = values => {
   const cities = getCities(values)
   const error = {}
-  return Promise.all(cities.map(({value,key}) => {
+  return Promise.all(cities.map(({ value,key }) => {
     if (!value) {
       return new Promise(resolve => resolve(true));
     }

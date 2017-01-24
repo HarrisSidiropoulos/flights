@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react'
-import {Row, Col} from 'react-flexbox-grid';
+import React, { Component, PropTypes } from 'react'
+import { Row, Col } from 'react-flexbox-grid';
 
 import DatePicker from 'material-ui/DatePicker';
 
@@ -9,8 +9,8 @@ maxDate.setDate(maxDate.getDate() + 1000);
 
 export class RangeDatePicker extends Component {
   render () {
-    const {startDate, minDate, maxDate, onChange} = this.props
-    let {endDate} = this.props
+    const { startDate, minDate, maxDate, onChange } = this.props
+    let { endDate } = this.props
     if (startDate.getTime() > endDate.getTime()) {
       endDate = startDate
     }
@@ -18,7 +18,7 @@ export class RangeDatePicker extends Component {
       <Row>
         <Col xs={12} sm={6}>
           <DatePicker
-            onChange={(e, date) => onChange({startDate:date,endDate})}
+            onChange={(e, date) => onChange({ startDate:date,endDate })}
             hintText='Hint Text'
             autoOk
             fullWidth={true}
@@ -31,7 +31,7 @@ export class RangeDatePicker extends Component {
         </Col>
         <Col xs={12} sm={6}>
           <DatePicker
-          onChange={(e, date) => onChange({startDate,endDate:date})}
+          onChange={(e, date) => onChange({ startDate,endDate:date })}
             hintText='Hint Text'
             autoOk
             fullWidth={true}
