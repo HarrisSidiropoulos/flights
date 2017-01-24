@@ -1,7 +1,7 @@
 import memoize from './memoize'
 
 describe('memoize', () => {
-  const fib = function ( x ) {
+  const fib = function (x) {
     if (x < 2) return 1; else return fib(x - 1) + fib(x - 2);
   }
   afterEach(() => {

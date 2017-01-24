@@ -33,7 +33,7 @@ Flights.propTypes = {
   loading: PropTypes.bool.isRequired
 }
 
-export const mapStateToProps = ({ [FLIGHTS_NAME]:flights } ) => {
+export const mapStateToProps = ({ [FLIGHTS_NAME]:flights }) => {
   return {
     ...flights
   }

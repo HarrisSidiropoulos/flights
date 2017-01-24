@@ -108,7 +108,7 @@ FlightsForm.propTypes = {
   loading: PropTypes.bool.isRequired
 }
 
-export const mapStateToProps = ({ flights, form } ) => {
+export const mapStateToProps = ({ flights, form }) => {
   return {
     ...flights,
     ...form,
