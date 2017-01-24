@@ -25,8 +25,7 @@ export default function memoize (fn, options = null) {
 
     while (i--) {
       currentArg = args[i];
-      hash += (currentArg === Object(currentArg)) ?
-      JSON.stringify(currentArg) : currentArg;
+      hash += (currentArg === Object(currentArg)) ? JSON.stringify(currentArg) : currentArg;
     }
     if (options && options.isPromise) {
       if (hash in mem) {
@@ -50,7 +49,6 @@ export default function memoize (fn, options = null) {
         });
       }
     }
-    return (hash in mem) ? mem[hash] :
-    mem[hash] = fn.apply(this, args);
+    return (hash in mem) ? mem[hash] : mem[hash] = fn.apply(this, args);
   };
 }
