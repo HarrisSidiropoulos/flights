@@ -58,6 +58,8 @@ module.exports = {
     "react/jsx-uses-vars": "error",
     "eol-last": "error",
     "id-length": "error",
+    "new-cap": "error",
+    "no-underscore-dangle": "error",
     "max-len": ["error", 100],
     "comma-dangle": ["error", "always"],
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
