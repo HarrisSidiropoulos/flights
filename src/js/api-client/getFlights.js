@@ -1,25 +1,25 @@
 /*eslint-disable max-len*/
-import dateFormat from 'date-format'
+import dateFormat from 'date-format';
 import fetch from 'isomorphic-fetch';
-import memoize from '../memoize'
+import memoize from '../memoize';
 
-export const QPX_API_KEY = 'AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk'
+export const QPX_API_KEY = 'AIzaSyBwobInPCB7X32m1KsQXojEiohDiy9VSPk';
 // export const QPX_API_KEY='AIzaSyC2qPNpo8wGPRM3beBbeN9noLLFnrY217k'
 // export const QPX_API_KEY='AIzaSyB0Ss37a8qoa88v8qhv8JdG2cVE5pxGsFo'
-export const QPX_API_URL = 'https://www.googleapis.com/qpxExpress/v1/trips/search'
+export const QPX_API_URL = 'https://www.googleapis.com/qpxExpress/v1/trips/search';
 
-export const ERROR_400 = 'Invalid inputs, including invalid API key. Do not retry without correcting inputs.'
-export const ERROR_403 = 'Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly.'
-export const ERROR_500 = 'Internal error. Try reproducing manually, and report a problem if it recurs.'
-export const ERROR_503 = 'Temporary overload. Wait before retrying.'
-export const ERROR_NO_FLIGHTS = 'Could not find flights for airport'
+export const ERROR_400 = 'Invalid inputs, including invalid API key. Do not retry without correcting inputs.';
+export const ERROR_403 = 'Not authorized. If free daily quota is exceeded, sign up for billing or wait until next day. If rate limit is exceeded, send queries more slowly.';
+export const ERROR_500 = 'Internal error. Try reproducing manually, and report a problem if it recurs.';
+export const ERROR_503 = 'Temporary overload. Wait before retrying.';
+export const ERROR_NO_FLIGHTS = 'Could not find flights for airport';
 
 export const getErrorNoFlights = (fromAirport,toAirport,date) => (
   `${ERROR_NO_FLIGHTS} ${fromAirport} to ${toAirport} for date ${getFlightDate(date)}`
-)
+);
 export const getFlightDate = function (date) {
   return dateFormat('yyyy-MM-dd', date);
-}
+};
 export const getFlightsHeaders = (
   fromAirport = 'SKG',
   toAirport = 'ATH',
@@ -40,7 +40,7 @@ export const getFlightsHeaders = (
         adultCount: 1,
       },
     },
-  }
+  };
 
   return {
     method: 'POST',
@@ -48,8 +48,8 @@ export const getFlightsHeaders = (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(requestBody),
-  }
-}
+  };
+};
 
 export const getFlights = (
   fromAirport = 'SKG',
@@ -57,33 +57,33 @@ export const getFlights = (
   date = new Date(),
   solutions = 1
 ) => {
-  const headers = getFlightsHeaders(fromAirport, toAirport, date, solutions)
+  const headers = getFlightsHeaders(fromAirport, toAirport, date, solutions);
   return fetch(`${QPX_API_URL}?key=${QPX_API_KEY}`, headers)
     .then(response => {
       if (!response.ok) {
         switch (response.status) {
         case 400:
-          throw new Error(ERROR_400)
+          throw new Error(ERROR_400);
         case 403:
-          throw new Error(ERROR_403)
+          throw new Error(ERROR_403);
         case 500:
-          throw new Error(ERROR_500)
+          throw new Error(ERROR_500);
         case 503:
-          throw new Error(ERROR_503)
+          throw new Error(ERROR_503);
         default:
-          throw new Error(response.statusText)
+          throw new Error(response.statusText);
         }
       }
-      return response.json()
+      return response.json();
     })
     .then(response => {
-      if (Array.isArray(response)) return response
+      if (Array.isArray(response)) return response;
       if (!response.trips.data.airport ||
           response.trips.data.airport.filter(({ city, }) => city === toAirport).length === 0 ||
           response.trips.data.airport.filter(({ city, }) => city === fromAirport).length === 0 ||
           response.trips.data.city.filter(({ code, })    => code === toAirport).length === 0 ||
           response.trips.data.city.filter(({ code, })    => code === fromAirport).length === 0) {
-        throw new Error(getErrorNoFlights(fromAirport,toAirport,date))
+        throw new Error(getErrorNoFlights(fromAirport,toAirport,date));
       }
       const filteredResponse =
         response.trips.tripOption.map(({ saleTotal,slice, }) => {
@@ -98,10 +98,10 @@ export const getFlights = (
             arrivalTime   : slice[0].segment[0].leg[0].arrivalTime,
             departureTime : slice[0].segment[0].leg[0].departureTime,
             flightNumber  : slice[0].segment[0].flight.carrier + slice[0].segment[0].flight.number,
-          }
-        })
-      return filteredResponse
-    })
-}
+          };
+        });
+      return filteredResponse;
+    });
+};
 
-export default memoize(getFlights, { isPromise:true, })
+export default memoize(getFlights, { isPromise:true, });

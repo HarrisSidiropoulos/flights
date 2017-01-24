@@ -1,2 +1,2 @@
-import memoize from './memoize'
-export default memoize
+import memoize from './memoize';
+export default memoize;

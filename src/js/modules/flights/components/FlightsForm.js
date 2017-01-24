@@ -1,20 +1,20 @@
 /*eslint-disable max-len*/
-import React, { Component, PropTypes, } from 'react'
-import { FieldArray, Field, Fields, reduxForm, SubmissionError, } from 'redux-form'
-import { connect, } from 'react-redux'
+import React, { Component, PropTypes, } from 'react';
+import { FieldArray, Field, Fields, reduxForm, SubmissionError, } from 'redux-form';
+import { connect, } from 'react-redux';
 
 import RaisedButton from 'material-ui/RaisedButton';
 import RefreshIndicator from 'material-ui/RefreshIndicator';
 
-import unique from 'array-unique'
-import getAirportCodes from '../../../api-client/getAirportCodes'
-import { validate, asyncValidate, getToCities, getCities, } from './FormValidation'
+import unique from 'array-unique';
+import getAirportCodes from '../../../api-client/getAirportCodes';
+import { validate, asyncValidate, getToCities, getCities, } from './FormValidation';
 
 import {
   renderAsyncAutocompleteInputs,
   renderRangeDatePicker,
   renderAsyncAutocomplete,
-} from './FormHelpers'
+} from './FormHelpers';
 
 const minDate = new Date();
 const maxDate = new Date();
@@ -29,7 +29,7 @@ const initialValues = {
   toCity2  : 'London',
   toCity3  : '',
   toCity4  : '',
-}
+};
 
 const buttonStyles = {
   marginTop: 30,
@@ -39,45 +39,45 @@ const buttonStyles = {
 const refreshStyles = {
   display: 'inline-block',
   position: 'relative',
-}
+};
 
 export const getCitiesFromInput = inputValue => {
   return getAirportCodes(inputValue, 10)
     .then(response =>
       unique(response.map(({ city, }) => (city)))
-    )
-}
+    );
+};
 
 class FlightsForm extends Component {
   submit (values) {
-    const { loadData, } = this.props
+    const { loadData, } = this.props;
     if (validate(values).errors) {
-      throw new SubmissionError(validate(values).errors)
+      throw new SubmissionError(validate(values).errors);
     }
-    const toCities = getToCities(values).map(({ value, }) => value)
-    loadData(values.fromCity,toCities,values.startDate,values.endDate)
+    const toCities = getToCities(values).map(({ value, }) => value);
+    loadData(values.fromCity,toCities,values.startDate,values.endDate);
   }
   reset (event) {
-    const { resetForm, cancelRequest, initialize, loading, } = this.props
-    event.preventDefault()
+    const { resetForm, cancelRequest, initialize, loading, } = this.props;
+    event.preventDefault();
     if (loading) {
-      cancelRequest()
+      cancelRequest();
     } else {
-      resetForm()
-      initialize(initialValues)
+      resetForm();
+      initialize(initialValues);
     }
   }
   getSubmitLabel (loading, asyncValidating) {
     if (loading) {
-      return 'Loading...'
+      return 'Loading...';
     } else if (asyncValidating) {
-      return 'Validating...'
+      return 'Validating...';
     } else {
-      return 'Submit'
+      return 'Submit';
     }
   }
   render () {
-    const { invalid, handleSubmit, submitting, loading, asyncValidating, } = this.props
+    const { invalid, handleSubmit, submitting, loading, asyncValidating, } = this.props;
     return (
       <form onSubmit={handleSubmit(values => this.submit(values))}
             onReset={e => this.reset(e)}>
@@ -98,7 +98,7 @@ class FlightsForm extends Component {
           status={loading || submitting || asyncValidating ? 'loading' : 'hide'}
           style={refreshStyles} />
       </form>
-    )
+    );
   }
 }
 
@@ -107,14 +107,14 @@ FlightsForm.propTypes = {
   cancelRequest: PropTypes.func.isRequired,
   loadData: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-}
+};
 
 export const mapStateToProps = ({ flights, form, }) => {
   return {
     ...flights,
     ...form,
     initialValues,
-  }
+  };
 };
 
 export default connect(mapStateToProps)(reduxForm({
@@ -122,4 +122,4 @@ export default connect(mapStateToProps)(reduxForm({
   validate,
   asyncValidate,
   asyncBlurFields: getCities(initialValues).map(({ key, }) => key),
-})(FlightsForm))
+})(FlightsForm));

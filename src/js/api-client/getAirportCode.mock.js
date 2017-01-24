@@ -1,7 +1,7 @@
-import nock from 'nock'
-import { API_URL, REQUEST_HEADERS, } from './getAirportCodes'
+import nock from 'nock';
+import { API_URL, REQUEST_HEADERS, } from './getAirportCodes';
 
-const nock_response = require('./getAirportCodes.response.json')
+const nock_response = require('./getAirportCodes.response.json');
 
 export const mockAirportCodes = (
   term = 'Thessaloniki',
@@ -12,5 +12,5 @@ export const mockAirportCodes = (
   nock(API_URL, REQUEST_HEADERS)
     .post('')
     .query({ term, limit, })
-    .reply(status, response)
-}
+    .reply(status, response);
+};

@@ -59,6 +59,7 @@ module.exports = {
     "max-len": ["error", 100],
     "comma-dangle": ["error", "always"],
     "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+    "semi": ["error", "always"],
     "object-curly-spacing": ["error", "always"],
     "array-bracket-spacing": ["error", "never"],
     "comma-style": ["error", "last"],

@@ -1,1 +1,1 @@
-export const NAME = 'flights'
+export const NAME = 'flights';

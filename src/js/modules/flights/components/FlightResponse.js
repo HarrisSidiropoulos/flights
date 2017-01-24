@@ -1,10 +1,10 @@
-import React from 'react'
-import dateFormat from 'date-format'
+import React from 'react';
+import dateFormat from 'date-format';
 import { Col, } from 'react-flexbox-grid';
 
 const formatDate = date => {
-  return dateFormat('dd-MM-yyyy hh:mm', new Date(date))
-}
+  return dateFormat('dd-MM-yyyy hh:mm', new Date(date));
+};
 
 export const FlightResponse = ({ flight, }) => (
   <Col xs={12} className="flight-response">
@@ -43,5 +43,5 @@ export const FlightResponse = ({ flight, }) => (
       </tbody>
     </table>
   </Col>
-)
-export default FlightResponse
+);
+export default FlightResponse;

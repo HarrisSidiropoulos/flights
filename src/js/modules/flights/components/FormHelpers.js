@@ -1,11 +1,11 @@
-import React from 'react'
-import { Field, } from 'redux-form'
+import React from 'react';
+import { Field, } from 'redux-form';
 import { Row, Col, } from 'react-flexbox-grid';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
 
-import AsyncAutocomplete from './AsyncAutocomplete'
+import AsyncAutocomplete from './AsyncAutocomplete';
 
 export const renderDatePicker = (
   { col, input, label, minDate, maxDate, meta: { touched, error, }, }
@@ -23,16 +23,16 @@ export const renderDatePicker = (
         onChange={(event, value) => input.onChange(value)}
         />
     </Col>
-  )
-}
+  );
+};
 
 export const renderRangeDatePicker = ({ startDate, endDate, maxDate, minDate, }) => {
   const onChange = value => {
-    startDate.input.onChange(value)
+    startDate.input.onChange(value);
     if (value.getTime() > endDate.input.value.getTime()) {
-      endDate.input.onChange(value)
+      endDate.input.onChange(value);
     }
-  }
+  };
   return (
     <Row>
       <Col xs={12} sm={6}>
@@ -60,26 +60,26 @@ export const renderRangeDatePicker = ({ startDate, endDate, maxDate, minDate, })
           />
       </Col>
     </Row>
-  )
-}
+  );
+};
 
 export const renderAsyncAutocompleteInputs = (
   { fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom, }
 ) => {
   const renderRemoveButton = () => {
     if (fields.length > min) {
-      return <FlatButton label={custom.removeLabel || 'Remove'} onClick={() => fields.pop()}/>
+      return <FlatButton label={custom.removeLabel || 'Remove'} onClick={() => fields.pop()}/>;
     } else {
-      return <div/>
+      return <div/>;
     }
-  }
+  };
   const renderAddButton = () => {
     if (fields.length < max) {
-      return <FlatButton label={custom.addLabel || 'Add'} onClick={() => fields.push({})}/>
+      return <FlatButton label={custom.addLabel || 'Add'} onClick={() => fields.push({})}/>;
     } else {
-      return <div/>
+      return <div/>;
     }
-  }
+  };
   return (
     <Row {...meta}>
       {
@@ -91,14 +91,14 @@ export const renderAsyncAutocompleteInputs = (
                 component={renderAsyncAutocomplete}
                 label={`${inputLabel || 'Field'} #${index + 1}`}/>
             </Col>
-          )
+          );
         })
       }
       {renderRemoveButton()}
       {renderAddButton()}
     </Row>
-  )
-}
+  );
+};
 
 export const renderTextField = ({ input, label, meta: { touched, error, }, ...custom, }) => {
   return (
@@ -110,8 +110,8 @@ export const renderTextField = ({ input, label, meta: { touched, error, }, ...cu
       {...custom}
       value={typeof input.value === 'string' ? input.value : ''}
     />
-  )
-}
+  );
+};
 
 export const renderAsyncAutocomplete = (
   { input, label, meta: { touched, error, }, ...custom, }
@@ -125,5 +125,5 @@ export const renderAsyncAutocomplete = (
       {...custom}
       searchText={input.value}
     />
-  )
-}
+  );
+};
