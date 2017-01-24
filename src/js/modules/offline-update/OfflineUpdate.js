@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-import React, { Component, PropTypes } from 'react'
+import React, { Component, PropTypes, } from 'react'
 
 require('./styles.scss')
 
@@ -9,12 +9,12 @@ class OfflineUpdate extends Component {
     this.state = {
       status: '',
       message: 'Quiz has been updated.',
-      hidden: true
+      hidden: true,
     }
     if (props.NODE_ENV!=='production') { //eslint-disable-line
       return;
     }
-    const { install } = props
+    const { install, } = props
     install({
       onInstalled:    () => this.onInstalled(),
       onUpdating:     () => this.onUpdating(),
@@ -22,7 +22,7 @@ class OfflineUpdate extends Component {
       onUpdateFailed: () => this.onUpdateFailed(),
       onUpdated:      () => this.onUpdated(),
       onReload:       () => this.reload(),
-      onDismiss:      () => this.dismiss()
+      onDismiss:      () => this.dismiss(),
     })
   }
   onInstalled () {
@@ -34,17 +34,17 @@ class OfflineUpdate extends Component {
       ...this.state,
       status: 'updating',
       message: 'updating...',
-      hidden: false
+      hidden: false,
     })
   }
   onUpdateReady () {
-    const { applyUpdate } = this.props
+    const { applyUpdate, } = this.props
     console.log('onUpdateReady')
     applyUpdate()
     this.setState({
       ...this.state,
       status: 'update-ready',
-      hidden: false
+      hidden: false,
     })
   }
   onUpdateFailed () {
@@ -53,7 +53,7 @@ class OfflineUpdate extends Component {
       ...this.state,
       message: 'Quiz has not been updated.',
       status: 'update-failed',
-      hidden: false
+      hidden: false,
     })
   }
   onUpdated () {
@@ -61,7 +61,7 @@ class OfflineUpdate extends Component {
       ...this.state,
       status: 'updated',
       message: 'Quiz has been updated.',
-      hidden: false
+      hidden: false,
     })
   }
   reload () {
@@ -70,11 +70,11 @@ class OfflineUpdate extends Component {
   dismiss () {
     this.setState({
       ...this.state,
-      hidden: true
+      hidden: true,
     })
   }
   renderActions () {
-    const { status } = this.state;
+    const { status, } = this.state;
     if (status === 'updating') {
       return '';
     }
@@ -88,7 +88,7 @@ class OfflineUpdate extends Component {
     )
   }
   render () {
-    const { hidden, message } = this.state;
+    const { hidden, message, } = this.state;
     return (
       <div className={`offline-update${hidden ? ' hidden' : ''}`}>
         <div className='container'>
@@ -103,11 +103,11 @@ class OfflineUpdate extends Component {
 OfflineUpdate.propTypes = {
   NODE_ENV: PropTypes.string.isRequired,
   install: PropTypes.func.isRequired,
-  applyUpdate: PropTypes.func.isRequired
+  applyUpdate: PropTypes.func.isRequired,
 }
 
 OfflineUpdate.defaultProps = {
-  NODE_ENV: 'development'
+  NODE_ENV: 'development',
 }
 
 export default OfflineUpdate

@@ -5,5 +5,5 @@ import FlightsResponse from './FlightsResponse'
 export {
   Flights,
   FlightsForm,
-  FlightsResponse
+  FlightsResponse,
 }

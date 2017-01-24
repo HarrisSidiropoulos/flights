@@ -3,5 +3,5 @@ import offlineProps from './offline-props'
 
 export {
   OfflineUpdate,
-  offlineProps
+  offlineProps,
 }

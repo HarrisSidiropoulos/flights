@@ -1,5 +1,5 @@
 import nock from 'nock'
-import { WEATHER_API_URL, WEATHER_API_KEY } from './getCityWeather'
+import { WEATHER_API_URL, WEATHER_API_KEY, } from './getCityWeather'
 
 const nock_response = require('./getCityWeather.response.json')
 
@@ -12,6 +12,6 @@ export const mockCityWeather = (
 ) => {
   nock(WEATHER_API_URL)
     .get('')
-    .query({ q, units, cnt, APPID: WEATHER_API_KEY })
+    .query({ q, units, cnt, APPID: WEATHER_API_KEY, })
     .reply(status, response)
 }

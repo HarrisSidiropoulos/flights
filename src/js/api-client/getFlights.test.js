@@ -1,10 +1,10 @@
 import nock from 'nock'
-import { mockFlights } from './getFlights.mock'
+import { mockFlights, } from './getFlights.mock'
 import getFlights, {
   ERROR_400,
   ERROR_403,
   ERROR_500,
-  ERROR_503
+  ERROR_503,
 } from './getFlights'
 
 const fromAirport = 'SKG'
@@ -27,8 +27,8 @@ describe('getFlights', () => {
       duration:50,
       arrivalTime:'2016-09-29T00:45+03:00',
       departureTime:'2016-09-28T23:55+03:00',
-      flightNumber:'A3511'
-    }]
+      flightNumber:'A3511',
+    },]
     mockFlights(fromAirport, toAirport, date, solutions)
 
     return getFlights(fromAirport, toAirport, date, solutions)

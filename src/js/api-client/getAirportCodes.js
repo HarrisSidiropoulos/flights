@@ -6,8 +6,8 @@ export const API_URL = 'https://www.air-port-codes.com/api/v1/multi'
 export const REQUEST_HEADERS = {
   method: 'POST',
   headers: {
-    'APC-Auth': APC_AUTH
-  }
+    'APC-Auth': APC_AUTH,
+  },
 }
 export const getAirportCodes = (city = 'Thessaloniki', limit = 1) => {
   return fetch(`${API_URL}?term=${city.trim()}&limit=${limit}`, REQUEST_HEADERS)
@@ -22,10 +22,10 @@ export const getAirportCodes = (city = 'Thessaloniki', limit = 1) => {
       if (response.statusCode !== 200) {
         throw new Error(response.message)
       }
-      const normResponse = response.airports.map(({ iata,city }) => {
+      const normResponse = response.airports.map(({ iata,city, }) => {
         return {
           airport: iata,
-          city
+          city,
         }
       })
       return normResponse
@@ -34,7 +34,7 @@ export const getAirportCodes = (city = 'Thessaloniki', limit = 1) => {
 const memoizeOptions = {
   isPromise:true,
   useLocalStorage:true,
-  localStorageKey:'getAirportCodes'
+  localStorageKey:'getAirportCodes',
 }
 
 export default memoize(getAirportCodes, memoizeOptions)

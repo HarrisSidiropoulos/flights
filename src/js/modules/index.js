@@ -5,5 +5,5 @@ import * as OfflineUpdate from './offline-update'
 export {
   Main,
   Flights,
-  OfflineUpdate
+  OfflineUpdate,
 }

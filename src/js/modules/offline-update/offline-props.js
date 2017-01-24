@@ -1,8 +1,8 @@
 const offlineProps = (env = process.env.NODE_ENV) => {
-  let { install, applyUpdate } = {
+  let { install, applyUpdate, } = {
     install : () => {},
     applyUpdate : () => {},
-    env
+    env,
   }
   if (env === 'production') {
     install = require('offline-plugin/runtime').install
@@ -11,7 +11,7 @@ const offlineProps = (env = process.env.NODE_ENV) => {
   return {
     install,
     applyUpdate,
-    NODE_ENV: process.env.NODE_ENV
+    NODE_ENV: process.env.NODE_ENV,
   }
 }
 export default offlineProps

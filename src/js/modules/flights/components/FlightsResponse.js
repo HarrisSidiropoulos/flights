@@ -1,20 +1,20 @@
-import React, { PropTypes } from 'react'
+import React, { PropTypes, } from 'react'
 
 import FlightResponse from './FlightResponse'
 import WeatherResponse from './WeatherResponse'
 import TotalCostResponse from './TotalCostResponse'
 
-import { Row, Col } from 'react-flexbox-grid';
+import { Row, Col, } from 'react-flexbox-grid';
 
-import { Card, CardText, CardHeader } from 'material-ui/Card';
+import { Card, CardText, CardHeader, } from 'material-ui/Card';
 
-const FlightsResponse = ({ cities }) => {
+const FlightsResponse = ({ cities, }) => {
   return (
     <Row>
       {
-        cities.map(({ flights, returnFlights, weather }, index) => {
-          const [flight] = flights
-          const [returnFlight] = returnFlights
+        cities.map(({ flights, returnFlights, weather, }, index) => {
+          const [flight,] = flights
+          const [returnFlight,] = returnFlights
           const title = flight ? `${flight.toCity}` : `${weather.city.name}`
           return (
             <Col key={index} xs={12} sm={Math.floor(12 / cities.length)}>
@@ -47,7 +47,7 @@ const FlightsResponse = ({ cities }) => {
 }
 
 FlightsResponse.propTypes = {
-  cities: PropTypes.array.isRequired
+  cities: PropTypes.array.isRequired,
 }
 
 export default FlightsResponse

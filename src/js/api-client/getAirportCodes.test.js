@@ -1,6 +1,6 @@
 import nock from 'nock'
 import getAirportCodes from './getAirportCodes'
-import { mockAirportCodes } from './getAirportCode.mock'
+import { mockAirportCodes, } from './getAirportCode.mock'
 
 const limit = 1
 
@@ -12,8 +12,8 @@ describe('getAirportCodes', () => {
     const city = 'Thessaloniki'
     const expectedValue = [{
       airport:'SKG',
-      city
-    }]
+      city,
+    },]
     mockAirportCodes(city, limit)
 
     return getAirportCodes(city,limit)

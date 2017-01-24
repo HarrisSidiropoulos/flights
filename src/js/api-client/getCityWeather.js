@@ -25,7 +25,7 @@ export const getCityWeather = (
       return response.json()
     })
     .then(response => {
-      const filteredWeatherList = response.list.filter(({ dt }) => {
+      const filteredWeatherList = response.list.filter(({ dt, }) => {
         const dtAsNumber = getDateAsNumber(new Date(dt * 1000))
         return (dtAsNumber >= getDateAsNumber(startDate) &&
                 dtAsNumber <= getDateAsNumber(endDate))
@@ -35,9 +35,9 @@ export const getCityWeather = (
       }
       return {
         ...response,
-        list: filteredWeatherList
+        list: filteredWeatherList,
       }
     })
 }
 
-export default memoize(getCityWeather, { isPromise:true })
+export default memoize(getCityWeather, { isPromise:true, })

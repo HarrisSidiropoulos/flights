@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { Component, } from 'react'
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { Grid } from 'react-flexbox-grid';
+import { Grid, } from 'react-flexbox-grid';
 
-import { OfflineUpdate, offlineProps } from '../offline-update'
-import { components as FlightsFormComponents } from '../flights'
-const { Flights } = FlightsFormComponents
+import { OfflineUpdate, offlineProps, } from '../offline-update'
+import { components as FlightsFormComponents, } from '../flights'
+const { Flights, } = FlightsFormComponents
 
 injectTapEventPlugin()
 

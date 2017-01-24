@@ -1,9 +1,9 @@
-import React, { Component,PropTypes } from 'react'
+import React, { Component,PropTypes, } from 'react'
 import AutoComplete from 'material-ui/AutoComplete'
 
-import { Observable } from 'rxjs/Observable'
-import { Subject } from 'rxjs/Subject'
-import { fromPromise } from 'rxjs/observable/fromPromise'
+import { Observable, } from 'rxjs/Observable'
+import { Subject, } from 'rxjs/Subject'
+import { fromPromise, } from 'rxjs/observable/fromPromise'
 Observable.fromPromise = fromPromise
 import 'rxjs/add/operator/mergeMap'
 import 'rxjs/add/operator/do'
@@ -16,7 +16,7 @@ class AsyncAutocomplete extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      dataSource : []
+      dataSource : [],
     }
   }
   componentWillMount () {
@@ -24,7 +24,7 @@ class AsyncAutocomplete extends Component {
       new Subject()
         .do(val => {
           this.refs.autoComplete.setState({
-            focusTextField: true
+            focusTextField: true,
           })
           this.props.onChange(val)
         })
@@ -42,7 +42,7 @@ class AsyncAutocomplete extends Component {
     this.subscription.unsubscribe()
   }
   handleObserver (dataSource) {
-    this.setState({ dataSource })
+    this.setState({ dataSource, })
   }
   handleNewRequest (value) {
     this.refs.autoComplete.focus()
@@ -67,7 +67,7 @@ class AsyncAutocomplete extends Component {
         dataSource    = {this.state.dataSource}
         onUpdateInput = {val => this.inputObserver$.next(val)}
         onBlur        = {e => this.handleBlur(e)}
-        menuProps     = {{ onKeyDown:e => this.handleMenuKeyDown(e) }}
+        menuProps     = {{ onKeyDown:e => this.handleMenuKeyDown(e), }}
         />
     )
   }
@@ -76,7 +76,7 @@ class AsyncAutocomplete extends Component {
 AsyncAutocomplete.propTypes = {
   dataSourceCallback : PropTypes.func.isRequired,
   onChange           : PropTypes.func,
-  onBlur             : PropTypes.func
+  onBlur             : PropTypes.func,
 }
 
 export default AsyncAutocomplete

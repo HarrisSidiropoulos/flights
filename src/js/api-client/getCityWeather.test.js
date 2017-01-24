@@ -1,6 +1,6 @@
 import nock from 'nock'
-import getCityWeather, { WEATHER_DATE_ERROR } from './getCityWeather'
-import { mockCityWeather } from './getCityWeather.mock'
+import getCityWeather, { WEATHER_DATE_ERROR, } from './getCityWeather'
+import { mockCityWeather, } from './getCityWeather.mock'
 
 const startDate = new Date(1475056800000)
 const endDate   = new Date(1475056800000)

@@ -1,6 +1,6 @@
 import React from 'react'
-import { Field } from 'redux-form'
-import { Row, Col } from 'react-flexbox-grid';
+import { Field, } from 'redux-form'
+import { Row, Col, } from 'react-flexbox-grid';
 import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import FlatButton from 'material-ui/FlatButton';
@@ -8,7 +8,7 @@ import FlatButton from 'material-ui/FlatButton';
 import AsyncAutocomplete from './AsyncAutocomplete'
 
 export const renderDatePicker = (
-  { col, input, label, minDate, maxDate, meta: { touched, error } }
+  { col, input, label, minDate, maxDate, meta: { touched, error, }, }
 ) => {
   return (
     <Col {...col}>
@@ -26,7 +26,7 @@ export const renderDatePicker = (
   )
 }
 
-export const renderRangeDatePicker = ({ startDate, endDate, maxDate, minDate }) => {
+export const renderRangeDatePicker = ({ startDate, endDate, maxDate, minDate, }) => {
   const onChange = value => {
     startDate.input.onChange(value)
     if (value.getTime() > endDate.input.value.getTime()) {
@@ -64,7 +64,7 @@ export const renderRangeDatePicker = ({ startDate, endDate, maxDate, minDate }) 
 }
 
 export const renderAsyncAutocompleteInputs = (
-  { fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom }
+  { fields, meta, inputName, inputLabel, min = 1, max = 4, ...custom, }
 ) => {
   const renderRemoveButton = () => {
     if (fields.length > min) {
@@ -100,7 +100,7 @@ export const renderAsyncAutocompleteInputs = (
   )
 }
 
-export const renderTextField = ({ input, label, meta: { touched, error }, ...custom }) => {
+export const renderTextField = ({ input, label, meta: { touched, error, }, ...custom, }) => {
   return (
     <TextField hintText={label}
       floatingLabelText={label}
@@ -113,7 +113,9 @@ export const renderTextField = ({ input, label, meta: { touched, error }, ...cus
   )
 }
 
-export const renderAsyncAutocomplete = ({ input, label, meta: { touched, error }, ...custom }) => {
+export const renderAsyncAutocomplete = (
+  { input, label, meta: { touched, error, }, ...custom, }
+) => {
   return (
     <AsyncAutocomplete hintText={label}
       floatingLabelText={label}

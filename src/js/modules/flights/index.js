@@ -11,5 +11,5 @@ export {
   actions,
   actionTypes,
   constants,
-  epic
+  epic,
 }

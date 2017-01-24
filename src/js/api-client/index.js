@@ -9,5 +9,5 @@ export {
   getCityWeather,
   getFlights,
   getWeatherAndFlights,
-  getWeatherAndFlight
+  getWeatherAndFlight,
 }
